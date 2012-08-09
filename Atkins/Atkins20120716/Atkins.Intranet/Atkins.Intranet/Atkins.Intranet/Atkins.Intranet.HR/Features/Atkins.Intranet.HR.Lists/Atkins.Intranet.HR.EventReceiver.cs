@@ -135,6 +135,9 @@ namespace Atkins.Intranet.HR.Features.Lists
                     //descriptionField.Title = EmployeeHandbook.Description;
                     CustomListHelper.SetFieldDisplayName(descriptionField, EmployeeHandbook.DescriptionDisplayName);
                     descriptionField.Group = EmployeeHandbook.ListName;
+                    descriptionField.NumberOfLines = 15;
+                    descriptionField.RichText = true;
+                    descriptionField.RichTextMode = SPRichTextMode.FullHtml;
                     descriptionField.Update();
                     SPFieldLink descriptionLink = new SPFieldLink(descriptionField);
 
@@ -542,11 +545,11 @@ namespace Atkins.Intranet.HR.Features.Lists
                 taskList.Update();
 
                 SPView defaultView = taskList.DefaultView;
-                defaultView.ViewFields.Add(IntroductionTasksFields.CompletedInternalName);
+                defaultView.ViewFields.Add(IntroductionTasksFields.Completed);
                 defaultView.ViewFields.Add(CustomListHelper.ReturnTrimmedString(IntroductionTasksFields.CompletionDate));
                 defaultView.ViewFields.Add(CustomListHelper.ReturnTrimmedString(IntroductionTasksFields.Employee));
                 defaultView.ViewFields.Add(CustomListHelper.ReturnTrimmedString(IntroductionTasksFields.TaskAssignee));
-                defaultView.ViewFields.Add(IntroductionTasksFields.DueDateInternalName);
+                defaultView.ViewFields.Add(IntroductionTasksFields.DueDate);
                 defaultView.Update();
 
                 //WebPartView

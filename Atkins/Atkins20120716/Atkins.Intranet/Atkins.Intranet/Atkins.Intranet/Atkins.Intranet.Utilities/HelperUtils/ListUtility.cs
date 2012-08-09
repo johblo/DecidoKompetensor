@@ -13,7 +13,7 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         {
             Type baseType = field.GetType().BaseType;
             object obj = baseType.InvokeMember("SetFieldAttributeValue", BindingFlags.InvokeMethod | BindingFlags.NonPublic | BindingFlags.Instance, null, field, new object[] { "DisplayName", displayName });
-            field.Update();
+            //field.Update();
         }
 
         public static string CreateSiteColumn(SPWeb currentWeb, string columnName, SPFieldType columnType, bool required)

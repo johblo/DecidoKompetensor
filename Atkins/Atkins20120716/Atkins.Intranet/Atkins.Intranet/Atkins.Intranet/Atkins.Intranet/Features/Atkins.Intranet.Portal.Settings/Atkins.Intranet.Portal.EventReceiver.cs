@@ -30,6 +30,10 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Portal.Settings
                 web.AllProperties["docid_settings_ui"] = "<?xml version=\"1.0\" encoding=\"utf-16\"?><DocIdUiSettings xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><Prefix>ATKINS</Prefix><AssignmentEnabled>true</AssignmentEnabled></DocIdUiSettings>";
                 web.Update();
             }
+            web.MasterUrl = web.Site.RootWeb.ServerRelativeUrl + "/_catalogs/masterpage/AtkinsSystemMasterPage.master";
+            web.Update();
+
+
             //CREATE PERMISSION ROLE
             SecurityUtility.CreateDeviationCustomRoleDefinition(web,DeviationsList.DeviationRoleDefinition);
         }

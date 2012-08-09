@@ -78,7 +78,7 @@ namespace Atkins.Intranet.HR.Layouts
                                  "</Value></Eq></Where>";
                 viewTest.Paged = true;
                 taskQuery = new SPQuery(viewTest);
-                taskQuery.ViewFields = "<FieldRef Name='LinkTitle'/><FieldRef Name='" + CustomListHelper.ReturnTrimmedString(IntroductionTasksFields.TaskAssignee) + "'/><FieldRef Name='"+ IntroductionTasksFields.CompletedInternalName +"'/><FieldRef Name='"+ IntroductionTasksFields.DueDateInternalName +"'/>";
+                taskQuery.ViewFields = "<FieldRef Name='LinkTitle'/><FieldRef Name='" + CustomListHelper.ReturnTrimmedString(IntroductionTasksFields.TaskAssignee) + "'/><FieldRef Name='"+ IntroductionTasksFields.Completed +"'/><FieldRef Name='"+ IntroductionTasksFields.DueDate +"'/>";
 
                 taskView.Query = taskQuery;
             }
