@@ -225,7 +225,7 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string Description = "HandBook Description";
         public const string DescriptionDisplayName = "HandBook Description";
         public const string Category = "Employee Handbook Category";
-        public const string CategoryDisplayName = "Employee Handbook Category";
+        public const string CategoryDisplayName = "Category";
         public const string SubCategory = "Sub category";
         public const string SubCategoryDisplayName = "Sub category";
         public const string ValidFrom = "Valid from";
