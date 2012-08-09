@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="6130dae1-a782-4331-9127-d7786eb628e2" solutionId="6130dae1-a782-4331-9127-d7786eb628e2" resetWebServer="false" name="Atkins.Intranet.HR" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <features>
+    <featureReference itemId="5d6f06df-2f31-475a-9370-aa8cb23db8d0" />
+    <featureReference itemId="38917d23-b043-4f16-8ade-b55aaa775b78" />
+    <featureReference itemId="dd3b148b-9a11-4ffb-96b0-398887400023" />
+    <featureReference itemId="a50ca0e3-f9db-4cdf-8d4f-300be3eb8158" />
+  </features>
+  <projectItems>
+    <projectItemReference itemId="5ee97387-ddea-4655-9059-1fe9df907e88" />
+    <projectItemReference itemId="394dfdda-7384-4fa9-a15a-3f7912d2abd3" />
+  </projectItems>
+</package>

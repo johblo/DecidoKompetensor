@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Templates xmlns:ows="Microsoft SharePoint">
+  <Template Name="Atkins.Intranet.Portal" ID="100000">
+    <Configuration ID="0" 
+                   Title="Atkins.Intranet.Portal"
+                   Hidden="FALSE" ImageUrl="/_layouts/images/Atkins.Intranet.Portal/AtkinsLogo.png"
+                   Description="Atkins.Intranet.Portal" 
+                   DisplayCategory="Atkins"
+                   RootWebOnly="TRUE"
+                   BaseTemplateName="CMSPUBLISHING"
+			             BaseTemplateID="39"
+			             BaseConfigurationID="0">
+    </Configuration>
+
+    <Configuration ID="1"
+                 Title="Atkins.Intranet.HR"
+                 Hidden="FALSE" ImageUrl="/_layouts/images/Atkins.Intranet.Portal/AtkinsLogo.png"
+                 Description="Atkins.Intranet.HR"
+                 DisplayCategory="Atkins"
+                 SubWebOnly="True"
+                 BaseTemplateName="CMSPUBLISHING"
+			           BaseTemplateID="39"
+			           BaseConfigurationID="0">
+    </Configuration>
+
+    <Configuration ID="2"
+                 Title="Atkins.Intranet.QSE"
+                 Hidden="FALSE" ImageUrl="/_layouts/images/Atkins.Intranet.Portal/AtkinsLogo.png"
+                 Description="Atkins.Intranet.QSE"
+                 DisplayCategory="Atkins"
+                 SubWebOnly="True"
+                 BaseTemplateName="CMSPUBLISHING"
+			           BaseTemplateID="39"
+			           BaseConfigurationID="0">
+    </Configuration>
+  </Template>  
+  
+</Templates>

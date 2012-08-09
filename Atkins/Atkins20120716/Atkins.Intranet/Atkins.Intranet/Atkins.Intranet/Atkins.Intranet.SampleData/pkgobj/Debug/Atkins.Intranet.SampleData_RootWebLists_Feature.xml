@@ -1,0 +1,2 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Hidden="true" Title="Atkins.Intranet.SampleData Root web lists" Description="Sample Data for Office Information List" Id="6297993d-59fc-43dd-9bc8-9459785a4acc" ReceiverAssembly="Atkins.Intranet.SampleData, Version=1.0.0.0, Culture=neutral, PublicKeyToken=266b4302532a3153" ReceiverClass="Atkins.Intranet.SampleData.Features.RootWebLists.RootWebListsEventReceiver" Scope="Web"></Feature>

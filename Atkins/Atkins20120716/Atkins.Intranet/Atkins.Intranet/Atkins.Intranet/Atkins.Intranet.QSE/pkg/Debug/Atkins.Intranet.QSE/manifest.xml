@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Solution xmlns="http://schemas.microsoft.com/sharepoint/" SolutionId="76062495-83a8-458b-9b2a-d0dfbca4c703" SharePointProductVersion="14.0">
+  <Assemblies>
+    <Assembly Location="Atkins.Intranet.QSE.dll" DeploymentTarget="GlobalAssemblyCache" />
+  </Assemblies>
+  <FeatureManifests>
+    <FeatureManifest Location="Atkins.Intranet.QSE_Atkins.Intranet.QSE.Lists\Feature.xml" />
+  </FeatureManifests>
+</Solution>

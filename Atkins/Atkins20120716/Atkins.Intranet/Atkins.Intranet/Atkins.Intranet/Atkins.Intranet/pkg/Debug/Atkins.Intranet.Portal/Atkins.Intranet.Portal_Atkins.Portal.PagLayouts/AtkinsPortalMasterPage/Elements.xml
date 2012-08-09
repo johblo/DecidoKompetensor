@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="MasterPages" Url="_catalogs/masterpage" >
+    <File Url="AtkinsPortalMasterPage.master"
+         Type="GhostableInLibrary"
+         Path="AtkinsPortalMasterPage/AtkinsPortalMasterPage.master">
+    </File>
+  </Module>
+</Elements>

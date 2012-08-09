@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Offices>
+  <Office>
+    <Title>Hässleholm</Title>
+    <Address>Frykholmsgatan 7, 281 31 Hässleholm </Address>
+    <City>Hässleholm</City>
+    <PhoneNumber>040 694 27 42</PhoneNumber>
+    <FaxNumber>040 650 12 50</FaxNumber>
+    <Zip>281 31</Zip>
+  </Office>
+  <Office>
+    <Title>Helsingborg</Title>
+    <Address>Strömgränden 3, 252 20 Helsingborg </Address>
+    <City>Helsingborg</City>
+    <PhoneNumber>042 400 15 20</PhoneNumber>
+    <FaxNumber>040 694 27 42</FaxNumber>
+    <Zip>252 20</Zip>
+  </Office>
+  <Office>
+    <Title>Göteborg</Title>
+    <Address>Hvitfeldtsgatan 15, vån 7, 411 20 Göteborg</Address>
+    <City>Göteborg</City>
+    <PhoneNumber>031 761 95 00 </PhoneNumber>
+    <FaxNumber>031 761 95 01</FaxNumber>
+    <Zip>411 20</Zip>
+  </Office>
+  <Office>
+    <Title>Stockholm</Title>
+    <Address>Fabrikörvägen 8, vån 5, 131 52 Nacka Strand</Address>
+    <City>Stockholm</City>
+    <PhoneNumber>08 563 00 600</PhoneNumber>
+    <FaxNumber>08 563 00 601</FaxNumber>
+    <Zip>131 52</Zip>
+  </Office>
+</Offices>

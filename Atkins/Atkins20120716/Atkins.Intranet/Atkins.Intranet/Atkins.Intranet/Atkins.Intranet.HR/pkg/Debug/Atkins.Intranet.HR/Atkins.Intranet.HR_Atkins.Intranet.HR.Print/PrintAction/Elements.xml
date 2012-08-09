@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <CustomAction
+  Description="Print Item"
+  Title="Print Item"
+  Id="{E538E8C7-65DA-454E-AD87-4A603B6CC569}"
+  Location="CommandUI.Ribbon.DisplayForm"
+  RegistrationId="100"
+  RegistrationType="List"
+  Sequence="0"
+  Rights="ViewListItems"
+  xmlns="http://schemas.microsoft.com/sharepoint/">
+    <CommandUIExtension xmlns="http://schemas.microsoft.com/sharepoint/">
+      <!-- Define the (UI) button to be used for this custom action -->
+      <CommandUIDefinitions>
+        <CommandUIDefinition Location="Ribbon.ListForm.Display.Actions.Controls._children">
+          <Button Id="{B511A716-54FF-4EAE-9CBE-EA02B51B626E}"
+          Command="{4E2F5DC0-FE2C-4466-BB2D-3ED0D1917763}"
+          Image32by32="~site/_layouts/Images/Atkins.Intranet.HR/Printer-icon.png"
+          Image16by16="~site/_layouts/Images/Atkins.Intranet.HR/printer_green.png"
+          Sequence="0"
+          LabelText="Print Item"
+          Description="Print Item"
+          TemplateAlias="o1"
+/>
+        </CommandUIDefinition>
+      </CommandUIDefinitions>
+      <CommandUIHandlers>
+        <!-- Define the action expected on the button click -->
+        <CommandUIHandler Command="{4E2F5DC0-FE2C-4466-BB2D-3ED0D1917763}" CommandAction="javascript:window.print()" />
+      </CommandUIHandlers>
+    </CommandUIExtension>
+  </CustomAction>
+
+
+</Elements>

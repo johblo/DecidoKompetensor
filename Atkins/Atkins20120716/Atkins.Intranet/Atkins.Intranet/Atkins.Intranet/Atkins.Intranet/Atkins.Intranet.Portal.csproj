@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5E0D8D65-3429-4BE2-B098-5F45DECC1218}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Atkins.Intranet</RootNamespace>
+    <AssemblyName>Atkins.Intranet.Portal</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{BB1F664B-9266-4fd6-B973-E1E44974B511};{14822709-B5A1-4724-98CA-57A101D1B079};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SandboxedSolution>False</SandboxedSolution>
+    <ActiveDeploymentConfiguration>No Activation</ActiveDeploymentConfiguration>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.DocumentManagement, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\Common Files\Microsoft Shared\Web Server Extensions\14\ISAPI\Microsoft.Office.DocumentManagement.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Publishing, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\Common Files\Microsoft Shared\Web Server Extensions\14\ISAPI\Microsoft.SharePoint.Publishing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Taxonomy, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\Common Files\Microsoft Shared\Web Server Extensions\14\ISAPI\Microsoft.SharePoint.Taxonomy.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.SharePoint" />
+    <Reference Include="Microsoft.SharePoint.Security" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Features\Atkins.Intranet.Lists\Atkins.Intranet.EventReceiver.cs">
+      <DependentUpon>Atkins.Intranet.Lists.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Atkins.Intranet.Portal.AddWebParts\Atkins.Intranet.Portal.EventReceiver.cs">
+      <DependentUpon>Atkins.Intranet.Portal.AddWebParts.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Atkins.Intranet.Portal.Settings\Atkins.Intranet.Portal.EventReceiver.cs">
+      <DependentUpon>Atkins.Intranet.Portal.Settings.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Features\Atkins.Portal.PagLayouts\Atkins.Portal.PagLayouts.feature">
+      <FeatureId>{f121c7d1-4b0e-468d-8aa5-3136b3c180f4}</FeatureId>
+    </None>
+    <None Include="Features\Atkins.Intranet.Lists\Atkins.Intranet.Lists.feature">
+      <FeatureId>{55dc732f-bbf7-44ab-9d46-b24182c0ad57}</FeatureId>
+    </None>
+    <None Include="Features\Atkins.Intranet.Portal.AddWebParts\Atkins.Intranet.Portal.AddWebParts.feature">
+      <FeatureId>{8b0c9444-9642-4d00-a3e5-adc7fb0fc100}</FeatureId>
+    </None>
+    <None Include="Features\Atkins.Intranet.Portal.Settings\Atkins.Intranet.Portal.Settings.feature">
+      <FeatureId>{348d669f-758b-4637-9d3a-2c1bcefcba56}</FeatureId>
+    </None>
+    <None Include="Images\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{4de2e5a2-c67e-4d47-a9f2-94e58f4f7100}</SharePointProjectItemId>
+    </None>
+    <None Include="key.snk" />
+    <None Include="Layouts\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{17474dd1-a25f-49df-8557-d71325e4428b}</SharePointProjectItemId>
+    </None>
+    <None Include="MasterPages\AtkinsPortalMasterPage\AtkinsPortalMasterPage.master">
+      <SubType>ASPXCodeBehind</SubType>
+    </None>
+    <None Include="MasterPages\AtkinsPortalMasterPage\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{6ed971d4-3323-4276-a5fe-01d9ad4784ed}</SharePointProjectItemId>
+    </None>
+    <None Include="MasterPages\SystemMasterPage\AtkinsSystemMasterPage.master" />
+    <None Include="MasterPages\SystemMasterPage\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{b83aca2b-ff4b-4e34-9014-7664934a23a4}</SharePointProjectItemId>
+    </None>
+    <None Include="Package\Package.package">
+      <PackageId>{2a93d79d-d83f-443a-b138-a437bc6084f1}</PackageId>
+    </None>
+    <None Include="Package\Package.Template.xml">
+      <DependentUpon>Package.package</DependentUpon>
+    </None>
+    <None Include="PageLayouts\AtkinsStartPageLayout\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{5e357ef6-a0c1-4d16-8821-08a5c968e116}</SharePointProjectItemId>
+    </None>
+    <Content Include="Features\Atkins.Intranet.Lists\Atkins.Intranet.Lists.Template.xml">
+      <DependentUpon>Atkins.Intranet.Lists.feature</DependentUpon>
+    </Content>
+    <Content Include="Features\Atkins.Intranet.Portal.AddWebParts\Atkins.Intranet.Portal.AddWebParts.Template.xml">
+      <DependentUpon>Atkins.Intranet.Portal.AddWebParts.feature</DependentUpon>
+    </Content>
+    <Content Include="Features\Atkins.Intranet.Portal.Settings\Atkins.Intranet.Portal.Settings.Template.xml">
+      <DependentUpon>Atkins.Intranet.Portal.Settings.feature</DependentUpon>
+    </Content>
+    <Content Include="Images\Atkins.Intranet.Portal\icons\docs.png" />
+    <Content Include="Images\Atkins.Intranet.Portal\icons\employee.png" />
+    <Content Include="Images\Atkins.Intranet.Portal\icons\task.png" />
+    <Content Include="Layouts\Atkins.Intranet.Portal\CSS\AtkinsPortalMasterPage.css" />
+    <Content Include="Layouts\Atkins.Intranet.Portal\CSS\AtkinsPortalStartPageLayout.css" />
+    <Content Include="Layouts\Atkins.Intranet.Portal\CSS\AtkinsSystemMasterPage.css" />
+    <Content Include="Layouts\Atkins.Intranet.Portal\Javascript\stickyFooter.js" />
+    <Content Include="MasterPages\AtkinsPortalMasterPage\Elements.xml" />
+    <Content Include="MasterPages\SystemMasterPage\Elements.xml" />
+    <Content Include="PageLayouts\AtkinsStartPageLayout\AtkinsStartPageLayout.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <None Include="SiteDefinition\Atkins.Intranet\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{2e9a7f93-3141-4af9-8607-06af52c685c5}</SharePointProjectItemId>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Features\Atkins.Portal.PagLayouts\Atkins.Portal.PagLayouts.Template.xml">
+      <DependentUpon>Atkins.Portal.PagLayouts.feature</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Images\Atkins.Intranet.Portal\AtkinsBreadCrumb.png" />
+    <Content Include="Images\Atkins.Intranet.Portal\AtkinsLogo.png" />
+    <Content Include="PageLayouts\AtkinsStartPageLayout\Elements.xml" />
+    <Content Include="SiteDefinition\Atkins.Intranet\default.aspx" />
+    <Content Include="SiteDefinition\Atkins.Intranet\onet.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="SiteDefinition\Atkins.Intranet\webtemp_Atkins.Intranet.Portal.xml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Atkins.Intranet.Utilities\Atkins.Intranet.Utilities.csproj">
+      <Project>{A1D3ECBC-CBDF-409D-B00C-C25D0F69105A}</Project>
+      <Name>Atkins.Intranet.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy $(TargetDir)$(TargetName).wsp $(SolutionDir)DeployScripts</PostBuildEvent>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,2 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Title="Atkins.Intranet.Portal Lists" Description="Creates and sets up Intranet lists on the root level site." Id="df6a80ee-8cbe-4253-9cca-8f173a97b8dd" ReceiverAssembly="Atkins.Intranet.Portal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=223aa5daed29128a" ReceiverClass="Atkins.Intranet.Features.Atkins.Intranet.Lists.AtkinsIntranetEventReceiver" Scope="Web"></Feature>

@@ -1,0 +1,2 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Title="Atkins.Intranet.HR AddWebParts" Id="187a36fd-14df-4e0a-b23c-2ee1018fa1c5" ReceiverAssembly="Atkins.Intranet.HR, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d815e360c31c37e0" ReceiverClass="Atkins.Intranet.HR.Features.Atkins.Intranet.HR.AddWebparts.AtkinsIntranetHREventReceiver" Scope="Web"></Feature>

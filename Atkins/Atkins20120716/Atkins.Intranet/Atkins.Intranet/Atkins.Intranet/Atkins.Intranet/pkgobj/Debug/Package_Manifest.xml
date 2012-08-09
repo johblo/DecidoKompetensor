@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Solution xmlns="http://schemas.microsoft.com/sharepoint/" SolutionId="2a93d79d-d83f-443a-b138-a437bc6084f1" SharePointProductVersion="14.0">
+  <Assemblies>
+    <Assembly Location="Atkins.Intranet.Portal.dll" DeploymentTarget="GlobalAssemblyCache" />
+  </Assemblies>
+  <TemplateFiles>
+    <TemplateFile Location="Layouts\Atkins.Intranet.Portal\CSS\AtkinsPortalMasterPage.css" />
+    <TemplateFile Location="Layouts\Atkins.Intranet.Portal\CSS\AtkinsPortalStartPageLayout.css" />
+    <TemplateFile Location="Layouts\Atkins.Intranet.Portal\CSS\AtkinsSystemMasterPage.css" />
+    <TemplateFile Location="Layouts\Atkins.Intranet.Portal\Javascript\stickyFooter.js" />
+    <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\docs.png" />
+    <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\employee.png" />
+    <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\task.png" />
+    <TemplateFile Location="Images\Atkins.Intranet.Portal\AtkinsBreadCrumb.png" />
+    <TemplateFile Location="Images\Atkins.Intranet.Portal\AtkinsLogo.png" />
+    <TemplateFile Location="SiteTemplates\Atkins.Intranet.Portal\default.aspx" />
+    <TemplateFile Location="SiteTemplates\Atkins.Intranet.Portal\Xml\onet.xml" />
+    <TemplateFile Location="1053\xml\webtemp_Atkins.Intranet.Portal.xml" />
+  </TemplateFiles>
+  <FeatureManifests>
+    <FeatureManifest Location="Atkins.Intranet.Portal_Atkins.Portal.PagLayouts\Feature.xml" />
+    <FeatureManifest Location="Atkins.Intranet.Portal_Atkins.Intranet.Lists\Feature.xml" />
+    <FeatureManifest Location="Atkins.Intranet.Portal_Atkins.Intranet.Portal.AddWebParts\Feature.xml" />
+    <FeatureManifest Location="Atkins.Intranet.Portal_Atkins.Intranet.Portal.Settings\Feature.xml" />
+  </FeatureManifests>
+</Solution>
