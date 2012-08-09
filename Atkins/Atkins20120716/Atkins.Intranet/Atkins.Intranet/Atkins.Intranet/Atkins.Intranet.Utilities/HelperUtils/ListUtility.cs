@@ -391,6 +391,8 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string TermGroup = "QSE";
         public const string TermSetStatus = "Deviation Status";
 
+        public const string webPartView = "webPartView";
+
         public static readonly SPContentTypeId DeviationBaseContentTypeId = new SPContentTypeId("0x0100E597B736AF8F410F887223B41DF23E68");
         //DB201B0B455F46CBA862ABA9FE71071F
         //2D37B3E6024745619856983299CB97BD

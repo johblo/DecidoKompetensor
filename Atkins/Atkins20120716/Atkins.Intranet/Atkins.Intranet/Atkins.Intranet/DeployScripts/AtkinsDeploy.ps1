@@ -70,8 +70,16 @@ Write-Host "Activating QSE features:"
 Write-Host "***********************Create lists*********"
 Enable-SPFeature -Identity "5fda185d-59ca-4101-955b-c9f28dd3acd7" -URL $qseUrl
 
-iisreset
+Write-Host "Activating QSE features:"
+Write-Host "***********************QSE Sample Data*********"
+Enable-SPFeature -Identity "da11ccec-692a-4402-a86e-6e4a53f56742" -URL $qseUrl
 
+
+Write-Host "Activating QSE features:"
+Write-Host "***********************QSE Add webparts to QSE startpage*********"
+Enable-SPFeature -Identity "5dfbab14-178b-48b7-8a9d-99bbe5ad0bbb" -URL $qseUrl
+
+iisreset
 Write-Host "QSE Features Activation Done!"
 
 Write-Host "Activating rootWeb Feature"

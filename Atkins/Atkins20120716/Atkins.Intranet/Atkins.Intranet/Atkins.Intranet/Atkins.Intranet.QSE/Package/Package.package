@@ -2,5 +2,6 @@
 <package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="76062495-83a8-458b-9b2a-d0dfbca4c703" solutionId="76062495-83a8-458b-9b2a-d0dfbca4c703" resetWebServer="false" name="Atkins.Intranet.QSE" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
   <features>
     <featureReference itemId="5f29ec9f-102a-4952-ad85-33048c0324fa" />
+    <featureReference itemId="3b706d17-8389-4863-b143-d3bd94f12065" />
   </features>
 </package>

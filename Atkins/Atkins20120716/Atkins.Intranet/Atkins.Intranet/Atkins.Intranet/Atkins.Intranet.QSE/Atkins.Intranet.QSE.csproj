@@ -59,6 +59,9 @@
     <Reference Include="Microsoft.SharePoint.Security" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\Atkins.Intranet.QSE.AddWebparts\Atkins.Intranet.QSE.EventReceiver.cs">
+      <DependentUpon>Atkins.Intranet.QSE.AddWebparts.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Atkins.Intranet.QSE.Lists\Atkins.Intranet.QSE.EventReceiver.cs">
       <DependentUpon>Atkins.Intranet.QSE.Lists.feature</DependentUpon>
     </Compile>
@@ -67,6 +70,9 @@
   <ItemGroup>
     <None Include="Features\Atkins.Intranet.QSE.Lists\Atkins.Intranet.QSE.Lists.feature">
       <FeatureId>{5f29ec9f-102a-4952-ad85-33048c0324fa}</FeatureId>
+    </None>
+    <None Include="Features\Atkins.Intranet.QSE.AddWebparts\Atkins.Intranet.QSE.AddWebparts.feature">
+      <FeatureId>{3b706d17-8389-4863-b143-d3bd94f12065}</FeatureId>
     </None>
     <None Include="key.snk" />
     <None Include="Package\Package.package">
@@ -85,6 +91,9 @@
   <ItemGroup>
     <Content Include="Features\Atkins.Intranet.QSE.Lists\Atkins.Intranet.QSE.Lists.Template.xml">
       <DependentUpon>Atkins.Intranet.QSE.Lists.feature</DependentUpon>
+    </Content>
+    <Content Include="Features\Atkins.Intranet.QSE.AddWebparts\Atkins.Intranet.QSE.AddWebparts.Template.xml">
+      <DependentUpon>Atkins.Intranet.QSE.AddWebparts.feature</DependentUpon>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

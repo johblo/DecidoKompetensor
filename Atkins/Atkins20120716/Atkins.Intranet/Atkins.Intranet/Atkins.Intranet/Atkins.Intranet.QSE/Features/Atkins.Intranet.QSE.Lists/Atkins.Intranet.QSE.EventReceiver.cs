@@ -274,6 +274,17 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     defaultView.Query = "<OrderBy><FieldRef Name='"+CustomListHelper.ReturnTrimmedString(DeviationsList.KeyDate)+"' Ascending='TRUE'/></OrderBy>";
 
                     defaultView.Update();
+
+
+                    //WebPartView
+                    System.Collections.Specialized.StringCollection viewFields = new System.Collections.Specialized.StringCollection();
+                    viewFields.Add("LinkTitle");
+                    SPView webPartView = deviationList.Views.Add(DeviationsList.webPartView, viewFields, "", 5, false, false);
+                    webPartView.TabularView = false;
+                    webPartView.Update();
+
+
+
                     currentWeb.Update();
                     //ADD METADATA NAVIGATION TO LIST
                     MetadataNavigationSettings listNavSettings = MetadataNavigationSettings.GetMetadataNavigationSettings(deviationList);

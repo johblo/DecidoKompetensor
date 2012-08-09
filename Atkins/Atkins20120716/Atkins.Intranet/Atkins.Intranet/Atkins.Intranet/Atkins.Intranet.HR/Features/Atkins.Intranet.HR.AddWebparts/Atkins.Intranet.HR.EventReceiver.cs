@@ -3,8 +3,6 @@ using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Security;
-
-
 using Atkins.Intranet.Utilities.HelperUtils;
 
 namespace Atkins.Intranet.HR.Features.Atkins.Intranet.HR.AddWebparts
