@@ -8,6 +8,8 @@ using Microsoft.SharePoint.Taxonomy;
 using Microsoft.SharePoint.Security;
 using System.Linq;
 using Microsoft.Office.DocumentManagement.MetadataNavigation;
+using System.Globalization;
+using System.Threading;
 
 namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
 {
@@ -28,9 +30,8 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
             try
             {
                 SPWeb currentWeb = (SPWeb)properties.Feature.Parent;
-
                 //Controlling Document
-                SPList controllingList = CustomListHelper.ReturnList(currentWeb,ControllingDocuments.ListName);
+                SPList controllingList = CustomListHelper.ReturnList(currentWeb, ControllingDocuments.ListName);
                 if (controllingList == null)
                 {
                     CreateControllingDocumentContentTypeList(currentWeb);
@@ -53,13 +54,14 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                 {
                     CreateDeviationsContentTypeList(currentWeb);
                 }
-                
+
             }
             catch (SPException exception)
             {
                 //Log error message
                 throw exception;
             }
+           
         }
         private static void CreateDeviationsContentTypeList(SPWeb currentWeb)
         {
@@ -103,8 +105,7 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     string fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, DeviationsList.KeyDate, SPFieldType.DateTime, true);
                     SPFieldDateTime keyDateField = (SPFieldDateTime)rootWeb.Fields.GetField(fieldInternalName);
                     keyDateField.DefaultValue = SPUtility.CreateISO8601DateTimeFromSystemDateTime(DateTime.Now);
-                    //keyDateField.Title = DeviationsList.KeyDate;
-                    CustomListHelper.SetFieldDisplayName(keyDateField, DeviationsList.KeyDateDisplayName);
+                    keyDateField.Title = DeviationsList.KeyDateDisplayName;
                     keyDateField.Group = DeviationsList.ListName;
                     keyDateField.DisplayFormat = SPDateTimeFieldFormatType.DateOnly;
                     keyDateField.Update();
@@ -113,8 +114,7 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     //Description Field
                     fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, DeviationsList.DeviationDescription, SPFieldType.Note, false);
                     SPFieldMultiLineText descriptionField = (SPFieldMultiLineText)rootWeb.Fields.GetField(fieldInternalName);
-                    //descriptionField.Title = DeviationsList.DeviationDescription;
-                    CustomListHelper.SetFieldDisplayName(descriptionField, DeviationsList.DeviationDescriptionDisplayName);
+                    descriptionField.Title = DeviationsList.DeviationDescriptionDisplayName;
                     descriptionField.Group = DeviationsList.ListName;
                     descriptionField.NumberOfLines = 15;
                     descriptionField.RichText = true;
@@ -138,16 +138,14 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     statusField.Open = true;
                     statusField.AnchorId = Guid.Empty;
                     statusField.Group = DeviationsList.ListName;
-                    //statusField.Title = DeviationsList.DeviationStatus;
-                    CustomListHelper.SetFieldDisplayName(statusField, DeviationsList.DeviationStatusDisplayName);
+                    statusField.Title = DeviationsList.DeviationStatusDisplayName;
                     statusField.Update();
                     SPFieldLink statusFieldLink = new SPFieldLink(statusField);
 
                     //RESPONSIBLE
                     fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, DeviationsList.Responsible, SPFieldType.User, false);
                     SPFieldUser responsibleField = (SPFieldUser)rootWeb.Fields.GetField(fieldInternalName);
-                    //responsibleField.Title = DeviationsList.Responsible;
-                    CustomListHelper.SetFieldDisplayName(responsibleField, DeviationsList.ResponsibleDisplayName);
+                    responsibleField.Title = DeviationsList.ResponsibleDisplayName;
                     responsibleField.AllowMultipleValues = false;
                     responsibleField.Group = DeviationsList.ListName;
                     responsibleField.Update();
@@ -156,8 +154,7 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     //DECISION DATE
                     fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, DeviationsList.DecisionDate, SPFieldType.DateTime, false);
                     SPFieldDateTime decisionDateField = (SPFieldDateTime)rootWeb.Fields.GetField(fieldInternalName);
-                    //decisionDateField.Title = DeviationsList.DecisionDate;
-                    CustomListHelper.SetFieldDisplayName(decisionDateField, DeviationsList.DecisionDateDisplayName);
+                    decisionDateField.Title = DeviationsList.DecisionDateDisplayName;
                     decisionDateField.Group = DeviationsList.ListName;
                     decisionDateField.DisplayFormat = SPDateTimeFieldFormatType.DateOnly;
                     decisionDateField.Update();
@@ -166,9 +163,9 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     //DECISION COMMENT
                     fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, DeviationsList.DecisionComment, SPFieldType.Note, false);
                     SPFieldMultiLineText decisionCommentField = (SPFieldMultiLineText)rootWeb.Fields.GetField(fieldInternalName);
-                    //decisionCommentField.Title = DeviationsList.DecisionComment;
-                    CustomListHelper.SetFieldDisplayName(decisionCommentField, DeviationsList.DecisionCommentDisplayName);
+                    decisionCommentField.Title = DeviationsList.DecisionCommentDisplayName;
                     decisionCommentField.Group = DeviationsList.ListName;
+                    decisionCommentField.AppendOnly = true;
                     decisionCommentField.NumberOfLines = 15;
                     decisionCommentField.RichText = true;
                     decisionCommentField.RichTextMode = SPRichTextMode.FullHtml;
@@ -178,8 +175,7 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     //ACTION BY DATE
                     fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, DeviationsList.ActionByDate, SPFieldType.DateTime, false);
                     SPFieldDateTime actionDateField = (SPFieldDateTime)rootWeb.Fields.GetField(fieldInternalName);
-                    //actionDateField.Title = DeviationsList.ActionByDate;
-                    CustomListHelper.SetFieldDisplayName(actionDateField, DeviationsList.ActionByDateDisplayName);
+                    actionDateField.Title = DeviationsList.ActionByDateDisplayName;
                     actionDateField.Group = DeviationsList.ListName;
                     actionDateField.DisplayFormat = SPDateTimeFieldFormatType.DateOnly;
                     actionDateField.Update();
@@ -188,8 +184,7 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     //FOLLOWUP DATE
                     fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, DeviationsList.FollowUpDate, SPFieldType.DateTime, false);
                     SPFieldDateTime followUpDateField = (SPFieldDateTime)rootWeb.Fields.GetField(fieldInternalName);
-                    //followUpDateField.Title = DeviationsList.FollowUpDate;
-                    CustomListHelper.SetFieldDisplayName(followUpDateField, DeviationsList.FollowUpDateDisplayName);
+                    followUpDateField.Title = DeviationsList.FollowUpDateDisplayName;
                     followUpDateField.Group = DeviationsList.ListName;
                     followUpDateField.DisplayFormat = SPDateTimeFieldFormatType.DateOnly;
                     followUpDateField.Update();
@@ -198,8 +193,7 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     //FOLLOWUP COMMENT
                     fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, DeviationsList.FollowUpComment, SPFieldType.Note, false);
                     SPFieldMultiLineText followUpCommentField = (SPFieldMultiLineText)rootWeb.Fields.GetField(fieldInternalName);
-                    //followUpCommentField.Title = DeviationsList.FollowUpComment;
-                    CustomListHelper.SetFieldDisplayName(followUpCommentField, DeviationsList.FollowUpCommentDisplayName);
+                    followUpCommentField.Title = DeviationsList.FollowUpCommentDisplayName;
                     followUpCommentField.Group = DeviationsList.ListName;
                     followUpCommentField.NumberOfLines = 15;
                     followUpCommentField.RichText = true;
@@ -344,8 +338,7 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     processStepField.Open = true;
                     processStepField.AnchorId = Guid.Empty;
                     processStepField.Group = ProcessStepList.ListName;
-                    //processStepField.Title = ProcessStepList.Process;
-                    CustomListHelper.SetFieldDisplayName(processStepField, ProcessStepList.ProcessDisplayName);
+                    processStepField.Title = ProcessStepList.ProcessDisplayName;
                     processStepField.Update();
                     SPFieldLink processStepFieldLink = new SPFieldLink(processStepField);
 
@@ -353,8 +346,7 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, ProcessStepList.ProcessDescription, SPFieldType.Note, true);
                     SPFieldMultiLineText descriptionField = (SPFieldMultiLineText)rootWeb.Fields.GetField(fieldInternalName);
                     descriptionField.NumberOfLines = 15;
-                    //descriptionField.Title = ProcessStepList.ProcessDescription;
-                    CustomListHelper.SetFieldDisplayName(descriptionField, ProcessStepList.ProcessDescriptionDisplayName);
+                    descriptionField.Title = ProcessStepList.ProcessDescriptionDisplayName;
                     descriptionField.Group = ProcessStepList.ListName;
                     descriptionField.Update();
                     SPFieldLink descriptionFieldLink = new SPFieldLink(descriptionField);
@@ -444,16 +436,14 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     resultingDocumentCategoryField.Open = true;
                     resultingDocumentCategoryField.AnchorId = Guid.Empty;
                     resultingDocumentCategoryField.Group = ResultingDocuments.ListName;
-                    //resultingDocumentCategoryField.Title = ResultingDocuments.ResultingDocumentCategory;
-                    CustomListHelper.SetFieldDisplayName(resultingDocumentCategoryField, ResultingDocuments.ResultingDocumentCategoryDisplayName);
+                    resultingDocumentCategoryField.Title = ResultingDocuments.ResultingDocumentCategoryDisplayName;
                     resultingDocumentCategoryField.Update();
                     SPFieldLink resultingDocumentCategoryFieldLink = new SPFieldLink(resultingDocumentCategoryField);
 
                     //RESULTING DOCUMENT YEAR
                     fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, ResultingDocuments.ResultingDocumentYear, SPFieldType.Choice, false);
                     SPFieldChoice resultingDocumentYearField = (SPFieldChoice)rootWeb.Fields.GetField(fieldInternalName);
-                    //resultingDocumentYearField.Title = ResultingDocuments.ResultingDocumentYear;
-                    CustomListHelper.SetFieldDisplayName(resultingDocumentYearField, ResultingDocuments.ResultingDocumentYearDisplayName);
+                    resultingDocumentYearField.Title = ResultingDocuments.ResultingDocumentYearDisplayName;
                     resultingDocumentYearField.Group = ResultingDocuments.ListName;
                     for (int year = ResultingDocuments.ResultingDocumentYearStart; year <= ResultingDocuments.ResultingDocumentYearStop; year++)
                         resultingDocumentYearField.Choices.Add(year.ToString());
@@ -556,8 +546,7 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     iso9001Field.Open = true;
                     iso9001Field.AnchorId = Guid.Empty;
                     iso9001Field.Group = ControllingDocuments.ListName;
-                    //iso9001Field.Title = ControllingDocuments.ISO9001;
-                    CustomListHelper.SetFieldDisplayName(iso9001Field, ControllingDocuments.ISO9001DisplayName);
+                    iso9001Field.Title = ControllingDocuments.ISO9001DisplayName;
                     iso9001Field.Update();
                     SPFieldLink iso9001FieldLink = new SPFieldLink(iso9001Field);
 
@@ -575,8 +564,7 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     iso14001Field.Open = true;
                     iso14001Field.AnchorId = Guid.Empty;
                     iso14001Field.Group = ControllingDocuments.ListName;
-                    //iso14001Field.Title = ControllingDocuments.ISO14001;
-                    CustomListHelper.SetFieldDisplayName(iso14001Field, ControllingDocuments.ISO14001DisplayName);
+                    iso14001Field.Title = ControllingDocuments.ISO14001DisplayName;
                     iso14001Field.Update();
                     SPFieldLink iso14001FieldLink = new SPFieldLink(iso14001Field);
 
@@ -594,16 +582,14 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     iso18001Field.Open = true;
                     iso18001Field.AnchorId = Guid.Empty;
                     iso18001Field.Group = ControllingDocuments.ListName;
-                    //iso18001Field.Title = ControllingDocuments.ISO18001;
-                    CustomListHelper.SetFieldDisplayName(iso18001Field, ControllingDocuments.ISO18001DisplayName);
+                    iso18001Field.Title = ControllingDocuments.ISO18001DisplayName;
                     iso18001Field.Update();
                     SPFieldLink iso18001FieldLink = new SPFieldLink(iso18001Field);
 
                     //Written By Field
                     fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, ControllingDocuments.WrittenBy, SPFieldType.User,false);
                     SPFieldUser writtenByField = (SPFieldUser)rootWeb.Fields.GetField(fieldInternalName);
-                    //writtenByField.Title = ControllingDocuments.WrittenBy;
-                    CustomListHelper.SetFieldDisplayName(writtenByField, ControllingDocuments.WrittenByDisplayName);
+                    writtenByField.Title = ControllingDocuments.WrittenByDisplayName;
                     writtenByField.AllowMultipleValues = false;
                     writtenByField.Group = ControllingDocuments.ListName;
                     writtenByField.SelectionGroup = currentWeb.SiteGroups[QSEAuthorsGroup.Name].ID;
@@ -613,8 +599,7 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     //Auditor Field
                     fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, ControllingDocuments.Auditor, SPFieldType.User, false);
                     SPFieldUser auditorField = (SPFieldUser)rootWeb.Fields.GetField(fieldInternalName);
-                    //auditorField.Title = ControllingDocuments.Auditor;
-                    CustomListHelper.SetFieldDisplayName(auditorField, ControllingDocuments.AuditorDisplayName);
+                    auditorField.Title = ControllingDocuments.AuditorDisplayName;
                     auditorField.Group = ControllingDocuments.ListName;
                     auditorField.SelectionGroup = currentWeb.SiteGroups[QSEAuditorssGroup.Name].ID;
                     auditorField.Update();
@@ -623,8 +608,7 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     //Approver Field
                     fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, ControllingDocuments.Approver, SPFieldType.User, false);
                     SPFieldUser approverField = (SPFieldUser)rootWeb.Fields.GetField(fieldInternalName);
-                    //approverField.Title = ControllingDocuments.Approver;
-                    CustomListHelper.SetFieldDisplayName(approverField, ControllingDocuments.ApproverDisplayName);
+                    approverField.Title = ControllingDocuments.ApproverDisplayName;
                     approverField.Group = ControllingDocuments.ListName;
                     approverField.SelectionGroup = currentWeb.SiteGroups[QSEApproverssGroup.Name].ID;
                     approverField.Update();
@@ -632,8 +616,7 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
 
                     fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, ControllingDocuments.ValidUntil, SPFieldType.DateTime, false);
                     SPFieldDateTime validUntilField = (SPFieldDateTime)rootWeb.Fields.GetField(fieldInternalName);
-                    //validUntilField.Title = ControllingDocuments.ValidUntil;
-                    CustomListHelper.SetFieldDisplayName(validUntilField, ControllingDocuments.ValidUntilDisplayName);
+                    validUntilField.Title = ControllingDocuments.ValidUntilDisplayName;
                     validUntilField.Group = ControllingDocuments.ListName;
                     validUntilField.DisplayFormat = SPDateTimeFieldFormatType.DateOnly;
                     validUntilField.Update();

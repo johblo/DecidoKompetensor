@@ -23,8 +23,8 @@ namespace Atkins.Intranet.HR.Features.Atkins.Intranet.HR.AddWebparts
         {
             SPWeb web = (SPWeb)properties.Feature.Parent;
             
-            WebPartUtility.AddListViewWebPart(web,web, CustomListHelper.ReturnTrimmedString(EmployeeContactFields.ListName), EmployeeContactFields.webPartView, "Left", 1);
-            WebPartUtility.AddListViewWebPart(web, web, CustomListHelper.ReturnTrimmedString(IntroductionTasksFields.ListName), IntroductionTasksFields.webPartView, "Center", 1);
+            //WebPartUtility.AddListViewWebPart(web,web, EmployeeContactFields.ListName, EmployeeContactFields.webPartView, "Left", 2);
+            WebPartUtility.AddListViewWebPart(web, web, IntroductionTasksFields.ListName, IntroductionTasksFields.webPartView, "Center", 1);
         }
 
 

@@ -9,6 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atkins.Intranet.Utilities",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AutomationScripts", "AutomationScripts", "{EB832CBB-5AC1-44C7-8B02-E533AC67E03A}"
 	ProjectSection(SolutionItems) = preProject
+		DeployScripts\Atkins.Intranet.Blog.ps1 = DeployScripts\Atkins.Intranet.Blog.ps1
 		DeployScripts\AtkinsDeploy.ps1 = DeployScripts\AtkinsDeploy.ps1
 		AtkinsFullDeploy.ps1 = AtkinsFullDeploy.ps1
 		DeployScripts\CleanFarm.ps1 = DeployScripts\CleanFarm.ps1
@@ -19,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atkins.Intranet.SampleData", "Atkins.Intranet.SampleData\Atkins.Intranet.SampleData.csproj", "{50640BA0-DC7A-4F20-AF39-4B108175D8DB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atkins.Intranet.QSE", "Atkins.Intranet.QSE\Atkins.Intranet.QSE.csproj", "{A10CEA83-E4A7-4809-9A86-E83FB960C2DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atkins.Intranet.Blog", "Atkins.Intranet.Blog\Atkins.Intranet.Blog.csproj", "{D0A96113-D0AE-483F-BF69-833B0E7F2F86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,6 +59,12 @@ Global
 		{A10CEA83-E4A7-4809-9A86-E83FB960C2DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A10CEA83-E4A7-4809-9A86-E83FB960C2DF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A10CEA83-E4A7-4809-9A86-E83FB960C2DF}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{D0A96113-D0AE-483F-BF69-833B0E7F2F86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0A96113-D0AE-483F-BF69-833B0E7F2F86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0A96113-D0AE-483F-BF69-833B0E7F2F86}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{D0A96113-D0AE-483F-BF69-833B0E7F2F86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0A96113-D0AE-483F-BF69-833B0E7F2F86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0A96113-D0AE-483F-BF69-833B0E7F2F86}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

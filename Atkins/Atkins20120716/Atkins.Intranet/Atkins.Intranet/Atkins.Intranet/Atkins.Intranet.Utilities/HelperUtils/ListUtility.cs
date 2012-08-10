@@ -418,6 +418,7 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string TermSetTemplateDocumentCategory = "Template Document Category";
 
         public static readonly SPContentTypeId templateDocumentContentTypeId = new SPContentTypeId("0x010100450A55B589644618865764033A029768");
+                                                                                                            
     }
     public class TemplateDocumentAdministrators
     {
@@ -425,4 +426,16 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string Description = "Contribute permission in the library.";
         public const SPRoleType role = SPRoleType.Contributor;
     }
+
+    public class BlogPosts
+    {
+        public const string webPartView = "webPartView";
+        public const string BlogPostsName = "Inlägg";
+        public const string BlogZoneLeft = "Vänster";
+        public const string HideTitle = "Hide Title";
+        public const string HideTitleContent = "<style>.s4-titletext {DISPLAY: none}</style>";
+
+        
+    }
+
 }

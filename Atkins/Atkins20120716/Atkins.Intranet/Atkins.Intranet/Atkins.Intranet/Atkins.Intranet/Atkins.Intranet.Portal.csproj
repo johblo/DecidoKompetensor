@@ -131,6 +131,7 @@
     <Content Include="Layouts\Atkins.Intranet.Portal\CSS\AtkinsPortalMasterPage.css" />
     <Content Include="Layouts\Atkins.Intranet.Portal\CSS\AtkinsPortalStartPageLayout.css" />
     <Content Include="Layouts\Atkins.Intranet.Portal\CSS\AtkinsSystemMasterPage.css" />
+    <Content Include="Layouts\Atkins.Intranet.Portal\CSS\Blog.css" />
     <Content Include="Layouts\Atkins.Intranet.Portal\Javascript\stickyFooter.js" />
     <Content Include="MasterPages\AtkinsPortalMasterPage\Elements.xml" />
     <Content Include="MasterPages\SystemMasterPage\Elements.xml" />

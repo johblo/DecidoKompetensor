@@ -5,6 +5,8 @@ using System.Text;
 using Microsoft.SharePoint;
 using System.Web.UI.WebControls.WebParts;
 using Microsoft.SharePoint.WebPartPages;
+using System.Collections.Specialized;
+using System.Xml;
 
 namespace Atkins.Intranet.Utilities.HelperUtils
 {
@@ -19,9 +21,11 @@ namespace Atkins.Intranet.Utilities.HelperUtils
             SPList currentList = sourceWeb.Lists.TryGetList(listName);
             if (currentList != null)
             {
-                startPageFile.CheckOut();
+                if(startPageFile.Level != SPFileLevel.Checkout)
+                    startPageFile.CheckOut();
                 SPLimitedWebPartManager manager = currentWeb.GetLimitedWebPartManager(startPage, PersonalizationScope.Shared);
                 ListViewWebPart webPart = new ListViewWebPart();
+                webPart.Title = listName;
                 webPart.WebId = sourceWeb.ID;
                 webPart.ListName = currentList.ID.ToString();
                 if (checkIfViewExist(currentList, viewName))
@@ -29,12 +33,86 @@ namespace Atkins.Intranet.Utilities.HelperUtils
                     SPView webPartView = currentList.Views[viewName];
                     webPart.ViewGuid = webPartView.ID.ToString("B").ToUpper();
                     webPart.ViewType = ViewType.Html;
-                    manager.AddWebPart(webPart, zoneId, zoneIndex);
+                    if(!FindWebPart(manager,listName))
+                        manager.AddWebPart(webPart, zoneId, zoneIndex);
+                    
                 }
-                startPageFile.CheckIn("Added webpart");
+                if (startPageFile.Level == SPFileLevel.Checkout)
+                    startPageFile.CheckIn("Added webpart");
             }
             currentWeb.Update();
         }
+        public static void AddContentEditorWebPart(SPWeb currentWeb, string title, string zoneId, int zoneIndex,string content)
+        {
+            //string startPage = currentWeb.RootFolder.WelcomePage;
+            string startPage = "default.aspx";
+            //string fullUrlOfStartPage = currentWeb.Url + "/" + startPage;
+            //SPFile startPageFile = currentWeb.GetFile(fullUrlOfStartPage);
+            //if (startPageFile.Level != SPFileLevel.Checkout)
+            //     startPageFile.CheckOut();
+
+            
+            
+            SPLimitedWebPartManager manager = currentWeb.GetLimitedWebPartManager(startPage, PersonalizationScope.Shared);
+            ContentEditorWebPart contentEditorWebpart = new ContentEditorWebPart();
+            contentEditorWebpart.ZoneID = zoneId;
+            contentEditorWebpart.Title = title;
+            contentEditorWebpart.ChromeState = System.Web.UI.WebControls.WebParts.PartChromeState.Normal;
+            contentEditorWebpart.ChromeType = System.Web.UI.WebControls.WebParts.PartChromeType.None;
+
+            //Add content to CEWP
+            XmlDocument xmlDoc = new XmlDocument();
+            XmlElement xmlElement = xmlDoc.CreateElement("Root");
+            xmlElement.InnerText = content;
+            contentEditorWebpart.Content = xmlElement;
+            contentEditorWebpart.Content.InnerText = xmlElement.InnerText;
+
+            //Add it to the zone
+            if (!FindWebPart(manager, title))
+                manager.AddWebPart(contentEditorWebpart, zoneId, zoneIndex);
+            //if (startPageFile.Level == SPFileLevel.Checkout)
+            //    startPageFile.CheckIn("Added webpart");
+        }
+        private static bool FindWebPart(SPLimitedWebPartManager manager,string title)
+        {
+            try
+            {
+                SPLimitedWebPartCollection webparts = manager.WebParts;
+                foreach (System.Web.UI.WebControls.WebParts.WebPart wp in webparts)
+                {
+                    // Here perform the webpart check 
+                    // For instance you could identify the web part by 
+                    // its class name 
+
+                    if (wp.Title == title)
+                        return true;
+                }
+                return false;
+            }
+            catch (Exception ex) 
+            {
+                return false;
+            }
+        }
+
+        public static string CreateView(SPWeb currentWeb, string listName, string viewName,string[] viewFields,string query,uint rowlimit)
+        {
+            SPList currentList = currentWeb.Lists.TryGetList(listName);
+            if (currentList != null)
+            {
+                if (!checkIfViewExist(currentList, viewName))
+                {
+                    StringCollection vf = new StringCollection();
+                    vf.AddRange(viewFields);
+                    SPView newView = currentList.Views.Add(viewName, vf, query, rowlimit, false, false);
+                    newView.Update();
+                    currentList.Update();
+                    return newView.Title;
+                }
+            }
+            return "";
+        }
+
         private static bool checkIfViewExist(SPList currentList,string name)
         {
             bool exist = false;

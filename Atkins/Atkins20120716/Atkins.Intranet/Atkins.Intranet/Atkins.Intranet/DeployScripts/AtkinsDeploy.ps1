@@ -1,3 +1,7 @@
+[int]$lcid = 1053
+$culture = new-object "System.Globalization.CultureInfo" $lcid
+[System.Threading.Thread]::CurrentThread.CurrentUICulture = $culture
+
 $intranetUrl = "http://ws2008r2efen64:6000/sites/intranet"
 $intranetTitle = "Home"
 $administratorAccount = "TRETTON37\administrator"

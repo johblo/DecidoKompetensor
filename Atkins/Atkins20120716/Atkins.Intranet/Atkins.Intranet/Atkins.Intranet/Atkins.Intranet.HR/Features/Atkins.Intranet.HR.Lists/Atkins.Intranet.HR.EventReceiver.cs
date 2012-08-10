@@ -5,6 +5,8 @@ using Microsoft.SharePoint;
 using Microsoft.SharePoint.Taxonomy;
 using System.Linq;
 using Microsoft.Office.DocumentManagement.MetadataNavigation;
+using System.Threading;
+using System.Globalization;
 
 
 
@@ -24,9 +26,9 @@ namespace Atkins.Intranet.HR.Features.Lists
 
         public override void FeatureActivated(SPFeatureReceiverProperties properties)
         {
+            SPWeb currentWeb = (SPWeb)properties.Feature.Parent;
             try
             {
-                SPWeb currentWeb = (SPWeb) properties.Feature.Parent;
 
                 //Introduction Templates list
                 SPList templateList = CustomListHelper.ReturnList(currentWeb, IntroductionTemplateFields.ListName);
@@ -96,8 +98,7 @@ namespace Atkins.Intranet.HR.Features.Lists
                     string internalName = employeeHandBookDocuments.Fields.AddLookup(CustomListHelper.ReturnTrimmedString(EmployeeHandBookDocuments.EmployeeHandBook), employeeHandbookList.ID, currentWeb.ID, true);
                     SPFieldLookup employeeLookUp = (SPFieldLookup)employeeHandBookDocuments.Fields[internalName];
                     employeeLookUp.LookupField = employeeHandbookList.Fields[SPBuiltInFieldId.Title].InternalName;
-                    //employeeLookUp.Title = EmployeeHandBookDocuments.EmployeeHandBook;
-                    CustomListHelper.SetFieldDisplayName(employeeLookUp, EmployeeHandBookDocuments.EmployeeHandBookDisplayName);
+                    employeeLookUp.Title = EmployeeHandBookDocuments.EmployeeHandBookDisplayName;
                     employeeLookUp.Update();
                 }
 
@@ -132,8 +133,7 @@ namespace Atkins.Intranet.HR.Features.Lists
                     //Description Field
                     string fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, EmployeeHandbook.Description, SPFieldType.Note, true);
                     SPFieldMultiLineText descriptionField = (SPFieldMultiLineText)rootWeb.Fields.GetField(fieldInternalName);
-                    //descriptionField.Title = EmployeeHandbook.Description;
-                    CustomListHelper.SetFieldDisplayName(descriptionField, EmployeeHandbook.DescriptionDisplayName);
+                    descriptionField.Title = EmployeeHandbook.DescriptionDisplayName;
                     descriptionField.Group = EmployeeHandbook.ListName;
                     descriptionField.NumberOfLines = 15;
                     descriptionField.RichText = true;
@@ -159,17 +159,14 @@ namespace Atkins.Intranet.HR.Features.Lists
                     categoryField.Open = true;
                     categoryField.AnchorId = Guid.Empty;
                     categoryField.Group = EmployeeHandbook.ListName;
-                    //categoryField.Title = EmployeeHandbook.Category;
-                    CustomListHelper.SetFieldDisplayName(categoryField, EmployeeHandbook.CategoryDisplayName);
+                    categoryField.Title = EmployeeHandbook.CategoryDisplayName;
                     categoryField.Update();
                     SPFieldLink categoryFieldLink = new SPFieldLink(categoryField);
-
                     
                     //Valid from Field
                     fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, EmployeeHandbook.ValidFrom, SPFieldType.DateTime,true);
                     SPFieldDateTime validFromField = (SPFieldDateTime)rootWeb.Fields.GetField(fieldInternalName);
-                    //validFromField.Title = EmployeeHandbook.ValidFrom;
-                    CustomListHelper.SetFieldDisplayName(validFromField, EmployeeHandbook.ValidFromDisplayName);
+                    validFromField.Title = EmployeeHandbook.ValidFromDisplayName;
                     validFromField.Group = EmployeeHandbook.ListName;
                     validFromField.DisplayFormat = SPDateTimeFieldFormatType.DateOnly;
                     validFromField.Update();
@@ -178,8 +175,7 @@ namespace Atkins.Intranet.HR.Features.Lists
                     //Valid to Field
                     fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, EmployeeHandbook.ValidTo, SPFieldType.DateTime, true);
                     SPFieldDateTime validToField = (SPFieldDateTime)rootWeb.Fields.GetField(fieldInternalName);
-                    //validToField.Title = EmployeeHandbook.ValidTo;
-                    CustomListHelper.SetFieldDisplayName(validToField, EmployeeHandbook.ValidToDisplayName);
+                    validToField.Title = EmployeeHandbook.ValidToDisplayName;
                     validToField.Group = EmployeeHandbook.ListName;
                     validToField.DisplayFormat = SPDateTimeFieldFormatType.DateOnly;
                     validToField.Update();
@@ -261,8 +257,7 @@ namespace Atkins.Intranet.HR.Features.Lists
                     //Steps Field
                     string fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, IntroductionTemplateFields.TemplateSteps, SPFieldType.Note, true);
                     SPFieldMultiLineText stepsField = (SPFieldMultiLineText)rootWeb.Fields.GetField(fieldInternalName);
-                    //stepsField.Title = IntroductionTemplateFields.TemplateSteps;
-                    CustomListHelper.SetFieldDisplayName(stepsField, IntroductionTemplateFields.TemplateStepsDisplayName);
+                    stepsField.Title = IntroductionTemplateFields.TemplateStepsDisplayName;
                     stepsField.Group = IntroductionTemplateFields.ListName;
                     stepsField.Update();
                     SPFieldLink stepsLink = new SPFieldLink(stepsField);
@@ -270,8 +265,7 @@ namespace Atkins.Intranet.HR.Features.Lists
                     //TemplateIsActive Field
                     fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, IntroductionTemplateFields.TemplateIsActive, SPFieldType.Boolean, true);
                     SPFieldBoolean activeField = (SPFieldBoolean)rootWeb.Fields.GetField(fieldInternalName);
-                    //activeField.Title = IntroductionTemplateFields.TemplateIsActive;
-                    CustomListHelper.SetFieldDisplayName(activeField, IntroductionTemplateFields.TemplateIsActiveDisplayName);
+                    activeField.Title = IntroductionTemplateFields.TemplateIsActiveDisplayName;
                     activeField.Group = IntroductionTemplateFields.ListName;
                     activeField.Update();
                     SPFieldLink activeLink = new SPFieldLink(activeField);
@@ -337,8 +331,7 @@ namespace Atkins.Intranet.HR.Features.Lists
                     //Personal Code Field
                     string fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, EmployeeContactFields.PersonalNumber, SPFieldType.Text, true);
                     SPFieldText personalNumberField = (SPFieldText)rootWeb.Fields.GetField(fieldInternalName);
-                    //personalNumberField.Title = EmployeeContactFields.PersonalNumber;
-                    CustomListHelper.SetFieldDisplayName(personalNumberField, EmployeeContactFields.PersonalNumberDisplayName);
+                    personalNumberField.Title = EmployeeContactFields.PersonalNumberDisplayName;
                     personalNumberField.Group = EmployeeContactFields.ListName;
                     personalNumberField.Update();
                     SPFieldLink codeLink = new SPFieldLink(personalNumberField);
@@ -346,8 +339,7 @@ namespace Atkins.Intranet.HR.Features.Lists
                     //Position Field
                     fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, EmployeeContactFields.Position, SPFieldType.Text, true);
                     SPFieldText positionField = (SPFieldText)rootWeb.Fields.GetField(fieldInternalName);
-                    //positionField.Title = EmployeeContactFields.Position;
-                    CustomListHelper.SetFieldDisplayName(positionField, EmployeeContactFields.PositionDisplayName);
+                    positionField.Title = EmployeeContactFields.PositionDisplayName;
                     positionField.Group = EmployeeContactFields.ListName;
                     positionField.Update();
                     SPFieldLink positionLink = new SPFieldLink(positionField);
@@ -355,8 +347,7 @@ namespace Atkins.Intranet.HR.Features.Lists
                     //Manager Field
                     fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, EmployeeContactFields.Manager, SPFieldType.User, true);
                     SPFieldUser managerField = (SPFieldUser)rootWeb.Fields.GetField(fieldInternalName);
-                    //managerField.Title = EmployeeContactFields.Manager;
-                    CustomListHelper.SetFieldDisplayName(managerField, EmployeeContactFields.ManagerDisplayName);
+                    managerField.Title = EmployeeContactFields.ManagerDisplayName;
                     managerField.Group = EmployeeContactFields.ListName;
                     managerField.Update();
                     SPFieldLink managerLink = new SPFieldLink(managerField);
@@ -364,8 +355,7 @@ namespace Atkins.Intranet.HR.Features.Lists
                     //HR Responsible Field
                     fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, EmployeeContactFields.HR_Responsible, SPFieldType.User, true);
                     SPFieldUser hrResponsibleField = (SPFieldUser)rootWeb.Fields.GetField(fieldInternalName);
-                    //hrResponsibleField.Title = EmployeeContactFields.HR_Responsible;
-                    CustomListHelper.SetFieldDisplayName(hrResponsibleField, EmployeeContactFields.HR_ResponsibleDisplayName);
+                    hrResponsibleField.Title = EmployeeContactFields.HR_ResponsibleDisplayName;
                     hrResponsibleField.Group = EmployeeContactFields.ListName;
                     hrResponsibleField.Update();
                     SPFieldLink hrResponsibleLink = new SPFieldLink(hrResponsibleField);
@@ -373,8 +363,7 @@ namespace Atkins.Intranet.HR.Features.Lists
                     //Mentor Field
                     fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, EmployeeContactFields.Mentor, SPFieldType.User, false);
                     SPFieldUser mentorField = (SPFieldUser)rootWeb.Fields.GetField(fieldInternalName);
-                    //mentorField.Title = EmployeeContactFields.Mentor;
-                    CustomListHelper.SetFieldDisplayName(mentorField, EmployeeContactFields.MentorDisplayName);
+                    mentorField.Title = EmployeeContactFields.MentorDisplayName;
                     mentorField.Group = EmployeeContactFields.ListName;
                     mentorField.Update();
                     SPFieldLink mentorLink = new SPFieldLink(mentorField);
@@ -473,8 +462,7 @@ namespace Atkins.Intranet.HR.Features.Lists
                     //AssignedTo Field
                     string fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, IntroductionTasksFields.TaskAssignee, SPFieldType.User, false);
                     SPFieldUser assigneeField = (SPFieldUser)rootWeb.Fields.GetField(fieldInternalName);
-                    //assigneeField.Title = IntroductionTasksFields.TaskAssignee;
-                    CustomListHelper.SetFieldDisplayName(assigneeField, IntroductionTasksFields.TaskAssigneeDisplayName);
+                    assigneeField.Title = IntroductionTasksFields.TaskAssigneeDisplayName;
                     assigneeField.Group = IntroductionTasksFields.ListName;
                     assigneeField.Update();
                     SPFieldLink assigneeLink = new SPFieldLink(assigneeField);
@@ -482,8 +470,7 @@ namespace Atkins.Intranet.HR.Features.Lists
                     //Due Date Field
                     fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, CustomListHelper.ReturnTrimmedString(IntroductionTasksFields.DueDate), SPFieldType.DateTime, false);
                     SPFieldDateTime dueDateField = (SPFieldDateTime)rootWeb.Fields.GetField(fieldInternalName);
-                    CustomListHelper.SetFieldDisplayName(dueDateField, IntroductionTasksFields.DueDateDisplayName);
-                    //dueDateField.Title = IntroductionTasksFields.DueDate;
+                    dueDateField.Title = IntroductionTasksFields.DueDateDisplayName;
                     dueDateField.Group = IntroductionTasksFields.ListName;
                     dueDateField.DisplayFormat = SPDateTimeFieldFormatType.DateOnly;
                     dueDateField.Update();
@@ -492,8 +479,7 @@ namespace Atkins.Intranet.HR.Features.Lists
                     //Completed Status Field
                     fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, IntroductionTasksFields.Completed, SPFieldType.Boolean, false);
                     SPFieldBoolean completeStatusField = (SPFieldBoolean)rootWeb.Fields.GetField(fieldInternalName);
-                    //completeStatusField.Title = IntroductionTasksFields.Completed;
-                    CustomListHelper.SetFieldDisplayName(completeStatusField, IntroductionTasksFields.CompletedDisplayName);
+                    completeStatusField.Title = IntroductionTasksFields.CompletedDisplayName;
                     completeStatusField.Group = IntroductionTasksFields.ListName;
                     completeStatusField.Update();
                     SPFieldLink completeStatusLink = new SPFieldLink(completeStatusField);
@@ -501,8 +487,7 @@ namespace Atkins.Intranet.HR.Features.Lists
                     //Completion Date Field
                     fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, CustomListHelper.ReturnTrimmedString(IntroductionTasksFields.CompletionDate), SPFieldType.DateTime, false);
                     SPFieldDateTime completionDateField = (SPFieldDateTime)rootWeb.Fields.GetField(fieldInternalName);
-                    //completionDateField.Title = IntroductionTasksFields.CompletionDate;
-                    CustomListHelper.SetFieldDisplayName(completionDateField, IntroductionTasksFields.CompletionDateDisplayName);
+                    completionDateField.Title = IntroductionTasksFields.CompletionDateDisplayName;
                     completionDateField.Group = IntroductionTasksFields.ListName;
                     completionDateField.DisplayFormat = SPDateTimeFieldFormatType.DateOnly;
                     completionDateField.Update();
@@ -582,9 +567,8 @@ namespace Atkins.Intranet.HR.Features.Lists
                     string internalName = employeeDocuments.Fields.AddLookup(CustomListHelper.ReturnTrimmedString(EmployeeDocuments.EmployeeName), contactList.ID, currentWeb.ID, true);
                     SPFieldLookup employeeLookUp = (SPFieldLookup)employeeDocuments.Fields[internalName];
                     employeeLookUp.LookupField = contactList.Fields[SPBuiltInFieldId.Title].InternalName;
-                    //employeeLookUp.Title = EmployeeDocuments.EmployeeName;
+                    employeeLookUp.Title = EmployeeDocuments.EmployeeNameDisplayName;
                     employeeLookUp.Group = EmployeeDocuments.ListName;
-                    CustomListHelper.SetFieldDisplayName(employeeLookUp, EmployeeDocuments.EmployeeNameDisplayName);
                     employeeLookUp.Update();
                 }
 

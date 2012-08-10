@@ -7,6 +7,7 @@
     <TemplateFile Location="Layouts\Atkins.Intranet.Portal\CSS\AtkinsPortalMasterPage.css" />
     <TemplateFile Location="Layouts\Atkins.Intranet.Portal\CSS\AtkinsPortalStartPageLayout.css" />
     <TemplateFile Location="Layouts\Atkins.Intranet.Portal\CSS\AtkinsSystemMasterPage.css" />
+    <TemplateFile Location="Layouts\Atkins.Intranet.Portal\CSS\Blog.css" />
     <TemplateFile Location="Layouts\Atkins.Intranet.Portal\Javascript\stickyFooter.js" />
     <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\docs.png" />
     <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\employee.png" />

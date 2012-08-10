@@ -302,8 +302,8 @@
         <Module Name="QSESite" />
       </Modules>
     </Configuration>
-    
-    
+
+
     
     
     
@@ -338,6 +338,7 @@
         <Property Name="PublishingPageLayout" Value="~SiteCollection/_catalogs/masterpage/AtkinsStartPageLayout.aspx, Welcome page" />
       </File>
     </Module>
+    
     
     
     

@@ -81,8 +81,7 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Lists
                     templateDocumentCategoryField.Open = true;
                     templateDocumentCategoryField.AnchorId = Guid.Empty;
                     templateDocumentCategoryField.Group = TemplateDocuments.ListName;
-                    //templateDocumentCategoryField.Title = TemplateDocuments.TemplateDocumentCategory;
-                    CustomListHelper.SetFieldDisplayName(templateDocumentCategoryField, TemplateDocuments.TemplateDocumentCategoryDisplayName);
+                    templateDocumentCategoryField.Title = TemplateDocuments.TemplateDocumentCategoryDisplayName;
                     templateDocumentCategoryField.Update();
                     SPFieldLink templateDocumentCategoryFieldLink = new SPFieldLink(templateDocumentCategoryField);
 
@@ -159,7 +158,7 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Lists
                 string fieldInternalName = CustomListHelper.CreateSiteColumn(currentWeb, OfficeFields.Address, SPFieldType.Note, false);
                 SPFieldMultiLineText addressField = (SPFieldMultiLineText)currentWeb.Fields.GetField(fieldInternalName);
                 addressField.Group = OfficeFields.ListName;
-                CustomListHelper.SetFieldDisplayName(addressField, OfficeFields.AddressDisplayName);
+                addressField.Title = OfficeFields.AddressDisplayName;
                 addressField.Update();
                 SPFieldLink addressLink = new SPFieldLink(addressField);
 
@@ -167,7 +166,7 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Lists
                 fieldInternalName = CustomListHelper.CreateSiteColumn(currentWeb, OfficeFields.Zip, SPFieldType.Text, false);
                 SPFieldText zipField = (SPFieldText)currentWeb.Fields.GetField(fieldInternalName);
                 zipField.Group = OfficeFields.ListName;
-                CustomListHelper.SetFieldDisplayName(zipField, OfficeFields.ZipDisplayName);
+                zipField.Group = OfficeFields.ZipDisplayName;
                 zipField.Update();
                 SPFieldLink zipLink = new SPFieldLink(zipField);
 
@@ -175,15 +174,14 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Lists
                 fieldInternalName = CustomListHelper.CreateSiteColumn(currentWeb, OfficeFields.City, SPFieldType.Text, false);
                 SPFieldText cityField = (SPFieldText)currentWeb.Fields.GetField(fieldInternalName);
                 cityField.Group = OfficeFields.ListName;
-                CustomListHelper.SetFieldDisplayName(cityField, OfficeFields.CityDisplayName);
+                cityField.Title = OfficeFields.CityDisplayName;
                 cityField.Update();
                 SPFieldLink cityLink = new SPFieldLink(cityField);
 
                 //Phone number Field
                 fieldInternalName = CustomListHelper.CreateSiteColumn(currentWeb, OfficeFields.PhoneNumber, SPFieldType.Text, false);
                 SPFieldText phoneField = (SPFieldText)currentWeb.Fields.GetField(fieldInternalName);
-                //phoneField.Title = OfficeFields.PhoneNumber;
-                CustomListHelper.SetFieldDisplayName(phoneField, OfficeFields.PhoneNumberDisplayName);
+                phoneField.Title = OfficeFields.PhoneNumberDisplayName;
                 phoneField.Group = OfficeFields.ListName;
                 phoneField.Update();
                 SPFieldLink phoneLink = new SPFieldLink(phoneField);
@@ -192,8 +190,7 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Lists
                 //Fax number Field
                 fieldInternalName = CustomListHelper.CreateSiteColumn(currentWeb, OfficeFields.FaxNumber, SPFieldType.Text, false);
                 SPFieldText faxField = (SPFieldText)currentWeb.Fields.GetField(fieldInternalName);
-                //faxField.Title = OfficeFields.FaxNumber;
-                CustomListHelper.SetFieldDisplayName(faxField, OfficeFields.FaxNumberDisplayName);
+                faxField.Title = OfficeFields.FaxNumberDisplayName;
                 faxField.Group = OfficeFields.ListName;
                 faxField.Update();
                 SPFieldLink faxLink = new SPFieldLink(faxField);

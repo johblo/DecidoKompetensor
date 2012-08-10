@@ -24,7 +24,8 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Portal.AddWebParts
             SPWeb web = (SPWeb)properties.Feature.Parent;
             using (SPWeb sourceWeb = web.Site.AllWebs["HR"])
             {
-                WebPartUtility.AddListViewWebPart(web, sourceWeb, CustomListHelper.ReturnTrimmedString(EmployeeContactFields.ListName), EmployeeContactFields.webPartView, "Left", 1);
+                WebPartUtility.AddListViewWebPart(web, sourceWeb, EmployeeContactFields.ListName, EmployeeContactFields.webPartView, "Left", 1);
+                
             }
         }
 
