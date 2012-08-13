@@ -4,6 +4,8 @@ using System.Security.Permissions;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Security;
 using Atkins.Intranet.Utilities.HelperUtils;
+using System.Web;
+using System.IO;
 
 namespace Atkins.Intranet.Features.Atkins.Intranet.Portal.AddWebParts
 {
@@ -22,16 +24,32 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Portal.AddWebParts
         public override void FeatureActivated(SPFeatureReceiverProperties properties)
         {
             SPWeb web = (SPWeb)properties.Feature.Parent;
-            //using (SPWeb sourceWeb = web.Site.AllWebs["HR"])
-            //{
-            //    WebPartUtility.AddListViewWebPart(web, sourceWeb, EmployeeContactFields.ListName,EmployeeContactFields.webPartTitle, EmployeeContactFields.webPartView, "Left", 1);
-                
-            //}
+            
+            //FIX That enables us to provide cqwp through PS Clears the error that otherwise occures: 
+            bool contextCreated = false;
+            if (HttpContext.Current == null)
+            {
+                HttpRequest request = new HttpRequest("", web.Url, "");
+                HttpContext.Current = new HttpContext(request,
+                    new HttpResponse(new StringWriter()));
+                HttpContext.Current.Items["HttpHandlerSPWeb"] = web;
+                contextCreated = true;
+            }
+
             using (SPWeb sourceWeb = web.Site.AllWebs["BLOG"])
             {
-                WebPartUtility.AddCQWP(web, sourceWeb, BlogPosts.ListName, BlogPosts.webPartTitle, "Left", 1, BlogPosts.xslPath, BlogPosts.webpartItemStyle,BlogPosts.webPartViewFields);
+                WebPartUtility.AddCQWP(web, sourceWeb, BlogPosts.ListName, BlogPosts.webPartTitle, "Left", 1, BlogPosts.xslPath, BlogPosts.webpartItemStyle, BlogPosts.webPartViewFields);
 
             }
+            WebPartUtility.AddCQWP(web,  "Meddelanden", "Center", 1, BlogPosts.xslPath, BlogPosts.webpartItemStyle, BlogPosts.webPartViewFields);
+
+
+
+            if (contextCreated)
+            {
+                HttpContext.Current = null;
+            }
+            
         }
 
 

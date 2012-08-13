@@ -537,10 +537,15 @@ namespace Atkins.Intranet.HR.Features.Lists
                 defaultView.ViewFields.Add(IntroductionTasksFields.DueDate);
                 defaultView.Update();
 
-                //WebPartView
+                //WebPartView show items assigned to [ME] and are not completed
                 System.Collections.Specialized.StringCollection viewFields = new System.Collections.Specialized.StringCollection();
                 viewFields.Add("LinkTitle");
-                string query = "<Where><Eq><FieldRef Name='"+IntroductionTasksFields.TaskAssignee+"'/><Value Type='Integer'><UserID Type='Integer'/></Value></Eq></Where>";
+                string query = "<Where>"+
+                                    "<And>"+
+                                        "<Eq><FieldRef Name='"+IntroductionTasksFields.TaskAssignee+"'/><Value Type='Integer'><UserID Type='Integer'/></Value></Eq>"+
+                                        "<Eq><FieldRef Name='" + IntroductionTasksFields.Completed + "'/><Value Type='Integer'>0</Value></Eq>" +
+                                    "</And>" +
+                                "</Where>";
                 SPView webPartView = taskList.Views.Add(IntroductionTasksFields.webPartView, viewFields, query, 5, false, false);
                 webPartView.TabularView = false;
                 webPartView.Update();

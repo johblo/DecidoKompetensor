@@ -95,6 +95,36 @@ namespace Atkins.Intranet.Utilities.HelperUtils
             currentWeb.Update();
         }
 
+        public static void AddCQWP(SPWeb currentWeb,string title, string zoneId, int zoneIndex, string xslPath, string itemstyle, string viewFields)
+        {
+            string startPage = currentWeb.RootFolder.WelcomePage;
+            string fullUrlOfStartPage = currentWeb.Url + "/" + startPage;
+            SPFile startPageFile = currentWeb.GetFile(fullUrlOfStartPage);
+
+            
+            if (startPageFile.Level != SPFileLevel.Checkout)
+                startPageFile.CheckOut();
+            SPLimitedWebPartManager manager = currentWeb.GetLimitedWebPartManager(startPage, PersonalizationScope.Shared);
+            ContentByQueryWebPart contentByQery = new ContentByQueryWebPart();
+            contentByQery.ItemXslLink = xslPath;
+            //contentByQery.WebUrl = currentWeb.Site.ServerRelativeUrl;
+            contentByQery.Title = title;
+            contentByQery.BaseType = "104";
+            
+            //contentByQery.ContentTypeName = "Meddelande";
+            //contentByQery.ListName = currentList.Title;
+            //contentByQery.ListGuid = currentList.ID.ToString("B");
+            contentByQery.ItemStyle = "Announcements";
+            contentByQery.ItemLimit = 10;
+            contentByQery.AdditionalFilterFields = "Title";
+            
+            if (!FindWebPart(manager, title))
+                manager.AddWebPart(contentByQery, zoneId, zoneIndex);
+            if (startPageFile.Level == SPFileLevel.Checkout)
+                startPageFile.CheckIn("Added webpart");
+            currentWeb.Update();
+        }
+
         private static bool FindWebPart(SPLimitedWebPartManager manager,string title)
         {
             try

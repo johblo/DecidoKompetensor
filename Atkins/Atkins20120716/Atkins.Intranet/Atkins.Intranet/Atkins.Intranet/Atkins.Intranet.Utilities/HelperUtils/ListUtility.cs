@@ -178,18 +178,18 @@ namespace Atkins.Intranet.Utilities.HelperUtils
 
         public const string TaskAssignee = "Assignee";
         public const string TaskAssigneeDisplayName = "Assignee";
-        public const string DueDate = "Due Date";
+        public const string DueDate = "DueDateIntroductionTask";
         public const string DueDateDisplayName = "Due Date";
         
         //public const string DueDateInternalName = "Deadline";
 
-        public const string Completed = "Completed";
+        public const string Completed = "CompletedStatus";
         public const string CompletedDisplayName = "Completed";
         //public const string CompletedInternalName = "CompletedStatus";
 
-        public const string CompletionDate = "Completion Date";
+        public const string CompletionDate = "CompletionDate";
         public const string CompletionDateDisplayName = "Completion Date";
-        public const string Employee = "Employee Name";
+        public const string Employee = "EmployeeName";
         public const string EmployeeDisplayName = "Employee Name";
         public const string webPartTitle = "Mina uppgifter";
         public const string webPartView = "webPartView";
