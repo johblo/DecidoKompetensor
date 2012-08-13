@@ -33,6 +33,16 @@
 			           BaseTemplateID="39"
 			           BaseConfigurationID="0">
     </Configuration>
+    <Configuration ID="3"
+                 Title="Atkins.Intranet.Finans"
+                 Hidden="FALSE" ImageUrl="/_layouts/images/Atkins.Intranet.Portal/AtkinsLogo.png"
+                 Description="Atkins.Intranet.Finans"
+                 DisplayCategory="Atkins"
+                 SubWebOnly="True"
+                 BaseTemplateName="CMSPUBLISHING"
+			           BaseTemplateID="39"
+			           BaseConfigurationID="0">
+    </Configuration>
    
   </Template>  
   

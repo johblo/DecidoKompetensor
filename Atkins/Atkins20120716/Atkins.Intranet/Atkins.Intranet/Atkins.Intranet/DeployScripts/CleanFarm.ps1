@@ -45,6 +45,10 @@ iisreset
 RetractSolution("Atkins.Intranet.SampleData.wsp")
 iisreset
 
+RetractSolution("Atkins.Intranet.Blog.wsp")
+iisreset
+
+
 
 
 

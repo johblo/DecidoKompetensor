@@ -44,3 +44,7 @@ iisreset
 
 DeploySolution("Atkins.Intranet.SampleData.wsp")
 iisreset
+
+DeploySolution("Atkins.Intranet.Blog.wsp")
+iisreset
+

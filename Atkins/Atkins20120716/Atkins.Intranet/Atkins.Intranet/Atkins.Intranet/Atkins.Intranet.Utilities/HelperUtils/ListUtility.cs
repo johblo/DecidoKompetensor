@@ -159,6 +159,7 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string IntroductionTemplate = "Template";
         public const string IntroductionTemplateDisplayName = "Template";
         //webPartView
+        public const string webPartTitle = "Anställda";
         public const string webPartView = "webPartView";
 
         public static readonly SPContentTypeId EmployeeContentTypeId = new SPContentTypeId("0x0100A33D9AD9805788419BDAAC2CCB37508E");
@@ -190,6 +191,7 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string CompletionDateDisplayName = "Completion Date";
         public const string Employee = "Employee Name";
         public const string EmployeeDisplayName = "Employee Name";
+        public const string webPartTitle = "Mina uppgifter";
         public const string webPartView = "webPartView";
         public const string webPartViewDisplayName = "webPartView";
 
@@ -390,9 +392,9 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         
         public const string TermGroup = "QSE";
         public const string TermSetStatus = "Deviation Status";
-
+        //WEBPART
         public const string webPartView = "webPartView";
-
+        public const string webPartTitle = "Avvikelser";
         public static readonly SPContentTypeId DeviationBaseContentTypeId = new SPContentTypeId("0x0100E597B736AF8F410F887223B41DF23E68");
         //DB201B0B455F46CBA862ABA9FE71071F
         //2D37B3E6024745619856983299CB97BD
@@ -429,8 +431,12 @@ namespace Atkins.Intranet.Utilities.HelperUtils
 
     public class BlogPosts
     {
+        public const string webPartTitle = "Blog Posts";
+        public const string webPartViewFields = "Title;Body";
         public const string webPartView = "webPartView";
-        public const string BlogPostsName = "Inlägg";
+        public const string webpartItemStyle =  "CQWP_Blog";
+        public const string ListName = "Inlägg";
+        public const string xslPath = "/Sites/Intranet/Style Library/XSL Style Sheets/customItem.xsl";
         public const string BlogZoneLeft = "Vänster";
         public const string HideTitle = "Hide Title";
         public const string HideTitleContent = "<style>.s4-titletext {DISPLAY: none}</style>";

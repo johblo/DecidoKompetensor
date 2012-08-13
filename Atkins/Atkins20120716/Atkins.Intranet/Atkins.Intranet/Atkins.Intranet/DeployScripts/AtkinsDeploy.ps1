@@ -86,6 +86,44 @@ Enable-SPFeature -Identity "5dfbab14-178b-48b7-8a9d-99bbe5ad0bbb" -URL $qseUrl
 iisreset
 Write-Host "QSE Features Activation Done!"
 
+
+
+
+iisreset
+
+$financeUrl= "http://ws2008r2efen64:6000/sites/intranet/Finance"
+$financeTitle = "Finans"
+
+$financeTemplate= Get-SPWebTemplate "Atkins.Intranet.Portal#3"
+iisreset
+
+Write-Host "Creating Sub-Site: "$financeTitle
+$financeSubSite = New-SPWeb –url $financeUrl -name $financeTitle -template $financeTemplate -Language 1053
+Write-Host "Sub-site "$financeTitle" successfully created!"
+Write-Host "************************************************************"
+
+iisreset
+
+$blogUrl = "http://ws2008r2efen64:6000/sites/intranet/Blog"
+$blogTitle = "BLOG"
+$administratorAccount = "TRETTON37\administrator"
+
+$blogTemplate = Get-SPWebTemplate "BLOG#0"
+iisreset
+
+Write-Host "Creating Site: "$blogTitle
+$blogSubSite = New-SPWeb -Url $blogUrl -name $blogTitle -template $blogTemplate -Language 1053
+
+Write-Host "Site "$blogTitle" successfully created!"
+Write-Host "************************************************************"
+
+iisreset
+Write-Host "Activating Blog features:"
+Write-Host "***********************Blog configuration feature*********"
+Enable-SPFeature -Identity "4612ce28-dddf-4127-bb32-40d6e34de1c7" -URL $blogUrl
+
+
+iisreset
 Write-Host "Activating rootWeb Feature"
 Write-Host "***********************RootWeb Subsite dependent webparts*********"
 Enable-SPFeature -Identity "41e3bfe4-65dc-4b61-8510-684fe180ed2c" -URL $intranetUrl

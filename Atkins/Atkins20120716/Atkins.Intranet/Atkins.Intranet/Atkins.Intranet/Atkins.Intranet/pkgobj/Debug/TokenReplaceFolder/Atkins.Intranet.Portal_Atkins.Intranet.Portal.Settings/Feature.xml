@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Title="Atkins.Intranet.Portal Settings" Id="8886fec7-0bb3-4869-bc43-ac77ddfc3989" ReceiverAssembly="Atkins.Intranet.Portal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=223aa5daed29128a" ReceiverClass="Atkins.Intranet.Features.Atkins.Intranet.Portal.Settings.AtkinsIntranetPortalEventReceiver" Scope="Web"></Feature>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Title="Atkins.Intranet.Portal Settings" Id="8886fec7-0bb3-4869-bc43-ac77ddfc3989" ReceiverAssembly="Atkins.Intranet.Portal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=223aa5daed29128a" ReceiverClass="Atkins.Intranet.Features.Atkins.Intranet.Portal.Settings.AtkinsIntranetPortalEventReceiver" Scope="Web">
+  <ElementManifests>
+    <ElementManifest Location="XSL\Elements.xml" />
+    <ElementFile Location="XSL\customItem.xsl" />
+  </ElementManifests>
+</Feature>

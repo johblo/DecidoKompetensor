@@ -78,6 +78,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="XSL\customItem.xsl" />
+    <Content Include="XSL\Elements.xml" />
     <None Include="Features\Atkins.Portal.PagLayouts\Atkins.Portal.PagLayouts.feature">
       <FeatureId>{f121c7d1-4b0e-468d-8aa5-3136b3c180f4}</FeatureId>
     </None>
@@ -140,6 +142,9 @@
     </Content>
     <None Include="SiteDefinition\Atkins.Intranet\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{2e9a7f93-3141-4af9-8607-06af52c685c5}</SharePointProjectItemId>
+    </None>
+    <None Include="XSL\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{507c7f9c-868a-4183-a031-d1d9129ff9f3}</SharePointProjectItemId>
     </None>
   </ItemGroup>
   <ItemGroup>

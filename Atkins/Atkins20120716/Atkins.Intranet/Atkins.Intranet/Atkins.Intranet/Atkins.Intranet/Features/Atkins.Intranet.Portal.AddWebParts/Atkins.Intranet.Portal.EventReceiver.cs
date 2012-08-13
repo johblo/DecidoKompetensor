@@ -22,10 +22,15 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Portal.AddWebParts
         public override void FeatureActivated(SPFeatureReceiverProperties properties)
         {
             SPWeb web = (SPWeb)properties.Feature.Parent;
-            using (SPWeb sourceWeb = web.Site.AllWebs["HR"])
-            {
-                WebPartUtility.AddListViewWebPart(web, sourceWeb, EmployeeContactFields.ListName, EmployeeContactFields.webPartView, "Left", 1);
+            //using (SPWeb sourceWeb = web.Site.AllWebs["HR"])
+            //{
+            //    WebPartUtility.AddListViewWebPart(web, sourceWeb, EmployeeContactFields.ListName,EmployeeContactFields.webPartTitle, EmployeeContactFields.webPartView, "Left", 1);
                 
+            //}
+            using (SPWeb sourceWeb = web.Site.AllWebs["BLOG"])
+            {
+                WebPartUtility.AddCQWP(web, sourceWeb, BlogPosts.ListName, BlogPosts.webPartTitle, "Left", 1, BlogPosts.xslPath, BlogPosts.webpartItemStyle,BlogPosts.webPartViewFields);
+
             }
         }
 
