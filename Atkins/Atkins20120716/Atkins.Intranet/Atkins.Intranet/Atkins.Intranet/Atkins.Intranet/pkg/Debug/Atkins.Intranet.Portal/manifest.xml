@@ -4,6 +4,7 @@
     <Assembly Location="Atkins.Intranet.Portal.dll" DeploymentTarget="GlobalAssemblyCache" />
   </Assemblies>
   <TemplateFiles>
+    <TemplateFile Location="Layouts\Atkins.Intranet.Portal\CSS\AtkinsWebParts.css" />
     <TemplateFile Location="Layouts\Atkins.Intranet.Portal\CSS\AtkinsPortalMasterPage.css" />
     <TemplateFile Location="Layouts\Atkins.Intranet.Portal\CSS\AtkinsPortalStartPageLayout.css" />
     <TemplateFile Location="Layouts\Atkins.Intranet.Portal\CSS\AtkinsSystemMasterPage.css" />

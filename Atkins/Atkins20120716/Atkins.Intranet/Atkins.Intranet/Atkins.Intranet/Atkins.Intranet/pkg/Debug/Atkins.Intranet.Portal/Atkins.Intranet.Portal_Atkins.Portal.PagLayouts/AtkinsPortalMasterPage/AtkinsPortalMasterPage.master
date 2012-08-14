@@ -35,6 +35,8 @@
 	<SharePoint:SPPageManager ID="SPPageManager1" runat="server"/>
 	<SharePoint:SPHelpPageComponent ID="SPHelpPageComponent1" Visible="false" runat="server"/>
 	<SharePoint:CssRegistration ID="AtkinsPortalMasterCssV4" name="<% $SPUrl:~SiteCollection/_layouts/Atkins.Intranet.Portal/css/AtkinsPortalMasterPage.css%>" After="corev4.css" runat="server"/>
+    <SharePoint:CssRegistration ID="AtkinsWebParts" name="<% $SPUrl:~SiteCollection/_layouts/Atkins.Intranet.Portal/css/AtkinsWebParts.css%>" After="corev4.css" runat="server"/>
+    
 </head>
 <body scroll="no" onload="if (typeof(_spBodyOnLoadWrapper) != 'undefined') _spBodyOnLoadWrapper();" class="v4master">
   <form id="Form1" runat="server" onsubmit="if (typeof(_spFormOnSubmitWrapper) != 'undefined') {return _spFormOnSubmitWrapper();} else {return true;}">

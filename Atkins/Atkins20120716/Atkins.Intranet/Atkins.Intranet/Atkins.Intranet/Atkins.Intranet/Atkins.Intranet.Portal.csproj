@@ -78,7 +78,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="XSL\customItem.xsl" />
+    <Content Include="Layouts\Atkins.Intranet.Portal\CSS\AtkinsWebParts.css" />
+    <Content Include="XSL\customItem.xsl">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="XSL\Elements.xml" />
     <None Include="Features\Atkins.Portal.PagLayouts\Atkins.Portal.PagLayouts.feature">
       <FeatureId>{f121c7d1-4b0e-468d-8aa5-3136b3c180f4}</FeatureId>

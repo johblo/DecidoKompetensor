@@ -38,10 +38,10 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Portal.AddWebParts
 
             using (SPWeb sourceWeb = web.Site.AllWebs["BLOG"])
             {
-                WebPartUtility.AddCQWP(web, sourceWeb, BlogPosts.ListName, BlogPosts.webPartTitle, "Left", 1, BlogPosts.xslPath, BlogPosts.webpartItemStyle, BlogPosts.webPartViewFields);
+                WebPartUtility.AddCQWP(web, sourceWeb, BlogPosts.ListName, BlogPosts.webPartTitle, BlogPosts.ZoneId, 1, BlogPosts.xslPath, BlogPosts.webpartItemStyle, BlogPosts.webPartViewFields);
 
             }
-            WebPartUtility.AddCQWP(web,  "Meddelanden", "Center", 1, BlogPosts.xslPath, BlogPosts.webpartItemStyle, BlogPosts.webPartViewFields);
+            WebPartUtility.AddAnnouncementCQWP(web,  Announcements.webPartTitle, Announcements.ZoneId, 1, Announcements.xslPath, Announcements.webpartItemStyle);
 
 
 

@@ -3,6 +3,7 @@ using Microsoft.SharePoint;
 using Microsoft.SharePoint.Taxonomy;
 using System.Linq;
 using System.Reflection;
+using System.Collections.Specialized;
 
 namespace Atkins.Intranet.Utilities.HelperUtils
 {
@@ -90,6 +91,51 @@ namespace Atkins.Intranet.Utilities.HelperUtils
 
             return targetList;
         }
+        public static string CreateView(SPWeb currentWeb, string listName, string viewName, string[] viewFields, string query, uint rowlimit)
+        {
+            SPList currentList = currentWeb.Lists.TryGetList(listName);
+            if (currentList != null)
+            {
+                if (!checkIfViewExist(currentList, viewName))
+                {
+                    StringCollection vf = new StringCollection();
+                    vf.AddRange(viewFields);
+                    SPView newView = currentList.Views.Add(viewName, vf, query, rowlimit, false, false);
+                    newView.Update();
+                    currentList.Update();
+                    return newView.Title;
+                }
+            }
+            return "";
+        }
+        public static string CreateView(SPList currentList,string viewName, string[] viewFields, string query, uint rowlimit)
+        {
+            StringCollection vf = new StringCollection();
+            vf.AddRange(viewFields);
+            SPView newView = currentList.Views.Add(viewName, vf, query, rowlimit, false, false);
+            newView.TabularView = false;
+            newView.Update();
+            currentList.Update();
+            return newView.Title;
+        }
+
+        public static bool checkIfViewExist(SPList currentList, string name)
+        {
+            bool exist = false;
+            foreach (SPView view in currentList.Views)
+            {
+                if (view.Title == name)
+                {
+                    exist = true;
+                    break;
+                }
+            }
+            return exist;
+        }
+        public static string[] returnStringArray(string input)
+        {
+            return input.Split(new char[] { ',' });
+        }
     }
 
     public class OfficeFields
@@ -161,6 +207,7 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         //webPartView
         public const string webPartTitle = "Anställda";
         public const string webPartView = "webPartView";
+        public const string ZoneId = "Left";
 
         public static readonly SPContentTypeId EmployeeContentTypeId = new SPContentTypeId("0x0100A33D9AD9805788419BDAAC2CCB37508E");
 
@@ -194,7 +241,8 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string webPartTitle = "Mina uppgifter";
         public const string webPartView = "webPartView";
         public const string webPartViewDisplayName = "webPartView";
-
+        public const string ZoneId = "Center";
+        
 
         public static readonly SPContentTypeId TaskContentTypeId = new SPContentTypeId("0x0100A33D9AD9805788419BDAAC2CCB37502E");
                                                                                         
@@ -395,6 +443,9 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         //WEBPART
         public const string webPartView = "webPartView";
         public const string webPartTitle = "Avvikelser";
+        public const string ZoneId = "Right";
+
+
         public static readonly SPContentTypeId DeviationBaseContentTypeId = new SPContentTypeId("0x0100E597B736AF8F410F887223B41DF23E68");
         //DB201B0B455F46CBA862ABA9FE71071F
         //2D37B3E6024745619856983299CB97BD
@@ -431,17 +482,50 @@ namespace Atkins.Intranet.Utilities.HelperUtils
 
     public class BlogPosts
     {
-        public const string webPartTitle = "Blog Posts";
+        public const string webPartTitle = "Blogg poster";
         public const string webPartViewFields = "Title;Body";
         public const string webPartView = "webPartView";
         public const string webpartItemStyle =  "CQWP_Blog";
         public const string ListName = "Inlägg";
         public const string xslPath = "/Sites/Intranet/Style Library/XSL Style Sheets/customItem.xsl";
-        public const string BlogZoneLeft = "Vänster";
-        public const string HideTitle = "Hide Title";
-        public const string HideTitleContent = "<style>.s4-titletext {DISPLAY: none}</style>";
-
-        
+        public const string ZoneId = "Left";
+    }
+    public class HideTitleBlog
+    {
+        public const string ZoneId = "Right";
+        public const string webPartTitle = "Hide Title";
+        public const string Content = "<style>.s4-titletext {DISPLAY: none}</style>";
     }
 
+    public class Announcements
+    {
+        public const string webPartTitle = "Meddelanden";
+        public const string webpartItemStyle = "Announcements";
+        public const string xslPath = "/Sites/Intranet/Style Library/XSL Style Sheets/customItem.xsl";
+        public const string ZoneId = "Center";
+    }
+    public class RelevantDocuments
+    {
+        public const string webPartTitle = "Relevanta dokument";
+        public const string ZoneId = "Left";
+    }
+    public class LastAddedModiefiedDocuments
+    {
+        public const string webPartTitle = "Senast tillagda eller ändrade Dokument";
+        public const string webpartItemStyle = "Announcements";
+        public const string xslPath = "/Sites/Intranet/Style Library/XSL Style Sheets/customItem.xsl";
+        public const string ZoneId = "Center";
+    }
+    public class QSELinks
+    {
+        public const string ListName = "$Resources:core,linksList;";
+        public const string webPartTitle = "Länkar";
+        public const string ZoneId = "Left";
+        public const string webPartView = "webPartView";
+        public const string webPartViewFields = "URL,LinkTitle";
+        public const int rowlimit = 100;
+        public const string query = "";
+        public const string resourceFile = "core";
+        public const uint resourceLCID = 1053;
+    }
 }

@@ -35,7 +35,23 @@
   
   <Configurations>
     <Configuration ID="0" Name="Atkins.Intranet.Portal" MasterUrl="~SiteCollection/_catalogs/masterpage/AtkinsSystemMasterPage.master">
-      <Lists/>
+      <Lists>
+        <List FeatureId="00BFEA71-D1CE-42de-9C63-A44004CE0104"
+          Type="104" Title="$Resources:core,announceList;"
+          Url="$Resources:core,lists_Folder;/$Resources:core,announce_Folder;">
+          <Data>
+            <Rows>
+              <Row>
+                <Field Name="Title">$Resources:onetid11;</Field>
+                <Field Name="Body">$Resources:onetid12;</Field>
+                <Field Name="Expires">
+                  <ows:TodayISO/>
+                </Field>
+              </Row>
+            </Rows>
+          </Data>
+        </List>
+      </Lists>
       <SiteFeatures>
         <!-- Publishing Prerequisites -->
         <Feature ID="A392DA98-270B-4e85-9769-04C0FDE267AA" />
@@ -88,6 +104,9 @@
           </Properties>
         </Feature>
 
+        <!-- TeamCollab Feature -->
+        <Feature ID="00BFEA71-4EA5-48D4-A4AD-7EA5C011ABE5" />
+
         <!-- Enable Metadata navigation Feature -->
         <Feature ID="7201d6a4-a5d3-49a1-8c19-19c4bac6e668" />
 
@@ -115,17 +134,6 @@
         <List FeatureId="00BFEA71-D1CE-42de-9C63-A44004CE0104"
           Type="104" Title="$Resources:core,announceList;"
           Url="$Resources:core,lists_Folder;/$Resources:core,announce_Folder;">
-          <Data>
-            <Rows>
-              <Row>
-                <Field Name="Title">$Resources:onetid11;</Field>
-                <Field Name="Body">$Resources:onetid12;</Field>
-                <Field Name="Expires">
-                  <ows:TodayISO/>
-                </Field>
-              </Row>
-            </Rows>
-          </Data>
         </List>
         <List FeatureId="00BFEA71-2062-426C-90BF-714C59600103"
           Type="103" Title="$Resources:core,linksList;"
@@ -218,17 +226,7 @@
         <List FeatureId="00BFEA71-D1CE-42de-9C63-A44004CE0104"
           Type="104" Title="$Resources:core,announceList;"
           Url="$Resources:core,lists_Folder;/$Resources:core,announce_Folder;">
-          <Data>
-            <Rows>
-              <Row>
-                <Field Name="Title">$Resources:onetid11;</Field>
-                <Field Name="Body">$Resources:onetid12;</Field>
-                <Field Name="Expires">
-                  <ows:TodayISO/>
-                </Field>
-              </Row>
-            </Rows>
-          </Data>
+          
         </List>
         <List FeatureId="00BFEA71-2062-426C-90BF-714C59600103"
           Type="103" Title="$Resources:core,linksList;"
@@ -318,17 +316,6 @@
         <List FeatureId="00BFEA71-D1CE-42de-9C63-A44004CE0104"
           Type="104" Title="$Resources:core,announceList;"
           Url="$Resources:core,lists_Folder;/$Resources:core,announce_Folder;">
-          <Data>
-            <Rows>
-              <Row>
-                <Field Name="Title">$Resources:onetid11;</Field>
-                <Field Name="Body">$Resources:onetid12;</Field>
-                <Field Name="Expires">
-                  <ows:TodayISO/>
-                </Field>
-              </Row>
-            </Rows>
-          </Data>
         </List>
         <List FeatureId="00BFEA71-2062-426C-90BF-714C59600103"
           Type="103" Title="$Resources:core,linksList;"

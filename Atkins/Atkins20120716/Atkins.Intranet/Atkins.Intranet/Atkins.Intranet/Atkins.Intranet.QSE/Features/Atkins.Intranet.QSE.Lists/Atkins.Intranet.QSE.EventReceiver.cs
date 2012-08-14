@@ -54,7 +54,13 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                 {
                     CreateDeviationsContentTypeList(currentWeb);
                 }
-
+                //Create view in LinkList
+                string listName = SPUtility.GetLocalizedString(QSELinks.ListName, QSELinks.resourceFile, QSELinks.resourceLCID);
+                SPList linkList = CustomListHelper.ReturnList(currentWeb, listName);
+                if (!CustomListHelper.checkIfViewExist(linkList, QSELinks.webPartView))
+                {
+                    CustomListHelper.CreateView(linkList, QSELinks.webPartView, CustomListHelper.returnStringArray(QSELinks.webPartViewFields), QSELinks.query,QSELinks.rowlimit);
+                }
             }
             catch (SPException exception)
             {
@@ -273,10 +279,10 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     //WebPartView
                     System.Collections.Specialized.StringCollection viewFields = new System.Collections.Specialized.StringCollection();
                     viewFields.Add("LinkTitle");
+                    viewFields.Add(CustomListHelper.ReturnTrimmedString(DeviationsList.KeyDate));
                     SPView webPartView = deviationList.Views.Add(DeviationsList.webPartView, viewFields, "", 5, false, false);
                     webPartView.TabularView = false;
                     webPartView.Update();
-
 
 
                     currentWeb.Update();
