@@ -25,7 +25,7 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Portal.AddWebParts
         {
             SPWeb web = (SPWeb)properties.Feature.Parent;
             
-            //FIX That enables us to provide cqwp through PS Clears the error that otherwise occures: 
+            //FIX That enables us to provide cqwp through PowerShell Clears the error that otherwise occures: 
             bool contextCreated = false;
             if (HttpContext.Current == null)
             {
@@ -38,18 +38,14 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Portal.AddWebParts
 
             using (SPWeb sourceWeb = web.Site.AllWebs["BLOG"])
             {
-                WebPartUtility.AddCQWP(web, sourceWeb, BlogPosts.ListName, BlogPosts.webPartTitle, BlogPosts.ZoneId, 1, BlogPosts.xslPath, BlogPosts.webpartItemStyle, BlogPosts.webPartViewFields);
-
+                WebPartUtility.AddCQWP(web, sourceWeb, BlogPosts.ListName, BlogPosts.webPartTitle, BlogPosts.ZoneId, 1, BlogPosts.xslPath, BlogPosts.webpartItemStyle, BlogPosts.webPartViewFields,BlogPosts.webpartTitleImageUrl);
             }
-            WebPartUtility.AddAnnouncementCQWP(web,  Announcements.webPartTitle, Announcements.ZoneId, 1, Announcements.xslPath, Announcements.webpartItemStyle);
-
-
+            WebPartUtility.AddAnnouncementCQWP(web,  Announcements.webPartTitle, Announcements.ZoneId, 1, Announcements.xslPath, Announcements.webpartItemStyle,"",Announcements.webpartTitleImageUrl);
 
             if (contextCreated)
             {
                 HttpContext.Current = null;
             }
-            
         }
 
 

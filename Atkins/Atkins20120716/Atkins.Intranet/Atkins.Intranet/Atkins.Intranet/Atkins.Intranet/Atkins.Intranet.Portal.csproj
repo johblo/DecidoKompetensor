@@ -78,6 +78,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\Atkins.Intranet.Portal\icons\chart.png" />
+    <Content Include="Images\Atkins.Intranet.Portal\icons\check.gif" />
+    <Content Include="Images\Atkins.Intranet.Portal\icons\group.png" />
+    <Content Include="Images\Atkins.Intranet.Portal\icons\plug_extension.png" />
+    <Content Include="Images\Atkins.Intranet.Portal\icons\warning.png" />
     <Content Include="Layouts\Atkins.Intranet.Portal\CSS\AtkinsWebParts.css" />
     <Content Include="XSL\customItem.xsl">
       <SubType>Designer</SubType>

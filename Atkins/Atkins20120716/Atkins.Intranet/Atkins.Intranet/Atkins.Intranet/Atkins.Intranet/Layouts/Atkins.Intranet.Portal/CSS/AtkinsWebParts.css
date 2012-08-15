@@ -1,0 +1,20 @@
+﻿.oddRow
+{
+    background-color:#FFFFFF;
+    padding:3px;
+}
+.evenRow
+{
+    
+    background-color:#DBEEFB;
+    padding:3px;
+}
+.announcementItem
+{
+    padding-bottom:0px;
+    padding-top:4px;
+    padding-right:0px;
+    padding-left:4px;
+    clear:both;
+}
+   
