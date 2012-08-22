@@ -1,0 +1,2 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Title="Atkins.Intranet.Finance.AddWebparts" Description="Add web parts to finance site" Id="12459c03-a1da-44f1-b105-834f32914c66" ReceiverAssembly="Atkins.Intranet.Finance, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ca9d1b4c861a6bb5" ReceiverClass="Atkins.Intranet.Finance.Features.Atkins.Intranet.Finance.AddWebparts.AtkinsIntranetFinanceEventReceiver" Scope="Web"></Feature>

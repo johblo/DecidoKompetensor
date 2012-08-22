@@ -48,3 +48,5 @@ iisreset
 DeploySolution("Atkins.Intranet.Blog.wsp")
 iisreset
 
+DeploySolution("Atkins.Intranet.Finance.wsp")
+iisreset

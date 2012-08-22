@@ -302,7 +302,7 @@
 								<tr>
 									<td class="s4-titlelogo">
 										<SharePoint:SPLinkButton runat="server" NavigateUrl="~site/" id="onetidProjectPropertyTitleGraphic">
-											<SharePoint:SiteLogoImage name="onetidHeadbnnr0" id="onetidHeadbnnr2" LogoImageUrl="/_layouts/images/siteIcon.png" runat="server"/>
+											<SharePoint:SiteLogoImage name="onetidHeadbnnr0" id="onetidHeadbnnr2" LogoImageUrl="~site/_layouts/Images/Atkins.Intranet.Portal/AtkinsLogo.png" runat="server"/>
 										</SharePoint:SPLinkButton>
 									</td>
 									<td class="s4-titletext">

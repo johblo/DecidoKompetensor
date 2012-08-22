@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Solution xmlns="http://schemas.microsoft.com/sharepoint/" SolutionId="df14f4f2-e175-415f-88b1-af926acdf325" SharePointProductVersion="14.0">
+  <Assemblies>
+    <Assembly Location="Atkins.Intranet.Finance.dll" DeploymentTarget="GlobalAssemblyCache" />
+  </Assemblies>
+  <FeatureManifests>
+    <FeatureManifest Location="Atkins.Intranet.Finance_Atkins.Intranet.Finance.AddWebparts\Feature.xml" />
+  </FeatureManifests>
+</Solution>

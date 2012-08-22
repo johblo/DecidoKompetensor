@@ -49,6 +49,8 @@ RetractSolution("Atkins.Intranet.Blog.wsp")
 iisreset
 
 
+RetractSolution("Atkins.Intranet.Finance.wsp")
+iisreset
 
 
 

@@ -27,12 +27,11 @@ namespace Atkins.Intranet.Blog.Features.Atkins.Intranet.Blog.Setup
             {
                 web.Features.Add(new Guid("22A9EF51-737B-4ff2-9346-694633FE4416"));
             }
-            
 
             web.Navigation.UseShared = true;
             web.SiteLogoUrl = "/_layouts/images/Atkins.Intranet.Portal/AtkinsLogo.png";
-            web.MasterUrl = web.Site.RootWeb.ServerRelativeUrl + "/_catalogs/masterpage/AtkinsSystemMasterPage.master";
-            web.CustomMasterUrl = web.Site.RootWeb.ServerRelativeUrl + "/_catalogs/masterpage/AtkinsPortalMasterPage.master";
+            web.MasterUrl = web.Site.RootWeb.ServerRelativeUrl + "/_catalogs/masterpage/AtkinsSubSiteMasterPage.master";
+            web.CustomMasterUrl = web.Site.RootWeb.ServerRelativeUrl + "/_catalogs/masterpage/AtkinsSystemMasterPage.master";
             //web.AlternateCssUrl = "/_layouts/Atkins.Intranet.Portal/CSS/Blog.css";
             SPList categories = web.Lists.TryGetList("Kategorier");
             if (categories != null)
@@ -41,12 +40,18 @@ namespace Atkins.Intranet.Blog.Features.Atkins.Intranet.Blog.Setup
                 {
                     categories.Items.Delete(i);
                 }
+                foreach (string title in CustomListHelper.returnStringArray(BlogPosts.blogpostCategories))
+                {
+                    SPListItem currentItem = categories.AddItem();
+                    currentItem["Title"] = title;
+                    currentItem.Update();
+                }
 
             }
             //ADD Content editorwebpart to hide title in titlearea for the blog site
             WebPartUtility.AddContentEditorWebPart(web, HideTitleBlog.webPartTitle,HideTitleBlog.ZoneId, 1, HideTitleBlog.Content);
             web.Update();
-            web.Dispose();
+            
         }
 
 

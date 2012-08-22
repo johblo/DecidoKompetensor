@@ -82,6 +82,7 @@
           <xsl:value-of select="$bodyContent" disable-output-escaping="yes" />
           ...(<a href="{$SafeLinkUrl}" mce_href="{$SafeLinkUrl}" target="{$LinkTarget}" title="{@LinkToolTip}">läs mer</a>)
           <br />
+          <xsl:value-of select="@PublishedDate" />
         </div>
       </div>
     </div>

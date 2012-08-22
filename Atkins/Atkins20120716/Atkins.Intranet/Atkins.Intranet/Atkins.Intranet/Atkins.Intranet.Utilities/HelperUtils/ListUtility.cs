@@ -242,8 +242,8 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string webPartTitle = "Mina uppgifter";
         public const string webPartView = "webPartView";
         public const string webPartViewDisplayName = "webPartView";
-        public const string ZoneId = "Center";
-        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/group.png";
+        public const string ZoneId = "Right";
+        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/task_my.png";
 
         public static readonly SPContentTypeId TaskContentTypeId = new SPContentTypeId("0x0100A33D9AD9805788419BDAAC2CCB37502E");
                                                                                         
@@ -445,7 +445,7 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string webPartView = "webPartView";
         public const string webPartTitle = "Avvikelser";
         public const string ZoneId = "Right";
-        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/group.png";
+        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/deviation.png";
 
 
         public static readonly SPContentTypeId DeviationBaseContentTypeId = new SPContentTypeId("0x0100E597B736AF8F410F887223B41DF23E68");
@@ -484,21 +484,26 @@ namespace Atkins.Intranet.Utilities.HelperUtils
 
     public class BlogPosts
     {
-        public const string webPartTitle = "Blogg poster";
-        public const string webPartViewFields = "Title;Body";
+        public const string webName = "Nyheter";
+        public const string webPartTitle = "Nyheter";
+        public const string webPartViewFields = "Title;Body;PublishedDate,DateTime;";
         public const string webPartView = "webPartView";
         public const string webpartItemStyle =  "CQWP_Blog";
         public const string ListName = "Inlägg";
         public const string xslPath = "/Sites/Intranet/Style Library/XSL Style Sheets/customItem.xsl";
         public const string ZoneId = "Left";
-        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/group.png";
+        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/news.png";
+        public const string blogpostCategories = "HR,QSE,Finans";
+        public const string categoryFilterHR = "HR";
+        public const string categoryFilterQSE = "QSE";
+        public const string categoryFilterFinance = "Finans";
         
     }
     public class HideTitleBlog
     {
         public const string ZoneId = "Right";
         public const string webPartTitle = "Hide Title";
-        public const string Content = "<style>.s4-titletext {DISPLAY: none}</style>";
+        public const string Content = "<style>.ms-webpartpagedescription {DISPLAY: none}</style>";
     }
 
     public class Announcements
@@ -506,22 +511,22 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string webPartTitle = "Meddelanden";
         public const string webpartItemStyle = "Announcements";
         public const string xslPath = "/Sites/Intranet/Style Library/XSL Style Sheets/customItem.xsl";
-        public const string ZoneId = "Center";
-        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/group.png";
+        public const string ZoneId = "Left";
+        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/announcement.png";
     }
     public class RelevantDocuments
     {
         public const string webPartTitle = "Relevanta dokument";
         public const string ZoneId = "Left";
-        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/group.png";
+        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/docs.png";
     }
     public class LastAddedModiefiedDocuments
     {
         public const string webPartTitle = "Senast tillagda eller ändrade Dokument";
         public const string webpartItemStyle = "Announcements";
         public const string xslPath = "/Sites/Intranet/Style Library/XSL Style Sheets/customItem.xsl";
-        public const string ZoneId = "Center";
-        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/group.png";
+        public const string ZoneId = "Left";
+        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/docs.png";
     }
     public class QSELinks
     {
@@ -529,11 +534,11 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string webPartTitle = "Länkar";
         public const string ZoneId = "Left";
         public const string webPartView = "webPartView";
-        public const string webPartViewFields = "URL,LinkTitle";
+        public const string webPartViewFields = "URL";
         public const int rowlimit = 100;
         public const string query = "";
         public const string resourceFile = "core";
         public const uint resourceLCID = 1053;
-        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/group.png";
+        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/link.png";
     }
 }

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="df14f4f2-e175-415f-88b1-af926acdf325" solutionId="df14f4f2-e175-415f-88b1-af926acdf325" resetWebServer="false" name="Atkins.Intranet.Finance" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <features>
+    <featureReference itemId="ff4ef94f-2181-4a3f-ae3a-76b0b8759ed3" />
+  </features>
+</package>

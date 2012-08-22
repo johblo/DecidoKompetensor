@@ -46,14 +46,20 @@
 .s4-status-s3 {
     display: none !important;
 }
-
+/*
 .s4-titletext {
      display: none !important;
 }
-
+*/
 .s4-titlelogo {
    
     text-align: left !important;
+}
+.s4-pagedescription
+{
+    font-size:20px !important;
+    color:Black !important;
+    font-weight:bold !important;
 }
 
 .s4-tn {

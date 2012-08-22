@@ -39,17 +39,6 @@
         <List FeatureId="00BFEA71-D1CE-42de-9C63-A44004CE0104"
           Type="104" Title="$Resources:core,announceList;"
           Url="$Resources:core,lists_Folder;/$Resources:core,announce_Folder;">
-          <Data>
-            <Rows>
-              <Row>
-                <Field Name="Title">$Resources:onetid11;</Field>
-                <Field Name="Body">$Resources:onetid12;</Field>
-                <Field Name="Expires">
-                  <ows:TodayISO/>
-                </Field>
-              </Row>
-            </Rows>
-          </Data>
         </List>
       </Lists>
       <SiteFeatures>
@@ -66,17 +55,9 @@
             <Property Key="SimplePublishing" Value="true" />
           </Properties>
         </Feature>
-        
+
         <!--Atkins Design-->
         <Feature ID="90fc8f29-9537-4dab-860d-363c8fdb4d27" />
-
-        <!-- Document ID Feature 
-        <Feature ID="b50e3104-6812-424f-a011-cc90e6327318">
-          <Properties>
-            <Property Key="docid_settings_ui" Value="ATKINS"/>
-          </Properties>
-        </Feature>
-        -->
 
       </SiteFeatures>
       <WebFeatures>
@@ -107,20 +88,21 @@
         <!-- TeamCollab Feature -->
         <Feature ID="00BFEA71-4EA5-48D4-A4AD-7EA5C011ABE5" />
 
+
         <!-- Enable Metadata navigation Feature -->
         <Feature ID="7201d6a4-a5d3-49a1-8c19-19c4bac6e668" />
 
-        <!--Intranet Root Lists-->
+        <!--Intranet Root Lists
         <Feature ID="df6a80ee-8cbe-4253-9cca-8f173a97b8dd"></Feature>
+        -->
 
-                       
       </WebFeatures>
       <Modules>
-        <Module Name="Start" />       
+        <Module Name="Start" />
       </Modules>
     </Configuration>
 
-    <Configuration ID="1" Name="Atkins.Intranet.HR" MasterUrl="~SiteCollection/_catalogs/masterpage/AtkinsSystemMasterPage.master" >
+    <Configuration ID="1" Name="Atkins.Intranet.HR" MasterUrl="~SiteCollection/_catalogs/masterpage/AtkinsSubSiteMasterPage.master" CustomMasterUrl="~SiteCollection/_catalogs/masterpage/AtkinsSystemMasterPage.master" >
       <Lists>
         <List FeatureId="00BFEA71-E717-4E80-AA17-D0C71B360101"
           Type="101" Title="$Resources:core,shareddocuments_Title;"
@@ -175,7 +157,7 @@
         <Feature ID="22A9EF51-737B-4ff2-9346-694633FE4416">
           <Properties xmlns="http://schemas.microsoft.com/sharepoint/">
             <Property Key="WelcomePageUrl" Value="$Resources:cmscore,List_Pages_UrlName;/default.aspx" />
-            <Property Key="ChromeMasterUrl" Value="~SiteCollection/_catalogs/masterpage/AtkinsPortalMasterPage.master" />
+            <Property Key="ChromeMasterUrl" Value="~SiteCollection/_catalogs/masterpage/AtkinsSubSiteMasterPage.master" />
             <Property Key="AvailablePageLayouts" Value="~SiteCollection/_catalogs/masterpage/AtkinsStartPageLayout.aspx:~SiteCollection/_catalogs/masterpage/ArticleLeft.aspx:~SiteCollection/_catalogs/masterpage/ArticleLinks.aspx:~SiteCollection/_catalogs/masterpage/ArticleRight.aspx" />
             <Property Key="DefaultPageLayout" Value="~SiteCollection/_catalogs/masterpage/AtkinsStartPageLayout.aspx"/>
             <Property Key="SimplePublishing" Value="true" />
@@ -197,6 +179,8 @@
 
         <!-- TeamCollab Feature -->
         <Feature ID="00BFEA71-4EA5-48D4-A4AD-7EA5C011ABE5" />
+
+
         
         <!-- Enable Metadata navigation Feature -->
         <Feature ID="7201d6a4-a5d3-49a1-8c19-19c4bac6e668" />
@@ -212,7 +196,7 @@
     </Configuration>
 
 
-    <Configuration ID="2" Name="Atkins.Intranet.QSE" MasterUrl="~SiteCollection/_catalogs/masterpage/AtkinsSystemMasterPage.master">
+    <Configuration ID="2" Name="Atkins.Intranet.QSE" MasterUrl="~SiteCollection/_catalogs/masterpage/AtkinsSubSiteMasterPage.master" CustomMasterUrl="~SiteCollection/_catalogs/masterpage/AtkinsSystemMasterPage.master" >
     <Lists>
         <List FeatureId="00BFEA71-E717-4E80-AA17-D0C71B360101"
           Type="101" Title="$Resources:core,shareddocuments_Title;"
@@ -226,7 +210,6 @@
         <List FeatureId="00BFEA71-D1CE-42de-9C63-A44004CE0104"
           Type="104" Title="$Resources:core,announceList;"
           Url="$Resources:core,lists_Folder;/$Resources:core,announce_Folder;">
-          
         </List>
         <List FeatureId="00BFEA71-2062-426C-90BF-714C59600103"
           Type="103" Title="$Resources:core,linksList;"
@@ -268,7 +251,7 @@
         <Feature ID="22A9EF51-737B-4ff2-9346-694633FE4416">
           <Properties xmlns="http://schemas.microsoft.com/sharepoint/">
             <Property Key="WelcomePageUrl" Value="$Resources:cmscore,List_Pages_UrlName;/default.aspx" />
-            <Property Key="ChromeMasterUrl" Value="~SiteCollection/_catalogs/masterpage/AtkinsPortalMasterPage.master" />
+            <Property Key="ChromeMasterUrl" Value="~SiteCollection/_catalogs/masterpage/AtkinsSubSiteMasterPage.master" />
             <Property Key="AvailablePageLayouts" Value="~SiteCollection/_catalogs/masterpage/AtkinsStartPageLayout.aspx:~SiteCollection/_catalogs/masterpage/ArticleLeft.aspx:~SiteCollection/_catalogs/masterpage/ArticleLinks.aspx:~SiteCollection/_catalogs/masterpage/ArticleRight.aspx" />
             <Property Key="DefaultPageLayout" Value="~SiteCollection/_catalogs/masterpage/AtkinsStartPageLayout.aspx"/>
             <Property Key="SimplePublishing" Value="true" />
@@ -302,7 +285,7 @@
     </Configuration>
 
 
-    <Configuration ID="3" Name="Atkins.Intranet.Finance" MasterUrl="~SiteCollection/_catalogs/masterpage/AtkinsSystemMasterPage.master">
+    <Configuration ID="3" Name="Atkins.Intranet.Finance" MasterUrl="~SiteCollection/_catalogs/masterpage/AtkinsSubSiteMasterPage.master" CustomMasterUrl="~SiteCollection/_catalogs/masterpage/AtkinsSystemMasterPage.master" >
       <Lists>
         <List FeatureId="00BFEA71-E717-4E80-AA17-D0C71B360101"
           Type="101" Title="$Resources:core,shareddocuments_Title;"
@@ -357,7 +340,7 @@
         <Feature ID="22A9EF51-737B-4ff2-9346-694633FE4416">
           <Properties xmlns="http://schemas.microsoft.com/sharepoint/">
             <Property Key="WelcomePageUrl" Value="$Resources:cmscore,List_Pages_UrlName;/default.aspx" />
-            <Property Key="ChromeMasterUrl" Value="~SiteCollection/_catalogs/masterpage/AtkinsPortalMasterPage.master" />
+            <Property Key="ChromeMasterUrl" Value="~SiteCollection/_catalogs/masterpage/AtkinsSubSiteMasterPage.master" />
             <Property Key="AvailablePageLayouts" Value="~SiteCollection/_catalogs/masterpage/AtkinsStartPageLayout.aspx:~SiteCollection/_catalogs/masterpage/ArticleLeft.aspx:~SiteCollection/_catalogs/masterpage/ArticleLinks.aspx:~SiteCollection/_catalogs/masterpage/ArticleRight.aspx" />
             <Property Key="DefaultPageLayout" Value="~SiteCollection/_catalogs/masterpage/AtkinsStartPageLayout.aspx"/>
             <Property Key="SimplePublishing" Value="true" />
@@ -407,7 +390,7 @@
       <File Url="default.aspx" Type="GhostableInLibrary">
         <Property Name="Title" Value="Atkins - HR" />
         <Property Name="ContentType" Value="$Resources:cmscore,contenttype_welcomepage_name;" />
-        <Property Name="PublishingPageLayout" Value="~SiteCollection/_catalogs/masterpage/AtkinsStartPageLayout.aspx, Welcome page" />
+        <Property Name="PublishingPageLayout" Value="~SiteCollection/_catalogs/masterpage/AtkinsSubStartPageLayout.aspx, Welcome page" />
       </File>
     </Module>
     <!--<Module Name="MasterPages" List="116" Url="_catalogs/masterpage" RootWebOnly="FALSE">
@@ -418,7 +401,7 @@
       <File Url="default.aspx" Type="GhostableInLibrary">
         <Property Name="Title" Value="Atkins - QSE" />
         <Property Name="ContentType" Value="$Resources:cmscore,contenttype_welcomepage_name;" />
-        <Property Name="PublishingPageLayout" Value="~SiteCollection/_catalogs/masterpage/AtkinsStartPageLayout.aspx, Welcome page" />
+        <Property Name="PublishingPageLayout" Value="~SiteCollection/_catalogs/masterpage/AtkinsSubStartPageLayout.aspx, Welcome page" />
       </File>
     </Module>
 
@@ -426,7 +409,7 @@
       <File Url="default.aspx" Type="GhostableInLibrary">
         <Property Name="Title" Value="Atkins - Finans" />
         <Property Name="ContentType" Value="$Resources:cmscore,contenttype_welcomepage_name;" />
-        <Property Name="PublishingPageLayout" Value="~SiteCollection/_catalogs/masterpage/AtkinsStartPageLayout.aspx, Welcome page" />
+        <Property Name="PublishingPageLayout" Value="~SiteCollection/_catalogs/masterpage/AtkinsSubStartPageLayout.aspx, Welcome page" />
       </File>
     </Module>
     

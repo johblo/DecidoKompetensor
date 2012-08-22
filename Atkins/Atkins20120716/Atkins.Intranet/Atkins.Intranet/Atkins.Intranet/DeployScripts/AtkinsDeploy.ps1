@@ -15,6 +15,12 @@ Write-Host "Site "$intranetTitle" successfully created!"
 Write-Host "************************************************************"
 
 Write-Host "Activating Rootweb features:"
+Write-Host "***********************Create Rootweb lists*********"
+Enable-SPFeature -Identity "df6a80ee-8cbe-4253-9cca-8f173a97b8dd" -URL $intranetUrl
+
+
+
+Write-Host "Activating Rootweb features:"
 Write-Host "***********************Permission level and Document ID Feature*********"
 Enable-SPFeature -Identity "8886fec7-0bb3-4869-bc43-ac77ddfc3989" -URL $intranetUrl
 
@@ -50,8 +56,6 @@ Enable-SPFeature -Identity "ba6fd70d-555e-448f-9271-c87f3d354c66" -URL $hrUrl
 Write-Host "***********************HR Print List Item *********"
 Enable-SPFeature -Identity "e1aea629-4aa3-479d-b9fe-f3454f5227e6" -URL $hrUrl
 
-Write-Host "***********************HR Add webparts to HR StartPage *********"
-Enable-SPFeature -Identity "187a36fd-14df-4e0a-b23c-2ee1018fa1c5" -URL $hrUrl
 
 
 
@@ -78,16 +82,7 @@ Write-Host "Activating QSE features:"
 Write-Host "***********************QSE Sample Data*********"
 Enable-SPFeature -Identity "da11ccec-692a-4402-a86e-6e4a53f56742" -URL $qseUrl
 
-
-Write-Host "Activating QSE features:"
-Write-Host "***********************QSE Add webparts to QSE startpage*********"
-Enable-SPFeature -Identity "5dfbab14-178b-48b7-8a9d-99bbe5ad0bbb" -URL $qseUrl
-
-iisreset
 Write-Host "QSE Features Activation Done!"
-
-
-
 
 iisreset
 
@@ -102,10 +97,12 @@ $financeSubSite = New-SPWeb –url $financeUrl -name $financeTitle -template $fina
 Write-Host "Sub-site "$financeTitle" successfully created!"
 Write-Host "************************************************************"
 
+
+
 iisreset
 
-$blogUrl = "http://ws2008r2efen64:6000/sites/intranet/Blog"
-$blogTitle = "BLOG"
+$blogUrl = "http://ws2008r2efen64:6000/sites/intranet/Nyheter"
+$blogTitle = "Nyheter"
 $administratorAccount = "TRETTON37\administrator"
 
 $blogTemplate = Get-SPWebTemplate "BLOG#0"
@@ -123,7 +120,24 @@ Write-Host "***********************Blog configuration feature*********"
 Enable-SPFeature -Identity "4612ce28-dddf-4127-bb32-40d6e34de1c7" -URL $blogUrl
 
 
-iisreset
+
+
+
+
+
+
 Write-Host "Activating rootWeb Feature"
 Write-Host "***********************RootWeb Subsite dependent webparts*********"
 Enable-SPFeature -Identity "41e3bfe4-65dc-4b61-8510-684fe180ed2c" -URL $intranetUrl
+
+Write-Host "Activating QSE features:"
+Write-Host "***********************QSE Add webparts to QSE startpage*********"
+Enable-SPFeature -Identity "5dfbab14-178b-48b7-8a9d-99bbe5ad0bbb" -URL $qseUrl
+
+Write-Host "Activating HR features:"
+Write-Host "***********************HR Add webparts to HR StartPage *********"
+Enable-SPFeature -Identity "187a36fd-14df-4e0a-b23c-2ee1018fa1c5" -URL $hrUrl
+
+Write-Host "Activating Finance features:"
+Write-Host "***********************Finance add webparts to Finance startpage*********"
+Enable-SPFeature -Identity "12459c03-a1da-44f1-b105-834f32914c66" -URL $financeUrl

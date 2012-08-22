@@ -311,18 +311,10 @@
 										</SharePoint:SPLinkButton>
 									</td>
 									<td class="s4-titletext">
-										<h1 name="onetidProjectPropertyTitle">
-											<asp:ContentPlaceHolder id="PlaceHolderSiteName" runat="server">
-												<SharePoint:SPLinkButton runat="server" NavigateUrl="~site/" id="onetidProjectPropertyTitle"><SharePoint:ProjectProperty ID="ProjectProperty1" Property="Title" runat="server" /></SharePoint:SPLinkButton>
-											</asp:ContentPlaceHolder>
-										</h1>
-										<span id="onetidPageTitleSeparator" class="s4-nothome s4-bcsep s4-titlesep">
-										<SharePoint:ClusteredDirectionalSeparatorArrow ID="ClusteredDirectionalSeparatorArrow1" runat="server"/> </span>
-										<h2>
-											<asp:ContentPlaceHolder id="PlaceHolderPageTitleInTitleArea" runat="server" />
-										</h2>
 										<div class="s4-pagedescription" tabindex="0" >
-											<asp:ContentPlaceHolder id="PlaceHolderPageDescription" runat="server"/>
+											<asp:ContentPlaceHolder id="PlaceHolderPageDescription" runat="server">
+                                                <SharePoint:ProjectProperty Property="Description" runat="server" />
+                                            </asp:ContentPlaceHolder>
 										</div>
 									</td>
 									<td class="s4-socialdata-notif">
@@ -350,6 +342,7 @@
 						<h2 class="ms-hidden">
 						<SharePoint:EncodedLiteral ID="EncodedLiteral5" runat="server" text="<%$Resources:wss,topnav_pagetitle%>" EncodeMethod="HtmlEncode"/></h2>
 								<asp:ContentPlaceHolder id="PlaceHolderHorizontalNav" runat="server">
+
 	<SharePoint:AspMenu
 	  ID="TopNavigationMenuV4"
 	  Runat="server"
@@ -372,7 +365,7 @@
 			  runat="server"
 			  StartingNodeUrl="sid:1002"/>
 		</Template_Controls>
-	</SharePoint:DelegateControl>
+	</SharePoint:DelegateControl> 
 								</asp:ContentPlaceHolder>
 						</asp:ContentPlaceHolder>
 					</div>
@@ -391,6 +384,7 @@
 						<asp:ContentPlaceHolder id="PlaceHolderLeftActions" runat="server"></asp:ContentPlaceHolder>
 							<asp:ContentPlaceHolder id="PlaceHolderLeftNavBarTop" runat="server"/>
 						<asp:ContentPlaceHolder id="PlaceHolderLeftNavBar" runat="server">
+
 				<div class="ms-quicklaunchouter">
 				<div class="ms-quickLaunch">
 				<Sharepoint:UIVersionedContent ID="UIVersionedContent1" runat="server" UIVersion="4">
@@ -442,7 +436,7 @@
 					</SharePoint:UIVersionedContent>
 					<SharePoint:UIVersionedContent ID="UIVersionedContent4" UIVersion="4" runat="server">
 						<ContentTemplate>
-							<SharePoint:AspMenu id="V4QuickLaunchMenu" runat="server" EnableViewState="false" DataSourceId="QuickLaunchSiteMap" UseSimpleRendering="true" UseSeparateCss="false" Orientation="Vertical" StaticDisplayLevels="2" MaximumDynamicDisplayLevels="0" SkipLinkText="" CssClass="s4-ql" />
+                            <SharePoint:AspMenu id="V4QuickLaunchMenu" runat="server" EnableViewState="false" DataSourceId="QuickLaunchSiteMap" UseSimpleRendering="true" UseSeparateCss="false" Orientation="Vertical" StaticDisplayLevels="2" MaximumDynamicDisplayLevels="0" SkipLinkText="" CssClass="s4-ql" />
 						</ContentTemplate>
 					</SharePoint:UIVersionedContent>
 				</div>
@@ -626,6 +620,10 @@
 							<div id="MSO_ContentDiv" runat="server">
 						<a name="mainContent"></a>
 						<asp:ContentPlaceHolder id="PlaceHolderMain" runat="server">
+                        
+
+
+
 						</asp:ContentPlaceHolder>
 							</div>
 						</div></div>
@@ -649,6 +647,12 @@
    <input type="text" name="__spText1" title="text" style="display:none;" />
    <input type="text" name="__spText2" title="text" style="display:none;" />
   </form>
+
+   <!--HIDDEN PLACEHOLDERS -->
+  <asp:Panel runat="server" visible="false">
+   <asp:ContentPlaceHolder id="PlaceHolderSiteName" runat="server" visible="false"/>
+   <asp:ContentPlaceHolder id="PlaceHolderPageTitleInTitleArea" runat="server" visible="false" />
+  </asp:Panel>
   <asp:ContentPlaceHolder id="PlaceHolderUtilityContent" runat="server"/>
 	<SharePoint:WarnOnUnsupportedBrowsers ID="WarnOnUnsupportedBrowsers1" runat="server"/>
 </body>

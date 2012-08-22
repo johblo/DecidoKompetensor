@@ -78,12 +78,24 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\Atkins.Intranet.Portal\AtkinsMan.png" />
+    <Content Include="Images\Atkins.Intranet.Portal\icons\announcement.png" />
     <Content Include="Images\Atkins.Intranet.Portal\icons\chart.png" />
     <Content Include="Images\Atkins.Intranet.Portal\icons\check.gif" />
+    <Content Include="Images\Atkins.Intranet.Portal\icons\deviation.png" />
     <Content Include="Images\Atkins.Intranet.Portal\icons\group.png" />
+    <Content Include="Images\Atkins.Intranet.Portal\icons\link.png" />
+    <Content Include="Images\Atkins.Intranet.Portal\icons\news.png" />
     <Content Include="Images\Atkins.Intranet.Portal\icons\plug_extension.png" />
+    <Content Include="Images\Atkins.Intranet.Portal\icons\task_my.png" />
     <Content Include="Images\Atkins.Intranet.Portal\icons\warning.png" />
+    <Content Include="Layouts\Atkins.Intranet.Portal\CSS\AtkinsSubSiteMasterPage.css" />
+    <Content Include="Layouts\Atkins.Intranet.Portal\CSS\AtkinsSubSitePageLayout.css" />
     <Content Include="Layouts\Atkins.Intranet.Portal\CSS\AtkinsWebParts.css" />
+    <Content Include="MasterPages\AtkinsSubSiteMasterPage\Elements.xml" />
+    <None Include="MasterPages\AtkinsSubSiteMasterPage\AtkinsSubSiteMasterPage.master" />
+    <Content Include="PageLayouts\AtkinsSubStartPageLayout\Elements.xml" />
+    <Content Include="PageLayouts\AtkinsSubStartPageLayout\AtkinsSubStartPageLayout.aspx" />
     <Content Include="XSL\customItem.xsl">
       <SubType>Designer</SubType>
     </Content>
@@ -112,6 +124,9 @@
     </None>
     <None Include="MasterPages\AtkinsPortalMasterPage\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{6ed971d4-3323-4276-a5fe-01d9ad4784ed}</SharePointProjectItemId>
+    </None>
+    <None Include="MasterPages\AtkinsSubSiteMasterPage\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{2c812218-bad1-44fa-9e69-84aa5e454bf4}</SharePointProjectItemId>
     </None>
     <None Include="MasterPages\SystemMasterPage\AtkinsSystemMasterPage.master" />
     <None Include="MasterPages\SystemMasterPage\SharePointProjectItem.spdata">
@@ -148,6 +163,9 @@
     <Content Include="PageLayouts\AtkinsStartPageLayout\AtkinsStartPageLayout.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
+    <None Include="PageLayouts\AtkinsSubStartPageLayout\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{b79a81c3-75c7-4212-8dc4-7d97b9b47540}</SharePointProjectItemId>
+    </None>
     <None Include="SiteDefinition\Atkins.Intranet\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{2e9a7f93-3141-4af9-8607-06af52c685c5}</SharePointProjectItemId>
     </None>

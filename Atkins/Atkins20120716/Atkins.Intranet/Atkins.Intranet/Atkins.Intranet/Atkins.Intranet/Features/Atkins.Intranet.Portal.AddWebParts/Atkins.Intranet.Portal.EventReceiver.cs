@@ -35,8 +35,8 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Portal.AddWebParts
                 HttpContext.Current.Items["HttpHandlerSPWeb"] = web;
                 contextCreated = true;
             }
-
-            using (SPWeb sourceWeb = web.Site.AllWebs["BLOG"])
+            //ADD BLOG WP TO START
+            using (SPWeb sourceWeb = web.Site.AllWebs[BlogPosts.webName])
             {
                 WebPartUtility.AddCQWP(web, sourceWeb, BlogPosts.ListName, BlogPosts.webPartTitle, BlogPosts.ZoneId, 1, BlogPosts.xslPath, BlogPosts.webpartItemStyle, BlogPosts.webPartViewFields,BlogPosts.webpartTitleImageUrl);
             }

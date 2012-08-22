@@ -16,8 +16,11 @@
 	<SharePoint:CssRegistration ID="AtkinsPortalMasterCss" name="<% $SPUrl:~SiteCollection/_layouts/Atkins.Intranet.Portal/css/AtkinsPortalStartPageLayout.css%>" After="corev4.css" runat="server"/>
 </asp:Content>
 
-<asp:Content ContentPlaceholderID="PlaceHolderMain" runat="server">
-    
+
+
+
+
+<asp:Content ContentPlaceholderID="PlaceHolderMain" runat="server"> 
        <table cellpadding="0" cellspacing="0"><tr>
        <td class="zonegap"></td>                                       
        <td class="zoneColumn">

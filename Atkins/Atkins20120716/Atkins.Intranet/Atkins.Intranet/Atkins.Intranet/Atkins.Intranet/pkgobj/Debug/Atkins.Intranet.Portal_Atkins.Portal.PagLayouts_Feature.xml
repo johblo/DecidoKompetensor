@@ -7,5 +7,9 @@
     <ElementFile Location="AtkinsPortalMasterPage\AtkinsPortalMasterPage.master" />
     <ElementManifest Location="SystemMasterPage\Elements.xml" />
     <ElementFile Location="SystemMasterPage\AtkinsSystemMasterPage.master" />
+    <ElementManifest Location="AtkinsSubStartPageLayout\Elements.xml" />
+    <ElementFile Location="AtkinsSubStartPageLayout\AtkinsSubStartPageLayout.aspx" />
+    <ElementManifest Location="AtkinsSubSiteMasterPage\Elements.xml" />
+    <ElementFile Location="AtkinsSubSiteMasterPage\AtkinsSubSiteMasterPage.master" />
   </ElementManifests>
 </Feature>

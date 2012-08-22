@@ -200,7 +200,46 @@ namespace Atkins.Intranet.Utilities.HelperUtils
                 startPageFile.CheckIn("Added webpart");
             currentWeb.Update();
         }
+        public static void AddBlogWebpart(SPWeb currentWeb, SPWeb sourceWeb, string listName, string title, string zoneId, int zoneIndex, string xslPath, string itemstyle, string viewFields, string titleImageUrl,string filter)
+        {
+            string startPage = currentWeb.RootFolder.WelcomePage;
+            string fullUrlOfStartPage = currentWeb.Url + "/" + startPage;
+            SPFile startPageFile = currentWeb.GetFile(fullUrlOfStartPage);
+            SPList currentList = sourceWeb.Lists.TryGetList(listName);
+            if (currentList != null)
+            {
+                if (startPageFile.Level != SPFileLevel.Checkout)
+                    startPageFile.CheckOut();
+                SPLimitedWebPartManager manager = currentWeb.GetLimitedWebPartManager(startPage, PersonalizationScope.Shared);
+                ContentByQueryWebPart contentByQery = new ContentByQueryWebPart();
+                if (!string.IsNullOrEmpty(titleImageUrl))
+                    contentByQery.TitleIconImageUrl = titleImageUrl;
 
+                contentByQery.FilterField1 = "PostCategory";
+                contentByQery.FilterOperator1 = ContentByQueryWebPart.FilterFieldQueryOperator.Eq;
+                contentByQery.FilterType1 = "Lookup";
+                //contentByQery.Filter1IsCustomValue = true;
+                //contentByQery.FilterDisplayValue1 = "-2";
+                contentByQery.FilterValue1 = filter;
+
+                contentByQery.UseCopyUtil = true;
+                contentByQery.ItemXslLink = xslPath;
+                contentByQery.Title = title;
+                contentByQery.WebUrl = sourceWeb.Url;
+                contentByQery.ListName = currentList.Title;
+                contentByQery.ListGuid = currentList.ID.ToString("B");
+                contentByQery.ItemStyle = itemstyle;
+                contentByQery.ItemLimit = 10;
+                contentByQery.CommonViewFields = viewFields;
+                if (!FindWebPart(manager, title))
+                    manager.AddWebPart(contentByQery, zoneId, zoneIndex);
+                if (startPageFile.Level == SPFileLevel.Checkout)
+                    startPageFile.CheckIn("Added webpart");
+            }
+            currentWeb.Update();
+        }
+
+       
        
         private static bool FindWebPart(SPLimitedWebPartManager manager,string title)
         {
