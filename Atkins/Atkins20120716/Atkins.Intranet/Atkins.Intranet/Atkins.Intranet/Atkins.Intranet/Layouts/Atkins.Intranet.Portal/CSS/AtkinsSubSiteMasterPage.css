@@ -50,6 +50,14 @@
 .s4-titletext {
      /*display: none !important;*/
 }
+/*Image above topnavigation*/
+.titleImage 
+{
+    vertical-align:middle;
+    padding-right:10px;
+    padding-left:10px;
+}
+
 
 .s4-pagedescription
 {
@@ -117,14 +125,3 @@ padding-right: 0px !important;
     padding-right: 100px !important;
 }
 
-/*Footer */
-.footer
-{
-    height:50px; 
-    text-align: center; 
-    padding: 10px; 
-    background-color:#00688B;
-    color:White;
-    font-size:30px;
-    font-weight:bold;
-}

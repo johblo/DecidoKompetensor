@@ -78,6 +78,7 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
             deviationList.BreakRoleInheritance(false);
             deviationList.WriteSecurity = 2;
             deviationList.EnableVersioning = true;
+            deviationList.OnQuickLaunch = true;
             deviationList.Update();
             SecurityUtility.CreateListGroup(currentWeb, deviationList, QSEAdministratorsGroup.Name, QSEAdministratorsGroup.Description, QSEAdministratorsGroup.role);
             SecurityUtility.AddExistingGroupCustomDefinition(currentWeb, deviationList, currentWeb.AssociatedMemberGroup, currentWeb.Site.RootWeb.RoleDefinitions[DeviationsList.DeviationRoleDefinition]);
@@ -313,6 +314,7 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
             SPList processStepList = currentWeb.Lists[documentLibraryGuid];
             processStepList.Title = ProcessStepList.ListName;
             processStepList.BreakRoleInheritance(false);
+            processStepList.OnQuickLaunch = true;
             processStepList.Update();
             //QSEResultingDocumentsAdministrators
             SecurityUtility.CreateListGroup(currentWeb, processStepList, QSEAdministratorsGroup.Name, QSEAdministratorsGroup.Description, QSEAdministratorsGroup.role);
@@ -410,6 +412,7 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
             SPList resultingDocumentsList = currentWeb.Lists[documentLibraryGuid];
             resultingDocumentsList.Title = ResultingDocuments.ListName;
             resultingDocumentsList.BreakRoleInheritance(false);
+            resultingDocumentsList.OnQuickLaunch = true;
             resultingDocumentsList.Update();
             //QSEResultingDocumentsAdministrators
             SecurityUtility.CreateListGroup(currentWeb, resultingDocumentsList, QSEResultingDocumentsAdministrators.Name, QSEResultingDocumentsAdministrators.Description, QSEResultingDocumentsAdministrators.role);
@@ -509,6 +512,7 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
             Guid documentLibraryGuid = currentWeb.Lists.Add(CustomListHelper.ReturnTrimmedString(ControllingDocuments.ListName), ControllingDocuments.ListDescription, SPListTemplateType.DocumentLibrary);
             SPList controllingDocumentsList = currentWeb.Lists[documentLibraryGuid];
             controllingDocumentsList.Title = ControllingDocuments.ListName;
+            controllingDocumentsList.OnQuickLaunch = true;
             controllingDocumentsList.EnableVersioning = true;
             controllingDocumentsList.EnableMinorVersions = true;
             controllingDocumentsList.MajorWithMinorVersionsLimit = 5;

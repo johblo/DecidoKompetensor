@@ -23,7 +23,6 @@
 	var _fV4UI = true;
 	</script>
 	<SharePoint:ScriptLink language="javascript" name="core.js" OnDemand="true" runat="server"/>
-    <script type="text/javascript" src="/_layouts/Atkins.Intranet.Portal/Javascript/stickyFooter.js"></script>
 	<SharePoint:CustomJSUrl runat="server"/>
 	<SharePoint:SoapDiscoveryLink runat="server"/>
 	<asp:ContentPlaceHolder id="PlaceHolderAdditionalPageHead" runat="server"/>
@@ -35,6 +34,7 @@
 	<SharePoint:SPHelpPageComponent Visible="false" runat="server"/>
     <SharePoint:CssRegistration ID="AtkinsPortalMasterCssV4" name="<% $SPUrl:~SiteCollection/_layouts/Atkins.Intranet.Portal/css/AtkinsSystemMasterPage.css%>" After="corev4.css" runat="server"/>
     <SharePoint:CssRegistration ID="AtkinsWebParts" name="<% $SPUrl:~SiteCollection/_layouts/Atkins.Intranet.Portal/css/AtkinsWebParts.css%>" After="corev4.css" runat="server"/>
+    <SharePoint:CssRegistration ID="AtkinsCommon" name="<% $SPUrl:~SiteCollection/_layouts/Atkins.Intranet.Portal/css/AtkinsCommon.css%>" After="corev4.css" runat="server"/>
 </head>
 <body scroll="no" onload="if (typeof(_spBodyOnLoadWrapper) != 'undefined') _spBodyOnLoadWrapper();" class="v4master">
   <form runat="server" onsubmit="if (typeof(_spFormOnSubmitWrapper) != 'undefined') {return _spFormOnSubmitWrapper();} else {return true;}">
@@ -304,6 +304,9 @@
 										<SharePoint:SPLinkButton runat="server" NavigateUrl="~site/" id="onetidProjectPropertyTitleGraphic">
 											<SharePoint:SiteLogoImage name="onetidHeadbnnr0" id="onetidHeadbnnr2" LogoImageUrl="~site/_layouts/Images/Atkins.Intranet.Portal/AtkinsLogo.png" runat="server"/>
 										</SharePoint:SPLinkButton>
+									</td>
+                                    <td class="titleImage">
+                                        <asp:Image runat="server" ImageUrl="~site/_layouts/Images/Atkins.Intranet.Portal/AtkinsMan.png" />
 									</td>
 									<td class="s4-titletext">
 										<h1 name="onetidProjectPropertyTitle">
@@ -630,10 +633,25 @@
 					</div>
 				</div>
 			</div>
-			<SharePoint:DeveloperDashboard runat="server"/>
+			<SharePoint:DeveloperDashboard  runat="server"/>
 		</div>
         <div id="footer" class="footer s4-notdlg" >
-                &copy; ATKINS
+        <table width="100%" background="~site/_layouts/Images/Atkins.Intranet.Portal/Footer-middle.jpg" cellspacing="0" cellpadding="0">
+        <tbody>
+            <tr style="text-align: left; height: 160px">
+                <td style="text-align: left; width: 297px; height: 160px">
+                    <asp:Image ID="Image4" runat="server" ImageUrl="~site/_layouts/Images/Atkins.Intranet.Portal/Footer-left.jpg" />
+                </td>
+                <td style="text-align: center; vertical-align: bottom">
+                
+                    <div  class= "footerMiddleSection" >Atkins Sverige AB ¤ Telefon: 040 650 12 50 ¤ Fax: 040 650 12 51 ¤ info-se@atkinsglobal.com ¤ www.atkins.se</div>
+                </td>
+                <td style="text-align: left; width: 140px; height: 160px">
+                        <asp:Image ID="Image5" runat="server" ImageUrl="~site/_layouts/Images/Atkins.Intranet.Portal/Footer-right.jpg" />
+                </td>
+             </tr>
+        </tbody>
+        </table>
         </div>
 </div>
   <asp:ContentPlaceHolder id="PlaceHolderFormDigest" runat="server">

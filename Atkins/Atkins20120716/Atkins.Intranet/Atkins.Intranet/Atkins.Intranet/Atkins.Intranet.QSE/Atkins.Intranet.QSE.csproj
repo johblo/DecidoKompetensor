@@ -95,6 +95,7 @@
     </Content>
     <Content Include="Features\Atkins.Intranet.QSE.AddWebparts\Atkins.Intranet.QSE.AddWebparts.Template.xml">
       <DependentUpon>Atkins.Intranet.QSE.AddWebparts.feature</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

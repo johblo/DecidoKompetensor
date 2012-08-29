@@ -29,6 +29,10 @@ Write-Host "Activating Rootweb features:"
 Write-Host "***********************RootWeb Sample Data*********"
 Enable-SPFeature -Identity "6297993d-59fc-43dd-9bc8-9459785a4acc" -URL $intranetUrl
 
+Write-Host "***********************jQuery*********"
+Enable-SPFeature -Identity "783ce8a6-bf49-44de-b4ee-52812db59e2c" -URL $intranetUrl
+
+
 
 iisreset
 
@@ -46,6 +50,12 @@ Write-Host "************************************************************"
 iisreset
 
 Write-Host "Activating HR features:"
+
+
+Write-Host "***********************Create Lists*********"
+Enable-SPFeature -Identity "d6c619a0-febe-40a9-8520-b1f76d214b06" -URL $hrUrl
+
+
 Write-Host "***********************Employee-Task Event Receiver*********"
 Enable-SPFeature -Identity "08636772-0489-40fe-82bf-651ef3ec281e" -URL $hrUrl
 
@@ -56,7 +66,10 @@ Enable-SPFeature -Identity "ba6fd70d-555e-448f-9271-c87f3d354c66" -URL $hrUrl
 Write-Host "***********************HR Print List Item *********"
 Enable-SPFeature -Identity "e1aea629-4aa3-479d-b9fe-f3454f5227e6" -URL $hrUrl
 
+Write-Host "***********************jQuery*********"
+Enable-SPFeature -Identity "783ce8a6-bf49-44de-b4ee-52812db59e2c" -URL $hrUrl
 
+Write-Host "HR Features Activation Done!"
 
 
 iisreset
@@ -78,9 +91,11 @@ Write-Host "Activating QSE features:"
 Write-Host "***********************Create lists*********"
 Enable-SPFeature -Identity "5fda185d-59ca-4101-955b-c9f28dd3acd7" -URL $qseUrl
 
-Write-Host "Activating QSE features:"
 Write-Host "***********************QSE Sample Data*********"
 Enable-SPFeature -Identity "da11ccec-692a-4402-a86e-6e4a53f56742" -URL $qseUrl
+
+Write-Host "***********************jQuery*********"
+Enable-SPFeature -Identity "783ce8a6-bf49-44de-b4ee-52812db59e2c" -URL $qseUrl
 
 Write-Host "QSE Features Activation Done!"
 
@@ -97,6 +112,11 @@ $financeSubSite = New-SPWeb –url $financeUrl -name $financeTitle -template $fina
 Write-Host "Sub-site "$financeTitle" successfully created!"
 Write-Host "************************************************************"
 
+Write-Host "Activating Finance features:"
+Write-Host "***********************jQuery*********"
+Enable-SPFeature -Identity "783ce8a6-bf49-44de-b4ee-52812db59e2c" -URL $financeUrl
+
+Write-Host "Finance Features Activation Done!"
 
 
 iisreset
@@ -120,7 +140,10 @@ Write-Host "***********************Blog configuration feature*********"
 Enable-SPFeature -Identity "4612ce28-dddf-4127-bb32-40d6e34de1c7" -URL $blogUrl
 
 
+Write-Host "***********************jQuery*********"
+Enable-SPFeature -Identity "783ce8a6-bf49-44de-b4ee-52812db59e2c" -URL $blogUrl
 
+Write-Host "Blog Features Activation Done!"
 
 
 

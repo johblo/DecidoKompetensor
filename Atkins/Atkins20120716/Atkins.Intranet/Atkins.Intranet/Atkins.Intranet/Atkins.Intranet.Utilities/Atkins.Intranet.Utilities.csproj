@@ -53,12 +53,20 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.SharePoint" />
     <Reference Include="Microsoft.SharePoint.Security" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CONTROLTEMPLATES\jQuery\jQuery.ascx.cs">
+      <DependentUpon>jQuery.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CONTROLTEMPLATES\jQuery\jQuery.ascx.designer.cs">
+      <DependentUpon>jQuery.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="HelperUtils\FeatureUtility.cs" />
     <Compile Include="HelperUtils\ListUtility.cs" />
     <Compile Include="HelperUtils\SecurityUtitlity.cs" />
@@ -67,7 +75,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="CONTROLTEMPLATES\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{ab28978c-eb6a-41c9-9294-937f5349c45f}</SharePointProjectItemId>
+    </None>
+    <None Include="Features\jQuery\jQuery.feature">
+      <FeatureId>{e71111c0-a907-4304-af6c-46fc10f6bdf6}</FeatureId>
+    </None>
+    <None Include="jQueryElement\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{5637cd95-97d1-4bf3-9556-1c9c5b670900}</SharePointProjectItemId>
+    </None>
     <None Include="key.snk" />
+    <None Include="Layouts\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{988be45f-c6a8-42ed-a4b6-3b962d35e10e}</SharePointProjectItemId>
+    </None>
     <None Include="Package\Package.package">
       <PackageId>{b343675e-eec3-47d1-a8c3-860c91aa18d6}</PackageId>
     </None>
@@ -75,8 +95,17 @@
       <DependentUpon>Package.package</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Features\" />
+    <Content Include="CONTROLTEMPLATES\jQuery\jQuery.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Features\jQuery\jQuery.Template.xml">
+      <DependentUpon>jQuery.feature</DependentUpon>
+    </Content>
+    <Content Include="jQueryElement\Elements.xml" />
+    <Content Include="Layouts\Atkins.Intranet.Utilities\Custom.js" />
+    <Content Include="Layouts\Atkins.Intranet.Utilities\jquery-1.8.0.min.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" />

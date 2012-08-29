@@ -79,6 +79,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\Atkins.Intranet.Portal\AtkinsMan.png" />
+    <Content Include="Images\Atkins.Intranet.Portal\Footer-left.jpg" />
+    <Content Include="Images\Atkins.Intranet.Portal\Footer-middle.jpg" />
+    <Content Include="Images\Atkins.Intranet.Portal\Footer-right.jpg" />
     <Content Include="Images\Atkins.Intranet.Portal\icons\announcement.png" />
     <Content Include="Images\Atkins.Intranet.Portal\icons\chart.png" />
     <Content Include="Images\Atkins.Intranet.Portal\icons\check.gif" />
@@ -89,6 +92,7 @@
     <Content Include="Images\Atkins.Intranet.Portal\icons\plug_extension.png" />
     <Content Include="Images\Atkins.Intranet.Portal\icons\task_my.png" />
     <Content Include="Images\Atkins.Intranet.Portal\icons\warning.png" />
+    <Content Include="Layouts\Atkins.Intranet.Portal\CSS\AtkinsCommon.css" />
     <Content Include="Layouts\Atkins.Intranet.Portal\CSS\AtkinsSubSiteMasterPage.css" />
     <Content Include="Layouts\Atkins.Intranet.Portal\CSS\AtkinsSubSitePageLayout.css" />
     <Content Include="Layouts\Atkins.Intranet.Portal\CSS\AtkinsWebParts.css" />

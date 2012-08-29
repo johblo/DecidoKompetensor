@@ -84,6 +84,7 @@ namespace Atkins.Intranet.HR.Features.Lists
             Guid documentLibraryGuid = currentWeb.Lists.Add(CustomListHelper.ReturnTrimmedString(EmployeeHandBookDocuments.ListName), EmployeeHandBookDocuments.ListDescription, SPListTemplateType.DocumentLibrary);
             SPList employeeHandBookDocuments = currentWeb.Lists[documentLibraryGuid];
             employeeHandBookDocuments.Title = EmployeeHandBookDocuments.ListName;
+            employeeHandBookDocuments.OnQuickLaunch = true;
             employeeHandBookDocuments.Update();
 
             using (SPSite site = new SPSite(currentWeb.Site.ID))
@@ -117,6 +118,7 @@ namespace Atkins.Intranet.HR.Features.Lists
             Guid employeeHandbookListGuid = currentWeb.Lists.Add(CustomListHelper.ReturnTrimmedString(EmployeeHandbook.ListName), EmployeeHandbook.ListDescription, SPListTemplateType.GenericList);
             SPList employeeHandbookList = currentWeb.Lists[employeeHandbookListGuid];
             employeeHandbookList.Title = EmployeeHandbook.ListName;
+            employeeHandbookList.OnQuickLaunch = true;
             employeeHandbookList.EnableVersioning = true;
             employeeHandbookList.Update();
 
@@ -240,6 +242,7 @@ namespace Atkins.Intranet.HR.Features.Lists
             Guid templateListGuid = currentWeb.Lists.Add(CustomListHelper.ReturnTrimmedString(IntroductionTemplateFields.ListName), IntroductionTemplateFields.ListDescription, SPListTemplateType.GenericList);
             SPList templateList = currentWeb.Lists[templateListGuid];
             templateList.Title = IntroductionTemplateFields.ListName;
+            templateList.OnQuickLaunch = true;
             templateList.Update();
             
             using (SPSite site = new SPSite(currentWeb.Site.ID))
@@ -313,6 +316,7 @@ namespace Atkins.Intranet.HR.Features.Lists
             Guid contactListGuid = currentWeb.Lists.Add(CustomListHelper.ReturnTrimmedString(EmployeeContactFields.ListName), EmployeeContactFields.ListDescription, SPListTemplateType.GenericList); //SPListTemplateType.Contacts);
             employeeList = currentWeb.Lists[contactListGuid];
             employeeList.Title = EmployeeContactFields.ListName;
+            employeeList.OnQuickLaunch = true;
             employeeList.NavigateForFormsPages = true;
             employeeList.Update();
             
@@ -445,6 +449,7 @@ namespace Atkins.Intranet.HR.Features.Lists
             Guid taskListGuid = currentWeb.Lists.Add(CustomListHelper.ReturnTrimmedString(IntroductionTasksFields.ListName), IntroductionTasksFields.ListDescription, SPListTemplateType.GenericList); 
             SPList taskList = currentWeb.Lists[taskListGuid];
             taskList.Title = IntroductionTasksFields.ListName;
+            taskList.OnQuickLaunch = true;
             taskList.Update();
 
             using (SPSite site = new SPSite(currentWeb.Site.ID))
@@ -559,6 +564,7 @@ namespace Atkins.Intranet.HR.Features.Lists
             Guid documentLibraryGuid = currentWeb.Lists.Add(CustomListHelper.ReturnTrimmedString(EmployeeDocuments.ListName), EmployeeDocuments.ListDescription, SPListTemplateType.DocumentLibrary);
             SPList employeeDocuments = currentWeb.Lists[documentLibraryGuid];
             employeeDocuments.Title = EmployeeDocuments.ListName;
+            employeeDocuments.OnQuickLaunch = true;
             employeeDocuments.Update();
 
             using (SPSite site = new SPSite(currentWeb.Site.ID))

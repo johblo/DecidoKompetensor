@@ -1,0 +1,20 @@
+﻿/*Footer */
+.footer
+{
+    text-align: center; 
+    color:White;
+    font-size:10px;
+    font-weight:bold;
+}
+.footerMiddleSection
+{
+    /*padding-bottom: 10px; */
+    padding-top:8px;
+    margin-bottom:2px;
+    height:26px;
+    
+    
+    color: white; 
+    font-size: 10px;
+    background-color:#304860;
+}

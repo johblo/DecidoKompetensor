@@ -123,12 +123,10 @@
         <List FeatureId="00BFEA71-EC85-4903-972D-EBE475780106"
           Type="106" Title="$Resources:core,calendarList;"
           Url="$Resources:core,lists_Folder;/$Resources:core,calendar_Folder;"
-          QuickLaunchUrl="$Resources:core,lists_Folder;/$Resources:core,calendar_Folder;/Calendar.aspx"
           EmailAlias="$Resources:core,calendar_EmailAlias;" />
         <List FeatureId="00BFEA71-A83E-497E-9BA0-7A5C597D0107"
           Type="107" Title="$Resources:core,taskList;"
-          Url="$Resources:core,lists_Folder;/$Resources:core,tasks_Folder;"
-          QuickLaunchUrl="$Resources:core,lists_Folder;/$Resources:core,tasks_Folder;/AllItems.aspx" />
+          Url="$Resources:core,lists_Folder;/$Resources:core,tasks_Folder;"/>
       </Lists>
 
 
@@ -171,9 +169,11 @@
         <Feature ID="541F5F57-C847-4e16-B59A-B31E90E6F9EA">
           <Properties xmlns="http://schemas.microsoft.com/sharepoint/">
             <Property Key="InheritGlobalNavigation" Value="true" />
-            <Property Key="ShowSiblings" Value="true" />
+            <Property Key="ShowSiblings" Value="false" />
             <Property Key="IncludeSubSites" Value="true" />
             <Property Key="IncludePages" Value="false" />
+            <Property Key="InheritCurrentNavigation" Value="false"/>
+            <Property Key="IncludeInCurrentNavigation" Value="false"/>
           </Properties>
         </Feature>
 
@@ -185,8 +185,8 @@
         <!-- Enable Metadata navigation Feature -->
         <Feature ID="7201d6a4-a5d3-49a1-8c19-19c4bac6e668" />
 
-        <!--HR Lists-->
-        <Feature ID="d6c619a0-febe-40a9-8520-b1f76d214b06"></Feature>
+        
+        
         <!--<Feature ID="08636772-0489-40fe-82bf-651ef3ec281e"></Feature>-->
         
       </WebFeatures>
@@ -216,13 +216,11 @@
           Url="$Resources:core,lists_Folder;/$Resources:core,links_Folder;" />
         <List FeatureId="00BFEA71-EC85-4903-972D-EBE475780106"
           Type="106" Title="$Resources:core,calendarList;"
-          Url="$Resources:core,lists_Folder;/$Resources:core,calendar_Folder;"
-          QuickLaunchUrl="$Resources:core,lists_Folder;/$Resources:core,calendar_Folder;/Calendar.aspx"
+          Url="$Resources:core,lists_Folder;/$Resources:core,calendar_Folder;"          
           EmailAlias="$Resources:core,calendar_EmailAlias;" />
         <List FeatureId="00BFEA71-A83E-497E-9BA0-7A5C597D0107"
           Type="107" Title="$Resources:core,taskList;"
-          Url="$Resources:core,lists_Folder;/$Resources:core,tasks_Folder;"
-          QuickLaunchUrl="$Resources:core,lists_Folder;/$Resources:core,tasks_Folder;/AllItems.aspx" />
+          Url="$Resources:core,lists_Folder;/$Resources:core,tasks_Folder;"/>
       </Lists>
 
 
@@ -265,9 +263,11 @@
         <Feature ID="541F5F57-C847-4e16-B59A-B31E90E6F9EA">
           <Properties xmlns="http://schemas.microsoft.com/sharepoint/">
             <Property Key="InheritGlobalNavigation" Value="true" />
-            <Property Key="ShowSiblings" Value="true" />
+            <Property Key="ShowSiblings" Value="false" />
             <Property Key="IncludeSubSites" Value="true" />
             <Property Key="IncludePages" Value="false" />
+            <Property Key="InheritCurrentNavigation" Value="false"/>
+            <Property Key="IncludeInCurrentNavigation" Value="false"/>
           </Properties>
         </Feature>
 
@@ -306,12 +306,10 @@
         <List FeatureId="00BFEA71-EC85-4903-972D-EBE475780106"
           Type="106" Title="$Resources:core,calendarList;"
           Url="$Resources:core,lists_Folder;/$Resources:core,calendar_Folder;"
-          QuickLaunchUrl="$Resources:core,lists_Folder;/$Resources:core,calendar_Folder;/Calendar.aspx"
           EmailAlias="$Resources:core,calendar_EmailAlias;" />
         <List FeatureId="00BFEA71-A83E-497E-9BA0-7A5C597D0107"
           Type="107" Title="$Resources:core,taskList;"
-          Url="$Resources:core,lists_Folder;/$Resources:core,tasks_Folder;"
-          QuickLaunchUrl="$Resources:core,lists_Folder;/$Resources:core,tasks_Folder;/AllItems.aspx" />
+          Url="$Resources:core,lists_Folder;/$Resources:core,tasks_Folder;" />
       </Lists>
 
 
@@ -354,9 +352,12 @@
         <Feature ID="541F5F57-C847-4e16-B59A-B31E90E6F9EA">
           <Properties xmlns="http://schemas.microsoft.com/sharepoint/">
             <Property Key="InheritGlobalNavigation" Value="true" />
-            <Property Key="ShowSiblings" Value="true" />
+            <Property Key="ShowSiblings" Value="false" />
             <Property Key="IncludeSubSites" Value="true" />
             <Property Key="IncludePages" Value="false" />
+            <Property Key="InheritCurrentNavigation" Value="false"/>
+            <Property Key="IncludeInCurrentNavigation" Value="false"/>
+            
           </Properties>
         </Feature>
 

@@ -4,6 +4,7 @@
     <Assembly Location="Atkins.Intranet.Portal.dll" DeploymentTarget="GlobalAssemblyCache" />
   </Assemblies>
   <TemplateFiles>
+    <TemplateFile Location="Layouts\Atkins.Intranet.Portal\CSS\AtkinsCommon.css" />
     <TemplateFile Location="Layouts\Atkins.Intranet.Portal\CSS\AtkinsSubSiteMasterPage.css" />
     <TemplateFile Location="Layouts\Atkins.Intranet.Portal\CSS\AtkinsSubSitePageLayout.css" />
     <TemplateFile Location="Layouts\Atkins.Intranet.Portal\CSS\AtkinsWebParts.css" />
@@ -13,6 +14,9 @@
     <TemplateFile Location="Layouts\Atkins.Intranet.Portal\CSS\Blog.css" />
     <TemplateFile Location="Layouts\Atkins.Intranet.Portal\Javascript\stickyFooter.js" />
     <TemplateFile Location="Images\Atkins.Intranet.Portal\AtkinsMan.png" />
+    <TemplateFile Location="Images\Atkins.Intranet.Portal\Footer-left.jpg" />
+    <TemplateFile Location="Images\Atkins.Intranet.Portal\Footer-middle.jpg" />
+    <TemplateFile Location="Images\Atkins.Intranet.Portal\Footer-right.jpg" />
     <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\announcement.png" />
     <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\chart.png" />
     <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\check.gif" />
