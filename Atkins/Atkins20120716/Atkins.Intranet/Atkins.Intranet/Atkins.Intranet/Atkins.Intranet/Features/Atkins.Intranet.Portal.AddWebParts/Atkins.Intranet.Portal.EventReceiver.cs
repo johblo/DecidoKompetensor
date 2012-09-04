@@ -42,6 +42,17 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Portal.AddWebParts
             }
             WebPartUtility.AddAnnouncementCQWP(web,  Announcements.webPartTitle, Announcements.ZoneId, 1, Announcements.xslPath, Announcements.webpartItemStyle,"",Announcements.webpartTitleImageUrl);
 
+
+            //ADD Calendar Webpart
+
+            WebPartUtility.AddXSLTListViewWebPart(web, web, CalendarStartSite.ListName, CalendarStartSite.webPartTitle, CalendarStartSite.webPartView, CalendarStartSite.ZoneId, 1, CalendarStartSite.webpartTitleImageUrl);
+
+
+            //ADDS PAGEVIEWER WEBPART 
+            WebPartUtility.AddPageViewWebPart(web, PageViewerHome.webPartTitle, PageViewerHome.ZoneId, 1, PageViewerHome.webpartTitleImageUrl,PageViewerHome.contentLink, Microsoft.SharePoint.WebPartPages.PathPattern.URL);
+            
+            
+
             if (contextCreated)
             {
                 HttpContext.Current = null;

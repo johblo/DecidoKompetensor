@@ -18,6 +18,7 @@
     <TemplateFile Location="Images\Atkins.Intranet.Portal\Footer-middle.jpg" />
     <TemplateFile Location="Images\Atkins.Intranet.Portal\Footer-right.jpg" />
     <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\announcement.png" />
+    <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\calendar.png" />
     <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\chart.png" />
     <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\check.gif" />
     <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\deviation.png" />

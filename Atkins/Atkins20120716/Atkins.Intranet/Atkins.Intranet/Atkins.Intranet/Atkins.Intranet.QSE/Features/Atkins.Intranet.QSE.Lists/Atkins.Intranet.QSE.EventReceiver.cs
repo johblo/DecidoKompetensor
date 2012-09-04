@@ -82,6 +82,8 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
             deviationList.Update();
             SecurityUtility.CreateListGroup(currentWeb, deviationList, QSEAdministratorsGroup.Name, QSEAdministratorsGroup.Description, QSEAdministratorsGroup.role);
             SecurityUtility.AddExistingGroupCustomDefinition(currentWeb, deviationList, currentWeb.AssociatedMemberGroup, currentWeb.Site.RootWeb.RoleDefinitions[DeviationsList.DeviationRoleDefinition]);
+            //SecurityUtility.AddExistingGroupCustomDefinition(currentWeb,deviationList, currentWeb.AssociatedOwnerGroup,currentWeb.Site.RootWeb.RoleDefinitions[
+            SecurityUtility.AddExistingGroup(currentWeb, deviationList, currentWeb.AssociatedOwnerGroup, SPRoleType.Administrator);
             using (SPSite site = new SPSite(currentWeb.Site.ID))
             {
                 SPWeb rootWeb = site.RootWeb;
@@ -320,6 +322,8 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
             SecurityUtility.CreateListGroup(currentWeb, processStepList, QSEAdministratorsGroup.Name, QSEAdministratorsGroup.Description, QSEAdministratorsGroup.role);
             //Site Members
             SecurityUtility.AddExistingGroup(currentWeb, processStepList,currentWeb.AssociatedMemberGroup,SPRoleType.Reader);
+            //administrators
+            SecurityUtility.AddExistingGroup(currentWeb, processStepList, currentWeb.AssociatedOwnerGroup, SPRoleType.Administrator);
             using (SPSite site = new SPSite(currentWeb.Site.ID))
             {
                 SPWeb rootWeb = site.RootWeb;
@@ -418,7 +422,8 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
             SecurityUtility.CreateListGroup(currentWeb, resultingDocumentsList, QSEResultingDocumentsAdministrators.Name, QSEResultingDocumentsAdministrators.Description, QSEResultingDocumentsAdministrators.role);
             //QSEAdministrators
             SecurityUtility.CreateListGroup(currentWeb, resultingDocumentsList, QSEAdministratorsGroup.Name, QSEAdministratorsGroup.Description, QSEAdministratorsGroup.role);
-            
+            //administrators
+            SecurityUtility.AddExistingGroup(currentWeb, resultingDocumentsList, currentWeb.AssociatedOwnerGroup, SPRoleType.Administrator);
             using (SPSite site = new SPSite(currentWeb.Site.ID))
             {
                 SPWeb rootWeb = site.RootWeb;
@@ -529,6 +534,8 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
             SecurityUtility.CreateListGroup(currentWeb, controllingDocumentsList, QSEAdministratorsGroup.Name, QSEAdministratorsGroup.Description, QSEAdministratorsGroup.role);
             //Membersgroup
             SecurityUtility.AddExistingGroup(currentWeb, controllingDocumentsList, currentWeb.AssociatedMemberGroup, SPRoleType.Reader);
+            //administrators
+            SecurityUtility.AddExistingGroup(currentWeb, controllingDocumentsList, currentWeb.AssociatedOwnerGroup, SPRoleType.Administrator);
 
             using (SPSite site = new SPSite(currentWeb.Site.ID))
             {

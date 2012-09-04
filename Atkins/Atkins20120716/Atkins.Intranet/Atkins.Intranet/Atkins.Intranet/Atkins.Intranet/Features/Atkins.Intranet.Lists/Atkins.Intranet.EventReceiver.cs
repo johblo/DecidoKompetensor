@@ -33,6 +33,26 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Lists
                     {
                         CreateTemplateDocumentLibraryContentTypeList(currentWeb);
                     }
+                    //LINKS LIST
+                    SPList linksList = CustomListHelper.ReturnList(currentWeb, LinksStartSite.ListName);
+                    if (linksList == null)
+                    {
+                        CreateLinksList(currentWeb);
+                    }
+
+                    //PERSONAL LINKS LIST
+                    SPList personalLinksList = CustomListHelper.ReturnList(currentWeb, PersonalLinksStartSite.ListName);
+                    if (personalLinksList == null)
+                    {
+                        CreatePersonalLinksList(currentWeb);
+                    }
+
+                    //CALENDAR LIST
+                    SPList calendarList = CustomListHelper.ReturnList(currentWeb, CalendarStartSite.ListName);
+                    if (calendarList == null)
+                    {
+                        CreateCalendarList(currentWeb);
+                    }
                 }
             }
             catch (SPException exception)
@@ -40,6 +60,44 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Lists
                 throw exception;
             }
         }
+        private static void CreateCalendarList(SPWeb currentWeb)
+        {
+            Guid listGuid = currentWeb.Lists.Add(CustomListHelper.ReturnTrimmedString(CalendarStartSite.ListName), CalendarStartSite.ListDescription, SPListTemplateType.Events);
+            SPList linksList = currentWeb.Lists[listGuid];
+
+            if (!CustomListHelper.checkIfViewExist(linksList, CalendarStartSite.webPartView))
+            {
+                CustomListHelper.CreateView(linksList, CalendarStartSite.webPartView, CustomListHelper.returnStringArray(CalendarStartSite.webPartViewFields), "", 5);
+            }
+        }
+        private static void CreatePersonalLinksList(SPWeb currentWeb)
+        {
+
+            Guid listGuid = currentWeb.Lists.Add(CustomListHelper.ReturnTrimmedString(PersonalLinksStartSite.ListName), PersonalLinksStartSite.ListDescription, SPListTemplateType.Links);
+            SPList linksList = currentWeb.Lists[listGuid];
+            if (!CustomListHelper.checkIfViewExist(linksList, PersonalLinksStartSite.webPartView))
+            {
+                CustomListHelper.CreateView(linksList, PersonalLinksStartSite.webPartView, CustomListHelper.returnStringArray(PersonalLinksStartSite.webPartViewFields), PersonalLinksStartSite.webPartQuery, 5);
+            }
+        }
+
+        private static void CreateLinksList(SPWeb currentWeb)
+        {
+
+            Guid listGuid = currentWeb.Lists.Add(CustomListHelper.ReturnTrimmedString(LinksStartSite.ListName), LinksStartSite.ListDescription, SPListTemplateType.Links);
+            SPList linksList = currentWeb.Lists[listGuid];
+            string fieldInternalName = CustomListHelper.CreateSiteColumn(currentWeb, LinksStartSite.activeField, SPFieldType.Boolean, false);
+
+            SPFieldBoolean activeField = (SPFieldBoolean)currentWeb.Fields.GetField(fieldInternalName);
+            activeField.Group = LinksStartSite.ListName;
+            activeField.Title = LinksStartSite.activeFieldDisplayName;
+            activeField.Update();
+            linksList.Fields.Add(activeField);
+            linksList.Update();
+        }
+
+
+
 
 
         private static void CreateTemplateDocumentLibraryContentTypeList(SPWeb currentWeb)

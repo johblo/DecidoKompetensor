@@ -83,6 +83,7 @@
     <Content Include="Images\Atkins.Intranet.Portal\Footer-middle.jpg" />
     <Content Include="Images\Atkins.Intranet.Portal\Footer-right.jpg" />
     <Content Include="Images\Atkins.Intranet.Portal\icons\announcement.png" />
+    <Content Include="Images\Atkins.Intranet.Portal\icons\calendar.png" />
     <Content Include="Images\Atkins.Intranet.Portal\icons\chart.png" />
     <Content Include="Images\Atkins.Intranet.Portal\icons\check.gif" />
     <Content Include="Images\Atkins.Intranet.Portal\icons\deviation.png" />

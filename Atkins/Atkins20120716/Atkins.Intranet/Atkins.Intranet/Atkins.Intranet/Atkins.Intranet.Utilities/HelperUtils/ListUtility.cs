@@ -4,6 +4,8 @@ using Microsoft.SharePoint.Taxonomy;
 using System.Linq;
 using System.Reflection;
 using System.Collections.Specialized;
+using System.Xml;
+using System.Reflection;
 
 namespace Atkins.Intranet.Utilities.HelperUtils
 {
@@ -113,6 +115,7 @@ namespace Atkins.Intranet.Utilities.HelperUtils
             StringCollection vf = new StringCollection();
             vf.AddRange(viewFields);
             SPView newView = currentList.Views.Add(viewName, vf, query, rowlimit, false, false);
+            newView.Toolbar = "";
             newView.TabularView = false;
             newView.Update();
             currentList.Update();
@@ -137,7 +140,7 @@ namespace Atkins.Intranet.Utilities.HelperUtils
             return input.Split(new char[] { ',' });
         }
     }
-
+    //OFFICES LIST
     public class OfficeFields
     {
         public const string ListName = "Offices";
@@ -159,6 +162,47 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string FaxNumberDisplayName = "Fax Number";
 
         public static readonly SPContentTypeId OfficeContentTypeId = new SPContentTypeId("0x0100A33D9AD9805788419BDAAC2CCB37509F");
+    }
+    //CALENDAR LIST
+    public class CalendarStartSite
+    {
+        public const string ListName = "Kalender";
+        public const string ListDescription = "Kalender";
+        public const string webPartTitle = "Kalender";
+        public const string webPartView = "webPartView";
+        public const string webPartViewFields = "Title,EndDate,EventDate";
+        public const string ZoneId = "Center";
+        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/calendar.png";
+    }
+    //LINKSLIST
+    public class LinksStartSite
+    {
+        public const string ListName = "Länkar";
+        public const string ListDescription = "Länkar";
+
+        public const string activeField = "linkActive";
+        public const string activeFieldDisplayName = "Active";
+
+        public const string webPartTitle = "Länkar";
+        public const string webPartView = "webPartView";
+        public const string webPartViewFields = "URL";
+        public const string ZoneId = "Center";
+        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/link.png";
+    }
+
+    //PERSONAL LINKSLIST
+    public class PersonalLinksStartSite
+    {
+        public const string ListName = "Personliga Länkar";
+        public const string ListDescription = "Personliga Länkar";
+
+        
+        public const string webPartTitle = "Personliga Länkar";
+        public const string webPartView = "webPartView";
+        public const string webPartViewFields = "URL";
+        public const string webPartQuery = "";
+        public const string ZoneId = "Center";
+        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/link.png";
     }
 
     public class IntroductionTemplateFields
@@ -493,10 +537,18 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string xslPath = "/Sites/Intranet/Style Library/XSL Style Sheets/customItem.xsl";
         public const string ZoneId = "Left";
         public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/news.png";
-        public const string blogpostCategories = "HR,QSE,Finans";
+        public const string blogpostCategories = "HR,QSE,Finans,Marknad,Kontor,IT,Teknik,Rekrytering";
         public const string categoryFilterHR = "HR";
         public const string categoryFilterQSE = "QSE";
         public const string categoryFilterFinance = "Finans";
+
+        public const string categoryFilterMarketing = "Marknad";
+        public const string categoryFilterOffices = "Kontor";
+        public const string categoryFilterIT = "IT";
+
+        public const string categoryFilterTech = "Teknik";
+        public const string categoryFilterRecruit = "Rekrytering";
+        
         
     }
     public class HideTitleBlog
@@ -540,5 +592,12 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string resourceFile = "core";
         public const uint resourceLCID = 1053;
         public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/link.png";
+    }
+    public class PageViewerHome
+    {
+        public const string webPartTitle = "Börskurs";
+        public const string contentLink = "http://ir2.flife.de/data/atkins/share-ticker.php";
+        public const string ZoneId = "Center";
+        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/announcement.png";
     }
 }

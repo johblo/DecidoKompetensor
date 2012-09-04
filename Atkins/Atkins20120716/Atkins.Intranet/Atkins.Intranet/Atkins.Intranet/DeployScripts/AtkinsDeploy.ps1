@@ -3,7 +3,7 @@ $culture = new-object "System.Globalization.CultureInfo" $lcid
 [System.Threading.Thread]::CurrentThread.CurrentUICulture = $culture
 
 $intranetUrl = "http://ws2008r2efen64:6000/sites/intranet"
-$intranetTitle = "Home"
+$intranetTitle = "Start"
 $administratorAccount = "TRETTON37\administrator"
 
 $rootTemplate = Get-SPWebTemplate "Atkins.Intranet.Portal#0"
@@ -37,7 +37,7 @@ Enable-SPFeature -Identity "783ce8a6-bf49-44de-b4ee-52812db59e2c" -URL $intranet
 iisreset
 
 $hrUrl= "http://ws2008r2efen64:6000/sites/intranet/HR"
-$hrTitle = "HR"
+$hrTitle = "Medarbetare"
 
 $hrTemplate= Get-SPWebTemplate "Atkins.Intranet.Portal#1"
 iisreset

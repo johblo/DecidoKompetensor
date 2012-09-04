@@ -8,12 +8,68 @@ using Microsoft.SharePoint.WebPartPages;
 using System.Collections.Specialized;
 using System.Xml;
 using Microsoft.SharePoint.Publishing.WebControls;
+using Microsoft.SharePoint.Portal.WebControls;
 
 
 namespace Atkins.Intranet.Utilities.HelperUtils
 {
     public class WebPartUtility
     {
+        public static void AddPageViewWebPart(SPWeb currentWeb, string title, string zoneId, int zoneIndex, string titleImageUrl,string contentLink,PathPattern sourceType)
+        {
+            string startPage = currentWeb.RootFolder.WelcomePage;
+            string fullUrlOfStartPage = currentWeb.Url + "/" + startPage;
+            SPFile startPageFile = currentWeb.GetFile(fullUrlOfStartPage);
+            
+            if (startPageFile.Level != SPFileLevel.Checkout)
+                startPageFile.CheckOut();
+            SPLimitedWebPartManager manager = currentWeb.GetLimitedWebPartManager(startPage, PersonalizationScope.Shared);
+            //ListViewWebPart webPart = new ListViewWebPart();
+            PageViewerWebPart webPart = new PageViewerWebPart();
+            webPart.Title = title;
+            webPart.ContentLink = contentLink;
+            webPart.SourceType = sourceType;
+            if (!string.IsNullOrEmpty(titleImageUrl))
+                webPart.TitleIconImageUrl = titleImageUrl;
+            if (!FindWebPart(manager, title))
+                manager.AddWebPart(webPart, zoneId, zoneIndex);
+            if (startPageFile.Level == SPFileLevel.Checkout)
+                startPageFile.CheckIn("Added webpart");
+            
+            currentWeb.Update();
+        }
+        /*
+        public static void AddRSSViewWebPart(SPWeb currentWeb, string title, string zoneId, int zoneIndex, string titleImageUrl)
+        {
+            string startPage = currentWeb.RootFolder.WelcomePage;
+            string fullUrlOfStartPage = currentWeb.Url + "/" + startPage;
+            SPFile startPageFile = currentWeb.GetFile(fullUrlOfStartPage);
+
+            if (startPageFile.Level != SPFileLevel.Checkout)
+                startPageFile.CheckOut();
+            SPLimitedWebPartManager manager = currentWeb.GetLimitedWebPartManager(startPage, PersonalizationScope.Shared);
+            RSSAggregatorWebPart webPart = new RSSAggregatorWebPart();
+            
+            webPart.Title = title;
+            webPart.FeedUrl = "http://www.infrastrukturnyheter.se/rss.xml";
+            webPart.FeedLimit = 10;
+            
+            
+            if (!string.IsNullOrEmpty(titleImageUrl))
+                webPart.TitleIconImageUrl = titleImageUrl;
+            if (!FindWebPart(manager, title))
+                manager.AddWebPart(webPart, zoneId, zoneIndex);
+            if (startPageFile.Level == SPFileLevel.Checkout)
+                startPageFile.CheckIn("Added webpart");
+
+            currentWeb.Update();
+        }
+        */
+   
+
+
+
+
         public static void AddListViewWebPart(SPWeb currentWeb,SPWeb sourceWeb,string listName,string title,string viewName,string zoneId,int zoneIndex,string titleImageUrl)
         {
             string startPage = currentWeb.RootFolder.WelcomePage;
@@ -46,6 +102,46 @@ namespace Atkins.Intranet.Utilities.HelperUtils
             }
             currentWeb.Update();
         }
+
+        public static void AddXSLTListViewWebPart(SPWeb currentWeb, SPWeb sourceWeb, string listName, string title, string viewName, string zoneId, int zoneIndex, string titleImageUrl)
+        {
+            string startPage = currentWeb.RootFolder.WelcomePage;
+            string fullUrlOfStartPage = currentWeb.Url + "/" + startPage;
+            SPFile startPageFile = currentWeb.GetFile(fullUrlOfStartPage);
+
+            SPList currentList = sourceWeb.Lists.TryGetList(listName);
+            if (currentList != null)
+            {
+                if (startPageFile.Level != SPFileLevel.Checkout)
+                    startPageFile.CheckOut();
+                SPLimitedWebPartManager manager = currentWeb.GetLimitedWebPartManager(startPage, PersonalizationScope.Shared);
+
+                XsltListViewWebPart webPart = new XsltListViewWebPart();
+                webPart.Title = title;
+                webPart.WebId = sourceWeb.ID;
+                if (!string.IsNullOrEmpty(titleImageUrl))
+                    webPart.TitleIconImageUrl = titleImageUrl;
+                webPart.ListName = currentList.ID.ToString();
+                
+                if (CustomListHelper.checkIfViewExist(currentList, viewName))
+                {
+                    SPView webPartView = currentList.Views[viewName];
+                    webPart.ViewGuid = webPartView.ID.ToString("B").ToUpper();
+                    if (!FindWebPart(manager, title))
+                    {
+                        manager.AddWebPart(webPart, zoneId, zoneIndex);
+                       
+                    }
+
+                }
+                if (startPageFile.Level == SPFileLevel.Checkout)
+                    startPageFile.CheckIn("Added webpart");
+            }
+            currentWeb.Update();
+        }
+
+
+
         public static void AddContentEditorWebPart(SPWeb currentWeb, string title, string zoneId, int zoneIndex,string content)
         {
             string startPage = "default.aspx";
@@ -238,6 +334,61 @@ namespace Atkins.Intranet.Utilities.HelperUtils
             }
             currentWeb.Update();
         }
+        //Method to Set the Tool bar type      
+        public static void SetToolbarType(SPView spView, String toolBarType)      
+        {          
+            spView.GetType().InvokeMember("EnsureFullBlownXmlDocument", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.InvokeMethod, null, spView, null, System.Globalization.CultureInfo.CurrentCulture);   
+            System.Reflection.PropertyInfo nodeProp = spView.GetType().GetProperty("Node", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);       
+            XmlNode node = nodeProp.GetValue(spView, null) as XmlNode;   
+            XmlNode toolbarNode = node.SelectSingleNode("Toolbar");       
+            if (toolbarNode != null)    
+            {         
+                toolbarNode.Attributes["Type"].Value = toolBarType;      
+                // If the toolbartype is Freeform (i.e. Summary Toolbar) then we need to manually        
+                // add some CAML to get it to work.       
+                if (String.Compare(toolBarType, "Freeform", true, System.Globalization.CultureInfo.InvariantCulture) == 0)          
+                {          
+                    string newItemString = "";    
+                    XmlAttribute positionNode = toolbarNode.OwnerDocument.CreateAttribute("Position");          
+                    positionNode.Value = "After";               
+                    toolbarNode.Attributes.Append(positionNode);                
+                    switch (spView.ParentList.BaseTemplate)            
+                    {                   
+                        case SPListTemplateType.Announcements:     
+                            newItemString = "announcement";                
+                            break;                     
+                        case SPListTemplateType.Events:                 
+                            newItemString = "event";                    
+                            break;                   
+                        case SPListTemplateType.Tasks:        
+                            newItemString = "task";              
+                            break;                  
+                        case SPListTemplateType.DiscussionBoard:    
+                            newItemString = "discussion";                  
+                            break;                
+                        case SPListTemplateType.Links:             
+                            newItemString = "link";               
+                            break;            
+                        case SPListTemplateType.GenericList:       
+                            newItemString = "item";                  
+                            break;             
+                        case SPListTemplateType.DocumentLibrary:    
+                            newItemString = "document";              
+                            break;              
+                        default:               
+                            newItemString = "item";        
+                            break;             
+                    }                
+                    if (spView.ParentList.BaseType == SPBaseType.DocumentLibrary)  
+                    {                    
+                        newItemString = "document";         
+                    }                  
+                    // Add the CAML    
+                    toolbarNode.InnerXml = @"<IfHasRights><RightsChoices><RightsGroup PermAddListItems=""required"" /></RightsChoices><Then><HTML><![CDATA[ <table width=100% cellpadding=0 cellspacing=0 border=0 > <tr> <td colspan=""2"" class=""ms-partline""><IMG   src=""/_layouts/images/blank.gif"" width=1 height=1 alt=""""></td> </tr> <tr> <td class=""ms-addnew"" style=""padding-bottom: 3px""> <img src=""/_layouts/images/rect.gif"" alt="""">&nbsp;<a class=""ms-addnew"" ID=""idAddNewItem"" href=""]]></HTML><URL Cmd=""New"" /><HTML><![CDATA["" ONCLICK=""BLOCKED SCRIPTNewItem(']]></HTML><URL Cmd=""New"" /><HTML><![CDATA[', true);BLOCKED SCRIPTreturn false;"" target=""_self"">]]></HTML><HTML>Add new " + newItemString + @"</HTML><HTML><![CDATA[</a> </td> </tr> <tr><td><IMG src=""/_layouts/images/blank.gif"" width=1 height=5 alt=""""></td></tr> </table>]]></HTML></Then></IfHasRights>";           
+                }               spView.Update();       
+            }     
+        }  
+    
 
        
        

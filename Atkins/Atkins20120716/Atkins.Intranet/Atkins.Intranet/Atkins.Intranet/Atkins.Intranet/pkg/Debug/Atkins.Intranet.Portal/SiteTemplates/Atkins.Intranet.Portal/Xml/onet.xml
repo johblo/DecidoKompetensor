@@ -38,9 +38,15 @@
       <Lists>
         <List FeatureId="00BFEA71-D1CE-42de-9C63-A44004CE0104"
           Type="104" Title="$Resources:core,announceList;"
-          Url="$Resources:core,lists_Folder;/$Resources:core,announce_Folder;">
-        </List>
+          Url="$Resources:core,lists_Folder;/$Resources:core,announce_Folder;"/>
+
+        <List FeatureId="00BFEA71-2062-426C-90BF-714C59600103"
+         Type="103" Title="Personliga Länkar"
+         Url="$Resources:core,lists_Folder;/$Resources:core,links_Folder;" />
+          
+        
       </Lists>
+      
       <SiteFeatures>
         <!-- Publishing Prerequisites -->
         <Feature ID="A392DA98-270B-4e85-9769-04C0FDE267AA" />

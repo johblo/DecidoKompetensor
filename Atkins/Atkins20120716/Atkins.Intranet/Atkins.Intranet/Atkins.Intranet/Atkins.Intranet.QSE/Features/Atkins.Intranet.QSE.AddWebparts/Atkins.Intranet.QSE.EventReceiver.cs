@@ -35,8 +35,8 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.AddWebparts
                 HttpContext.Current.Items["HttpHandlerSPWeb"] = web;
                 contextCreated = true;
             }
-
-            WebPartUtility.AddListViewWebPart(web, web,DeviationsList.ListName,DeviationsList.webPartTitle, DeviationsList.webPartView, DeviationsList.ZoneId, 1,DeviationsList.webpartTitleImageUrl);
+            WebPartUtility.AddXSLTListViewWebPart(web, web, DeviationsList.ListName, DeviationsList.webPartTitle, DeviationsList.webPartView, DeviationsList.ZoneId, 1, DeviationsList.webpartTitleImageUrl);
+            //WebPartUtility.AddListViewWebPart(web, web,DeviationsList.ListName,DeviationsList.webPartTitle, DeviationsList.webPartView, DeviationsList.ZoneId, 1,DeviationsList.webpartTitleImageUrl);
             WebPartUtility.AddListViewWebPart(web, web, SPUtility.GetLocalizedString(QSELinks.ListName, QSELinks.resourceFile, QSELinks.resourceLCID), QSELinks.webPartTitle, QSELinks.webPartView, QSELinks.ZoneId, 1,QSELinks.webpartTitleImageUrl);
             WebPartUtility.AddRelevantDocuments(web, RelevantDocuments.webPartTitle, RelevantDocuments.ZoneId, 1,RelevantDocuments.webpartTitleImageUrl);
             WebPartUtility.AddLastCreatedDocuments(web, LastAddedModiefiedDocuments.webPartTitle, LastAddedModiefiedDocuments.ZoneId, 2, "", "",LastAddedModiefiedDocuments.webpartTitleImageUrl);

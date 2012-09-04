@@ -36,6 +36,8 @@ namespace Atkins.Intranet.HR.Features.Atkins.Intranet.HR.AddWebparts
             }
             WebPartUtility.AddListViewWebPart(web,web, EmployeeContactFields.ListName,EmployeeContactFields.webPartTitle, EmployeeContactFields.webPartView, EmployeeContactFields.ZoneId, 2,EmployeeContactFields.webpartTitleImageUrl);
             WebPartUtility.AddListViewWebPart(web, web, IntroductionTasksFields.ListName, IntroductionTasksFields.webPartTitle, IntroductionTasksFields.webPartView, IntroductionTasksFields.ZoneId, 1, IntroductionTasksFields.webpartTitleImageUrl);
+            
+            
             //BLOG WEBPART FILTER HR CATEGORY
             using (SPWeb sourceWeb = web.Site.AllWebs[BlogPosts.webName])
             {
