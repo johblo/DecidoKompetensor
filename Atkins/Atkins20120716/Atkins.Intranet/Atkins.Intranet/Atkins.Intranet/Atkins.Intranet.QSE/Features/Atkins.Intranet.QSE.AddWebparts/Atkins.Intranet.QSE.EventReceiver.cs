@@ -35,17 +35,20 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.AddWebparts
                 HttpContext.Current.Items["HttpHandlerSPWeb"] = web;
                 contextCreated = true;
             }
-            WebPartUtility.AddXSLTListViewWebPart(web, web, DeviationsList.ListName, DeviationsList.webPartTitle, DeviationsList.webPartView, DeviationsList.ZoneId, 1, DeviationsList.webpartTitleImageUrl);
-            //WebPartUtility.AddListViewWebPart(web, web,DeviationsList.ListName,DeviationsList.webPartTitle, DeviationsList.webPartView, DeviationsList.ZoneId, 1,DeviationsList.webpartTitleImageUrl);
-            WebPartUtility.AddListViewWebPart(web, web, SPUtility.GetLocalizedString(QSELinks.ListName, QSELinks.resourceFile, QSELinks.resourceLCID), QSELinks.webPartTitle, QSELinks.webPartView, QSELinks.ZoneId, 1,QSELinks.webpartTitleImageUrl);
-            WebPartUtility.AddRelevantDocuments(web, RelevantDocuments.webPartTitle, RelevantDocuments.ZoneId, 1,RelevantDocuments.webpartTitleImageUrl);
-            WebPartUtility.AddLastCreatedDocuments(web, LastAddedModiefiedDocuments.webPartTitle, LastAddedModiefiedDocuments.ZoneId, 2, "", "",LastAddedModiefiedDocuments.webpartTitleImageUrl);
+            //QSE LINKS
+            WebPartUtility.AddXSLTListViewWebPart(web, web, SPUtility.GetLocalizedString(QSELinks.ListName, QSELinks.resourceFile, QSELinks.resourceLCID), QSELinks.webPartTitle, QSELinks.webPartView, QSELinks.ZoneId, 1, QSELinks.webpartTitleImageUrl);
+            //DEVIATION
+            WebPartUtility.AddXSLTListViewWebPart(web, web, DeviationsList.ListName, DeviationsList.webPartTitle, DeviationsList.webPartView, DeviationsList.ZoneId, 2, DeviationsList.webpartTitleImageUrl);
+            
             //BLOG WEBPART FILTER QSE CATEGORY
             using (SPWeb sourceWeb = web.Site.AllWebs[BlogPosts.webName])
             {
-
-                WebPartUtility.AddBlogWebpart(web, sourceWeb, BlogPosts.ListName, BlogPosts.webPartTitle, BlogPosts.ZoneId, 3, BlogPosts.xslPath, BlogPosts.webpartItemStyle, BlogPosts.webPartViewFields, BlogPosts.webpartTitleImageUrl, BlogPosts.categoryFilterQSE);
+                WebPartUtility.AddBlogWebpart(web, sourceWeb, BlogPosts.ListName, BlogPosts.webPartTitle, BlogPosts.ZoneId, 1, BlogPosts.xslPath, BlogPosts.webpartItemStyle, BlogPosts.webPartViewFields, BlogPosts.webpartTitleImageUrl, BlogPosts.categoryFilterQSE);
             }
+            //LAST ADDED DOCUMENTS
+            WebPartUtility.AddLastCreatedDocuments(web, LastAddedModiefiedDocuments.webPartTitle, LastAddedModiefiedDocuments.ZoneId, 2, "", "", LastAddedModiefiedDocuments.webpartTitleImageUrl);
+            //RELEVANT DOCUMENTS
+            WebPartUtility.AddRelevantDocuments(web, RelevantDocuments.webPartTitle, RelevantDocuments.ZoneId, 3, RelevantDocuments.webpartTitleImageUrl);
             if (contextCreated)
             {
                 HttpContext.Current = null;

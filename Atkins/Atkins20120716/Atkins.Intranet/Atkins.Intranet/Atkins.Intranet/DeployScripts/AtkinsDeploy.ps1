@@ -29,8 +29,7 @@ Write-Host "Activating Rootweb features:"
 Write-Host "***********************RootWeb Sample Data*********"
 Enable-SPFeature -Identity "6297993d-59fc-43dd-9bc8-9459785a4acc" -URL $intranetUrl
 
-Write-Host "***********************jQuery*********"
-Enable-SPFeature -Identity "783ce8a6-bf49-44de-b4ee-52812db59e2c" -URL $intranetUrl
+
 
 
 
@@ -66,8 +65,6 @@ Enable-SPFeature -Identity "ba6fd70d-555e-448f-9271-c87f3d354c66" -URL $hrUrl
 Write-Host "***********************HR Print List Item *********"
 Enable-SPFeature -Identity "e1aea629-4aa3-479d-b9fe-f3454f5227e6" -URL $hrUrl
 
-Write-Host "***********************jQuery*********"
-Enable-SPFeature -Identity "783ce8a6-bf49-44de-b4ee-52812db59e2c" -URL $hrUrl
 
 Write-Host "HR Features Activation Done!"
 
@@ -94,8 +91,6 @@ Enable-SPFeature -Identity "5fda185d-59ca-4101-955b-c9f28dd3acd7" -URL $qseUrl
 Write-Host "***********************QSE Sample Data*********"
 Enable-SPFeature -Identity "da11ccec-692a-4402-a86e-6e4a53f56742" -URL $qseUrl
 
-Write-Host "***********************jQuery*********"
-Enable-SPFeature -Identity "783ce8a6-bf49-44de-b4ee-52812db59e2c" -URL $qseUrl
 
 Write-Host "QSE Features Activation Done!"
 
@@ -112,12 +107,61 @@ $financeSubSite = New-SPWeb –url $financeUrl -name $financeTitle -template $fina
 Write-Host "Sub-site "$financeTitle" successfully created!"
 Write-Host "************************************************************"
 
-Write-Host "Activating Finance features:"
-Write-Host "***********************jQuery*********"
-Enable-SPFeature -Identity "783ce8a6-bf49-44de-b4ee-52812db59e2c" -URL $financeUrl
 
-Write-Host "Finance Features Activation Done!"
 
+
+iisreset
+
+$marketingUrl= "http://ws2008r2efen64:6000/sites/intranet/Marketing"
+$marketingTitle = "Marknad"
+
+$marketingTemplate= Get-SPWebTemplate "Atkins.Intranet.Portal#4"
+iisreset
+
+Write-Host "Creating Sub-Site: "$marketingTitle
+$marketingSubSite = New-SPWeb –url $marketingUrl -name $marketingTitle -template $marketingTemplate -Language 1053
+Write-Host "Sub-site "$marketingTitle" successfully created!"
+Write-Host "************************************************************"
+
+iisreset
+
+$officeUrl= "http://ws2008r2efen64:6000/sites/intranet/Office"
+$officeTitle = "Kontor"
+
+$officeTemplate= Get-SPWebTemplate "Atkins.Intranet.Portal#4"
+iisreset
+
+Write-Host "Creating Sub-Site: "$officeTitle
+$officeSubSite = New-SPWeb –url $officeUrl -name $officeTitle -template $officeTemplate -Language 1053
+Write-Host "Sub-site "$officeTitle" successfully created!"
+Write-Host "************************************************************"
+
+iisreset
+
+$itUrl= "http://ws2008r2efen64:6000/sites/intranet/IT"
+$itTitle = "IT"
+
+$itTemplate= Get-SPWebTemplate "Atkins.Intranet.Portal#4"
+iisreset
+
+Write-Host "Creating Sub-Site: "$itTitle
+$itSubSite = New-SPWeb –url $itUrl -name $itTitle -template $itTemplate -Language 1053
+Write-Host "Sub-site "$itTitle" successfully created!"
+Write-Host "************************************************************"
+
+
+iisreset
+
+$technologyUrl= "http://ws2008r2efen64:6000/sites/intranet/Technology"
+$technologyTitle = "Teknikområden"
+
+$technologyTemplate= Get-SPWebTemplate "Atkins.Intranet.Portal#4"
+iisreset
+
+Write-Host "Creating Sub-Site: "$itTitle
+$technologySubSite = New-SPWeb –url $technologyUrl -name $technologyTitle -template $technologyTemplate -Language 1053
+Write-Host "Sub-site "$technologyTitle" successfully created!"
+Write-Host "************************************************************"
 
 iisreset
 
@@ -164,3 +208,19 @@ Enable-SPFeature -Identity "187a36fd-14df-4e0a-b23c-2ee1018fa1c5" -URL $hrUrl
 Write-Host "Activating Finance features:"
 Write-Host "***********************Finance add webparts to Finance startpage*********"
 Enable-SPFeature -Identity "12459c03-a1da-44f1-b105-834f32914c66" -URL $financeUrl
+
+Write-Host "Activating Marketing features:"
+Write-Host "***********************Marketing add webparts to Marketing startpage*********"
+Enable-SPFeature -Identity "c7a57caf-a385-47e1-8116-6e30c399e5ce" -URL $marketingUrl
+
+Write-Host "Activating Office features:"
+Write-Host "***********************Office add webparts to Office startpage*********"
+Enable-SPFeature -Identity "c7a57caf-a385-47e1-8116-6e30c399e5ce" -URL $officeUrl
+
+Write-Host "Activating IT features:"
+Write-Host "***********************IT add webparts to IT startpage*********"
+Enable-SPFeature -Identity "c7a57caf-a385-47e1-8116-6e30c399e5ce" -URL $itUrl
+
+Write-Host "Activating Technology features:"
+Write-Host "***********************Technology add webparts to Technology startpage*********"
+Enable-SPFeature -Identity "c7a57caf-a385-47e1-8116-6e30c399e5ce" -URL $technologyUrl

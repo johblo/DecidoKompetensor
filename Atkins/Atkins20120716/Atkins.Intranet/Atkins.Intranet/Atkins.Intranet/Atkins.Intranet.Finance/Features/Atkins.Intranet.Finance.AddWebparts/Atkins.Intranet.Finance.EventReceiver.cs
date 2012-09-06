@@ -40,6 +40,31 @@ namespace Atkins.Intranet.Finance.Features.Atkins.Intranet.Finance.AddWebparts
             {
                 WebPartUtility.AddBlogWebpart(web, sourceWeb, BlogPosts.ListName, BlogPosts.webPartTitle, BlogPosts.ZoneId, 3, BlogPosts.xslPath, BlogPosts.webpartItemStyle, BlogPosts.webPartViewFields, BlogPosts.webpartTitleImageUrl, BlogPosts.categoryFilterFinance);
             }
+
+
+            using (SPWeb sourceWeb = web.Site.RootWeb)
+            {
+                SPList linkList = sourceWeb.Lists.TryGetList(FinanceLinks.ListName);
+                if (linkList != null)
+                {
+                    if (!CustomListHelper.checkIfViewExist(linkList, FinanceLinks.webPartView))
+                    {
+                        CustomListHelper.CreateView(linkList, FinanceLinks.webPartView, CustomListHelper.returnStringArray(FinanceLinks.webPartViewFields), FinanceLinks.webPartQuery, FinanceLinks.webPartRowLimit);
+                    }
+                    WebPartUtility.AddXSLTListViewWebPart(web, sourceWeb, FinanceLinks.ListName, FinanceLinks.webPartTitle, FinanceLinks.webPartView, FinanceLinks.ZoneId, 1, FinanceLinks.webpartTitleImageUrl);
+                }
+            }
+
+            //ADD Calendar view and Webpart
+            SPList calendarList = web.Lists.TryGetList(FinanceCalendar.ListName);
+            if(calendarList!= null)
+            {
+                if (!CustomListHelper.checkIfViewExist(calendarList, FinanceCalendar.webPartView))
+                {
+                    CustomListHelper.CreateView(calendarList, FinanceCalendar.webPartView, CustomListHelper.returnStringArray(FinanceCalendar.webPartViewFields), FinanceCalendar.webPartQuery, FinanceCalendar.webPartRowLimit);
+                }
+                WebPartUtility.AddXSLTListViewWebPart(web, web, CalendarStartSite.ListName, CalendarStartSite.webPartTitle, CalendarStartSite.webPartView, CalendarStartSite.ZoneId, 2, CalendarStartSite.webpartTitleImageUrl);
+            }
             if (contextCreated)
             {
                 HttpContext.Current = null;

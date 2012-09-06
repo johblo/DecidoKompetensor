@@ -22,7 +22,9 @@
     <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\chart.png" />
     <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\check.gif" />
     <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\deviation.png" />
+    <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\employeehandbook.png" />
     <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\group.png" />
+    <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\kpi.png" />
     <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\link.png" />
     <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\news.png" />
     <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\plug_extension.png" />

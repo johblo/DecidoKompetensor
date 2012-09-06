@@ -75,6 +75,7 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
             Guid listGuid = currentWeb.Lists.Add(CustomListHelper.ReturnTrimmedString(DeviationsList.ListName), DeviationsList.ListDescription, SPListTemplateType.GenericList);
             SPList deviationList = currentWeb.Lists[listGuid];
             deviationList.Title = DeviationsList.ListName;
+            deviationList.NavigateForFormsPages = true;
             deviationList.BreakRoleInheritance(false);
             deviationList.WriteSecurity = 2;
             deviationList.EnableVersioning = true;
@@ -248,11 +249,15 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                                                             DeviationsList.DeviationBaseContentTypeId))
                 {
                     deviationList.ContentTypesEnabled = true;
-                    deviationList.ContentTypes.Add(deviationBaseContentType);
-                    deviationList.ContentTypes[0].Delete();
+                    //deviationList.ContentTypes.Add(deviationBaseContentType);
                     deviationList.ContentTypes.Add(deviationContentType);
+                    deviationList.ContentTypes[0].Delete();
                     deviationList.ContentTypes.Add(complaintsContentType);
                     deviationList.ContentTypes.Add(suggestionsContentType);
+
+                    SPField titleField = deviationList.Fields[SPBuiltInFieldId.Title];
+                    titleField.Title = DeviationsList.TitleDisplayName;
+                    titleField.Update();
 
                     deviationList.Update();
 
@@ -315,6 +320,7 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
             Guid documentLibraryGuid = currentWeb.Lists.Add(CustomListHelper.ReturnTrimmedString(ProcessStepList.ListName), ProcessStepList.ListDescription, SPListTemplateType.GenericList);
             SPList processStepList = currentWeb.Lists[documentLibraryGuid];
             processStepList.Title = ProcessStepList.ListName;
+            processStepList.NavigateForFormsPages = true;
             processStepList.BreakRoleInheritance(false);
             processStepList.OnQuickLaunch = true;
             processStepList.Update();
@@ -355,19 +361,38 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     SPFieldLink processStepFieldLink = new SPFieldLink(processStepField);
 
                     //Process Description Field
-                    fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, ProcessStepList.ProcessDescription, SPFieldType.Note, true);
+                    fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, ProcessStepList.ProcessDescription, SPFieldType.Note, false);
                     SPFieldMultiLineText descriptionField = (SPFieldMultiLineText)rootWeb.Fields.GetField(fieldInternalName);
                     descriptionField.NumberOfLines = 15;
+                    descriptionField.RichText = true;
+                    descriptionField.RichTextMode = SPRichTextMode.FullHtml;
                     descriptionField.Title = ProcessStepList.ProcessDescriptionDisplayName;
                     descriptionField.Group = ProcessStepList.ListName;
                     descriptionField.Update();
                     SPFieldLink descriptionFieldLink = new SPFieldLink(descriptionField);
+
+
+
+                    //Templates Field
+                    fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, ProcessStepList.ProcessTemplates, SPFieldType.Note, false);
+                    SPFieldMultiLineText templatesField = (SPFieldMultiLineText)rootWeb.Fields.GetField(fieldInternalName);
+                    templatesField.NumberOfLines = 15;
+                    templatesField.RichText = true;
+                    templatesField.RichTextMode = SPRichTextMode.FullHtml;
+                    templatesField.Title = ProcessStepList.ProcessTemplatesDisplayName;
+                    templatesField.Group = ProcessStepList.ListName;
+                    templatesField.Update();
+                    SPFieldLink templatesFieldLink = new SPFieldLink(templatesField);
+
+
+
 
                     processStepContentType = new SPContentType(ProcessStepList.processStepContentTypeId,
                                                                    rootWeb.ContentTypes,
                                                                    ProcessStepList.ListContentType);
                     processStepContentType.FieldLinks.Add(processStepFieldLink);
                     processStepContentType.FieldLinks.Add(descriptionFieldLink);
+                    processStepContentType.FieldLinks.Add(templatesFieldLink);
                     processStepContentType.Group = ProcessStepList.AtkinsContentTypeGroup;
                     rootWeb.ContentTypes.Add(processStepContentType);
                     rootWeb.Update();
@@ -383,13 +408,15 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     processStepList.Update();
 
                     SPView defaultView = processStepList.DefaultView;
-                    //defaultView.ViewFields.Delete(CustomListHelper.ReturnListField(processStepList, "Modified"));
-                    //defaultView.ViewFields.Delete(CustomListHelper.ReturnListField(processStepList, "Editor"));
                     defaultView.ViewFields.Add(CustomListHelper.ReturnListField(processStepList, ProcessStepList.Process));
                     defaultView.ViewFields.Add(CustomListHelper.ReturnListField(processStepList, ProcessStepList.ProcessDescription));
-
+                    defaultView.ViewFields.Add(CustomListHelper.ReturnListField(processStepList, ProcessStepList.ProcessTemplates));
                     defaultView.Update();
 
+                    SPField titleField = processStepList.Fields[SPBuiltInFieldId.Title];
+                    titleField.Title = ProcessStepList.TitleDisplayName;
+                    titleField.Update();
+                    
 
                     //WebPartView
                     System.Collections.Specialized.StringCollection viewFields = new System.Collections.Specialized.StringCollection();
@@ -603,6 +630,25 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     iso18001Field.Update();
                     SPFieldLink iso18001FieldLink = new SPFieldLink(iso18001Field);
 
+                    //CHAPTER   -   CREATE QSE TERM GROUP AND TERMSET 
+                    TaxonomyUtility.CreateTermSet(currentWeb, ControllingDocuments.TermGroup, ControllingDocuments.TermSetChapter);
+                    fieldInternalName = CustomListHelper.CreateTaxonomySiteColumn(site, ControllingDocuments.Chapter);
+                    TaxonomyField chapterField = rootWeb.Fields[fieldInternalName] as TaxonomyField;
+                    group = from g in termStore.Groups where g.Name == ControllingDocuments.TermGroup select g;
+                    termSet = group.FirstOrDefault().TermSets[ControllingDocuments.TermSetChapter];
+                    chapterField.SspId = termSet.TermStore.Id;
+                    chapterField.TermSetId = termSet.Id;
+                    chapterField.TargetTemplate = string.Empty;
+                    chapterField.AllowMultipleValues = false;
+                    chapterField.CreateValuesInEditForm = false;
+                    chapterField.Open = true;
+                    chapterField.AnchorId = Guid.Empty;
+                    chapterField.Group = ControllingDocuments.ListName;
+                    chapterField.Title = ControllingDocuments.ChapterDisplayname;
+                    chapterField.Update();
+                    SPFieldLink chapterFieldLink = new SPFieldLink(chapterField);
+
+
                     //Written By Field
                     fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, ControllingDocuments.WrittenBy, SPFieldType.User,false);
                     SPFieldUser writtenByField = (SPFieldUser)rootWeb.Fields.GetField(fieldInternalName);
@@ -648,6 +694,7 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     controllingDocumentsContentType.FieldLinks.Add(iso9001FieldLink);
                     controllingDocumentsContentType.FieldLinks.Add(iso14001FieldLink);
                     controllingDocumentsContentType.FieldLinks.Add(iso18001FieldLink);
+                    controllingDocumentsContentType.FieldLinks.Add(chapterFieldLink);
                     controllingDocumentsContentType.FieldLinks.Add(writtenByFieldLink);
                     controllingDocumentsContentType.FieldLinks.Add(auditorFieldLink);
                     controllingDocumentsContentType.FieldLinks.Add(approverFieldLink);
@@ -669,6 +716,10 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     SPView defaultView = controllingDocumentsList.DefaultView;
                     defaultView.ViewFields.Delete(CustomListHelper.ReturnListField(controllingDocumentsList, "Modified"));
                     defaultView.ViewFields.Delete(CustomListHelper.ReturnListField(controllingDocumentsList, "Editor"));
+
+                    SPField chapter = CustomListHelper.ReturnListField(controllingDocumentsList, ControllingDocuments.Chapter);
+                    if (chapter != null)
+                        defaultView.ViewFields.Add(chapter);
                     SPField iso9001 = CustomListHelper.ReturnListField(controllingDocumentsList, ControllingDocuments.ISO9001);
                     if (iso9001 != null)
                         defaultView.ViewFields.Add(iso9001);
@@ -688,7 +739,8 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     SPField docId = CustomListHelper.ReturnListField(controllingDocumentsList, "_dlc_DocIdUrl");
                     if (docId != null)
                         defaultView.ViewFields.Add(docId);
-                    
+
+                    defaultView.Query = "<OrderBy><FieldRef Name='" + ControllingDocuments.Chapter + "' Ascending='TRUE'/></OrderBy>";
 
                     SPField auditor = CustomListHelper.ReturnListField(controllingDocumentsList, ControllingDocuments.Auditor);
                     SPField approver = CustomListHelper.ReturnListField(controllingDocumentsList, ControllingDocuments.Approver);
@@ -697,6 +749,9 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     currentWeb.Update();
                     //ADD METADATA NAVIGATION TO LIST
                     MetadataNavigationSettings listNavSettings = MetadataNavigationSettings.GetMetadataNavigationSettings(controllingDocumentsList);
+
+                    MetadataNavigationHierarchy navigationChapter = new MetadataNavigationHierarchy(chapter);
+                    listNavSettings.AddConfiguredHierarchy(navigationChapter);
                     MetadataNavigationHierarchy navigationIso9001 = new MetadataNavigationHierarchy(iso9001);
                     listNavSettings.AddConfiguredHierarchy(navigationIso9001);
                     MetadataNavigationHierarchy navigationIso14001 = new MetadataNavigationHierarchy(iso14001);

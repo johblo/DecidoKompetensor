@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Solution xmlns="http://schemas.microsoft.com/sharepoint/" SolutionId="0f0c5260-608a-4718-80eb-a422b8df3a84" SharePointProductVersion="14.0">
+  <Assemblies>
+    <Assembly Location="Atkins.Intranet.CommonSite.dll" DeploymentTarget="GlobalAssemblyCache" />
+  </Assemblies>
+  <FeatureManifests>
+    <FeatureManifest Location="Atkins.Intranet.CommonSite_Atkins.Intranet.CommonSite.AddWebParts\Feature.xml" />
+  </FeatureManifests>
+</Solution>

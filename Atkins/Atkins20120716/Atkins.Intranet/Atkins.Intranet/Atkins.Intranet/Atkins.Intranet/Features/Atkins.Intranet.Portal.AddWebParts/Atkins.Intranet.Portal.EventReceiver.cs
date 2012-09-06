@@ -38,18 +38,21 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Portal.AddWebParts
             //ADD BLOG WP TO START
             using (SPWeb sourceWeb = web.Site.AllWebs[BlogPosts.webName])
             {
-                WebPartUtility.AddCQWP(web, sourceWeb, BlogPosts.ListName, BlogPosts.webPartTitle, BlogPosts.ZoneId, 1, BlogPosts.xslPath, BlogPosts.webpartItemStyle, BlogPosts.webPartViewFields,BlogPosts.webpartTitleImageUrl);
+                WebPartUtility.AddCQWP(web, sourceWeb, BlogPosts.ListName, BlogPosts.webPartTitle,BlogPosts.rowLimitStartPage, BlogPosts.ZoneId, 1, BlogPosts.xslPath, BlogPosts.webpartItemStyle, BlogPosts.webPartViewFields,BlogPosts.webpartTitleImageUrl);
             }
+            //ADD ANNOUNCEMENT
             WebPartUtility.AddAnnouncementCQWP(web,  Announcements.webPartTitle, Announcements.ZoneId, 1, Announcements.xslPath, Announcements.webpartItemStyle,"",Announcements.webpartTitleImageUrl);
 
 
             //ADD Calendar Webpart
-
             WebPartUtility.AddXSLTListViewWebPart(web, web, CalendarStartSite.ListName, CalendarStartSite.webPartTitle, CalendarStartSite.webPartView, CalendarStartSite.ZoneId, 1, CalendarStartSite.webpartTitleImageUrl);
 
-
             //ADDS PAGEVIEWER WEBPART 
-            WebPartUtility.AddPageViewWebPart(web, PageViewerHome.webPartTitle, PageViewerHome.ZoneId, 1, PageViewerHome.webpartTitleImageUrl,PageViewerHome.contentLink, Microsoft.SharePoint.WebPartPages.PathPattern.URL);
+            WebPartUtility.AddPageViewWebPart(web, KpiStock.webPartTitle, KpiStock.ZoneId, 1, KpiStock.webpartTitleImageUrl, KpiStock.contentLink, Microsoft.SharePoint.WebPartPages.PathPattern.URL);
+            
+            //ADD LINKS
+            WebPartUtility.AddXSLTListViewWebPart(web, web, LinksStartSite.ListName, LinksStartSite.webPartTitle, LinksStartSite.webPartView, LinksStartSite.ZoneId, 1, LinksStartSite.webpartTitleImageUrl);
+            
             
             
 

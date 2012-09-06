@@ -53,23 +53,16 @@ namespace Atkins.Intranet.Utilities.HelperUtils
             webPart.Title = title;
             webPart.FeedUrl = "http://www.infrastrukturnyheter.se/rss.xml";
             webPart.FeedLimit = 10;
-            
-            
             if (!string.IsNullOrEmpty(titleImageUrl))
                 webPart.TitleIconImageUrl = titleImageUrl;
             if (!FindWebPart(manager, title))
                 manager.AddWebPart(webPart, zoneId, zoneIndex);
             if (startPageFile.Level == SPFileLevel.Checkout)
                 startPageFile.CheckIn("Added webpart");
-
             currentWeb.Update();
         }
         */
-   
-
-
-
-
+   /*
         public static void AddListViewWebPart(SPWeb currentWeb,SPWeb sourceWeb,string listName,string title,string viewName,string zoneId,int zoneIndex,string titleImageUrl)
         {
             string startPage = currentWeb.RootFolder.WelcomePage;
@@ -102,8 +95,8 @@ namespace Atkins.Intranet.Utilities.HelperUtils
             }
             currentWeb.Update();
         }
-
-        public static void AddXSLTListViewWebPart(SPWeb currentWeb, SPWeb sourceWeb, string listName, string title, string viewName, string zoneId, int zoneIndex, string titleImageUrl)
+*/
+        public static void AddXSLTListViewWebPart(SPWeb currentWeb, SPWeb sourceWeb, string listName, string title, string viewName, string zoneId, int zoneIndex,string titleImageUrl)
         {
             string startPage = currentWeb.RootFolder.WelcomePage;
             string fullUrlOfStartPage = currentWeb.Url + "/" + startPage;
@@ -118,6 +111,7 @@ namespace Atkins.Intranet.Utilities.HelperUtils
 
                 XsltListViewWebPart webPart = new XsltListViewWebPart();
                 webPart.Title = title;
+                
                 webPart.WebId = sourceWeb.ID;
                 if (!string.IsNullOrEmpty(titleImageUrl))
                     webPart.TitleIconImageUrl = titleImageUrl;
@@ -130,17 +124,13 @@ namespace Atkins.Intranet.Utilities.HelperUtils
                     if (!FindWebPart(manager, title))
                     {
                         manager.AddWebPart(webPart, zoneId, zoneIndex);
-                       
                     }
-
                 }
                 if (startPageFile.Level == SPFileLevel.Checkout)
                     startPageFile.CheckIn("Added webpart");
             }
             currentWeb.Update();
         }
-
-
 
         public static void AddContentEditorWebPart(SPWeb currentWeb, string title, string zoneId, int zoneIndex,string content)
         {
@@ -164,7 +154,7 @@ namespace Atkins.Intranet.Utilities.HelperUtils
             if (!FindWebPart(manager, title))
                 manager.AddWebPart(contentEditorWebpart, zoneId, zoneIndex);
         }
-        public static void AddCQWP(SPWeb currentWeb, SPWeb sourceWeb, string listName, string title, string zoneId, int zoneIndex,string xslPath,string itemstyle,string viewFields,string titleImageUrl)
+        public static void AddCQWP(SPWeb currentWeb, SPWeb sourceWeb, string listName, string title, int rowlimit, string zoneId, int zoneIndex,string xslPath,string itemstyle,string viewFields,string titleImageUrl)
         {
             string startPage = currentWeb.RootFolder.WelcomePage;
             string fullUrlOfStartPage = currentWeb.Url + "/" + startPage;
@@ -185,7 +175,7 @@ namespace Atkins.Intranet.Utilities.HelperUtils
                 contentByQery.ListName = currentList.Title;
                 contentByQery.ListGuid = currentList.ID.ToString("B");
                 contentByQery.ItemStyle = itemstyle;
-                contentByQery.ItemLimit = 10;
+                contentByQery.ItemLimit = rowlimit;
                 contentByQery.CommonViewFields = viewFields;
                 if (!FindWebPart(manager, title))
                     manager.AddWebPart(contentByQery, zoneId, zoneIndex);
@@ -209,6 +199,13 @@ namespace Atkins.Intranet.Utilities.HelperUtils
                 contentByQery.TitleIconImageUrl = titleImageUrl;
             //contentByQery.ViewFieldsOverride = "<![CDATA[<FieldRef ID='{fa564e0f-0c70-4ab9-b863-0177e6ddd247}' Nullable='True' Type='Text' /><FieldRef ID='{94f89715-e097-4e8b-ba79-ea02aa8b7adb}' Nullable='True' Type='Lookup' /><FieldRef ID='{1d22ea11-1e32-424e-89ab-9fedbadb6ce1}' Nullable='True' Type='Counter' /><FieldRef ID='{28cf69c5-fa48-462a-b5cd-27b6f9d2bd5f}' Nullable='True' Type='DateTime' /><FieldRef ID='{1df5e554-ec7e-46a6-901d-d85a3881cb18}' Nullable='True' Type='User' /><FieldRef ID='{d31655d1-1d5b-4511-95a1-7a09e9b75bf2}' Nullable='True' Type='User' /><FieldRef ID='{8c06beca-0777-48f7-91c7-6da68bc07b69}' Nullable='True' Type='DateTime' /><FieldRef Name='PublishingRollupImage' Nullable='True' Type='Image' /><FieldRef Name='_Level' Nullable='True' Type='Number' /><FieldRef Name='Comments' Nullable='True' Type='Note' /><ListProperty Name='Title' /><ProjectProperty Name='Title' />]]>";
             contentByQery.ItemXslLink = xslPath;
+
+            contentByQery.FilterField1 = "Expires";
+            contentByQery.FilterOperator1 = ContentByQueryWebPart.FilterFieldQueryOperator.Geq;
+            contentByQery.FilterType1 = "DateTime";
+            contentByQery.FilterDisplayValue1 = "0";
+            contentByQery.FilterValue1 = "0";
+
             contentByQery.Title = title;
             contentByQery.BaseType = "104";
             contentByQery.ItemStyle = itemstyle; 
@@ -234,13 +231,7 @@ namespace Atkins.Intranet.Utilities.HelperUtils
             if (!string.IsNullOrEmpty(titleImageUrl))
                 contentByQery.TitleIconImageUrl = titleImageUrl;
             contentByQery.ItemStyle = "TitleOnly";
-            //contentByQery.ViewFieldsOverride = "<ViewFields>"+
-            //                                        "<FieldRef Name='Title' Nullable='True' Type='Text'/>" +
-            //                                        "<FieldRef Name='FileLeadRef' Nullable='True' Type='URL'/>" +
-            //                                        "<ListProperty Name='Title' />"+
-            //                                        "<ProjectProperty Name='Title' />"+
-            //                                   "</ViewFields>";
-            //<ListProperty Name="Title" /><ProjectProperty Name="Title" />
+            
             contentByQery.FilterField1 = "Created";
             contentByQery.FilterOperator1 = ContentByQueryWebPart.FilterFieldQueryOperator.Gt;
             contentByQery.FilterType1 = "DateTime";
@@ -387,7 +378,8 @@ namespace Atkins.Intranet.Utilities.HelperUtils
                     toolbarNode.InnerXml = @"<IfHasRights><RightsChoices><RightsGroup PermAddListItems=""required"" /></RightsChoices><Then><HTML><![CDATA[ <table width=100% cellpadding=0 cellspacing=0 border=0 > <tr> <td colspan=""2"" class=""ms-partline""><IMG   src=""/_layouts/images/blank.gif"" width=1 height=1 alt=""""></td> </tr> <tr> <td class=""ms-addnew"" style=""padding-bottom: 3px""> <img src=""/_layouts/images/rect.gif"" alt="""">&nbsp;<a class=""ms-addnew"" ID=""idAddNewItem"" href=""]]></HTML><URL Cmd=""New"" /><HTML><![CDATA["" ONCLICK=""BLOCKED SCRIPTNewItem(']]></HTML><URL Cmd=""New"" /><HTML><![CDATA[', true);BLOCKED SCRIPTreturn false;"" target=""_self"">]]></HTML><HTML>Add new " + newItemString + @"</HTML><HTML><![CDATA[</a> </td> </tr> <tr><td><IMG src=""/_layouts/images/blank.gif"" width=1 height=5 alt=""""></td></tr> </table>]]></HTML></Then></IfHasRights>";           
                 }               spView.Update();       
             }     
-        }  
+        }
+        
     
 
        

@@ -140,10 +140,11 @@ namespace Atkins.Intranet.Utilities.HelperUtils
             return input.Split(new char[] { ',' });
         }
     }
+    //***************************************************************************STARTSITE**************************************************************************************
     //OFFICES LIST
     public class OfficeFields
     {
-        public const string ListName = "Offices";
+        public const string ListName = "Kontor";
         public const string ListDescription = "Contains information about Atkins multiple offices across the country.";
         public const string ListContentType = "Atkins Office Information";
         public const string AtkinsContentTypeGroup = "Atkins Content Types";
@@ -151,26 +152,44 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string Title = "Title";
         public const string TitleDisplayName = "Title";
         public const string Address = "Address";
-        public const string AddressDisplayName = "Address";
+        public const string AddressDisplayName = "Adress";
         public const string Zip = "Zip";
-        public const string ZipDisplayName = "Zip";
+        public const string ZipDisplayName = "Postnummer";
         public const string City = "City";
-        public const string CityDisplayName = "City";
+        public const string CityDisplayName = "Stad";
         public const string PhoneNumber = "Phone Number";
-        public const string PhoneNumberDisplayName = "Phone Number";
+        public const string PhoneNumberDisplayName = "Telefon";
         public const string FaxNumber = "Fax Number";
-        public const string FaxNumberDisplayName = "Fax Number";
+        public const string FaxNumberDisplayName = "Fax";
 
         public static readonly SPContentTypeId OfficeContentTypeId = new SPContentTypeId("0x0100A33D9AD9805788419BDAAC2CCB37509F");
     }
+    // AREA LIST
+    public class AreaList
+    {
+        public const string ListName = "Område";
+        public const string ListDescription = "Contains information about Atkins specific areas";
+        public const string ListContentType = "Atkins Area Information";
+        public const string AtkinsContentTypeGroup = "Atkins Content Types";
+        
+        public const string TitleDisplayName = "Område";
+    }
+
+
     //CALENDAR LIST
     public class CalendarStartSite
     {
         public const string ListName = "Kalender";
         public const string ListDescription = "Kalender";
+        public const string TitleDisplayName = "Rubrik";
         public const string webPartTitle = "Kalender";
         public const string webPartView = "webPartView";
-        public const string webPartViewFields = "Title,EndDate,EventDate";
+        public const string webPartViewFields = "LinkTitle,EventDate,EndDate";
+        public const string webPartQuery = "<Where>" +
+                                              "<Geq><FieldRef Name='EndDate' /><Value Type='DateTime'><Today /></Value></Geq>" +
+                                           "</Where>"+
+                                           "<OrderBy><FieldRef Name='EventDate' Ascending='TRUE'/></OrderBy>";
+        public const int webPartRowLimit = 10;
         public const string ZoneId = "Center";
         public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/calendar.png";
     }
@@ -180,13 +199,24 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string ListName = "Länkar";
         public const string ListDescription = "Länkar";
 
-        public const string activeField = "linkActive";
-        public const string activeFieldDisplayName = "Active";
+        public const string TitleDisplayName = "Länk";
 
-        public const string webPartTitle = "Länkar";
+        public const string activeField = "linkActive";
+        public const string activeFieldDisplayName = "Aktiv";
+
+        public const string areaField = "linkArea";
+        public const string areaFieldDisplayName = "Område";
+
+        public const string webPartTitle = "Nyttiga länkar";
         public const string webPartView = "webPartView";
+        public const string webPartQuery = "<Where>" +
+                                             "<Eq><FieldRef Name='linkActive'/><Value Type='Boolean'>1</Value></Eq>" +
+                                           "</Where>";
+
+
         public const string webPartViewFields = "URL";
-        public const string ZoneId = "Center";
+        public const int webPartRowLimit = 10;
+        public const string ZoneId = "Right";
         public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/link.png";
     }
 
@@ -200,24 +230,62 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string webPartTitle = "Personliga Länkar";
         public const string webPartView = "webPartView";
         public const string webPartViewFields = "URL";
-        public const string webPartQuery = "";
-        public const string ZoneId = "Center";
+
+        public const string webPartQuery = "<Where>" +
+                                             "<Eq><FieldRef Name='Author'/><Value Type='Integer'><UserID Type='Integer'/></Value></Eq>" +
+                                           "</Where>";
+
+        public const string ZoneId = "Right";
         public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/link.png";
+    }
+
+    public class Announcements
+    {
+        public const string webPartTitle = "Meddelanden";
+        public const string webpartItemStyle = "Announcements";
+        public const string xslPath = "/Sites/Intranet/Style Library/XSL Style Sheets/customItem.xsl";
+        public const string ZoneId = "Left";
+        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/announcement.png";
+    }
+
+    public class KpiStock
+    {
+        public const string webPartTitle = "KPI";
+        public const string contentLink = "http://ir2.flife.de/data/atkins/share-ticker.php";
+        public const string ZoneId = "Center";
+        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/kpi.png";
+    }
+    //***************************************************************************HR HR HR HR**************************************************************************************
+    public class HRblogPosts
+    {
+        public const string webName = "Nyheter";
+        public const string webPartTitle = "Rekryteringsnyheter";
+        public const string webPartViewFields = "Title;Body;PublishedDate,DateTime;";
+        public const string webPartView = "webPartView";
+        public const string webpartItemStyle = "CQWP_Blog";
+        public const int rowLimitStartPage = 10;
+        public const string ListName = "Inlägg";
+        public const string xslPath = "/Sites/Intranet/Style Library/XSL Style Sheets/customItem.xsl";
+        public const string ZoneId = "Right";
+        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/news.png";
+        public const string blogpostCategories = "HR,QSE,Finans,Marknad,Kontor,IT,Teknik,Rekrytering";
+       
+        public const string category = "Rekrytering";
     }
 
     public class IntroductionTemplateFields
     {
-        public const string ListName = "Introduction Templates";
+        public const string ListName = "Introduktionsmall";
         public const string ListDescription = "Contains the steps required to be taken in each introduction template.";
         public const string ListContentType = "Atkins Introduction Template";
         public const string AtkinsContentTypeGroup = "Atkins Content Types";
 
         public const string Title = "Title";
-        public const string TitleDisplayName = "Title";
+        public const string TitleDisplayName = "Titel";
         public const string TemplateSteps = "Introduction Steps";
-        public const string TemplateStepsDisplayName = "Introduction Steps";
-        public const string TemplateIsActive = "Active";
-        public const string TemplateIsActiveDisplayName = "Active";
+        public const string TemplateStepsDisplayName = "Introduktionsaktiviteter";
+        public const string TemplateIsActive = "IntroductionActive";
+        public const string TemplateIsActiveDisplayName = "Aktiv";
         public const string TemplateIsActiveXML = "TemplateIsActive";
         public const string TemplateIsActiveXMLDisplayName = "TemplateIsActive";
 
@@ -227,31 +295,44 @@ namespace Atkins.Intranet.Utilities.HelperUtils
 
     public class EmployeeContactFields
     {
-        public const string ListName = "Employees";
+        public const string ListName = "Medarbetare";
         public const string ListDescription = "Contains the personnel information of new employees";
         public const string ListContentType = "Atkins Employee Contact";
         public const string AtkinsContentTypeGroup = "Atkins Content Types";
 
         public const string Title = "Title";
-        public const string TitleDisplayName = "Title";
+        public const string TitleDisplayName = "Titel";
         public const string PersonalNumber = "Personal Number";
-        public const string PersonalNumberDisplayName = "Personal Number";
+        public const string PersonalNumberDisplayName = "Anställningsnummer";
         public const string Office = "Office";
-        public const string OfficeDisplayName = "Office";
+        public const string OfficeDisplayName = "Kontor";
         public const string Position = "Position";
         public const string PositionDisplayName = "Position";
         public const string Manager = "Manager";
-        public const string ManagerDisplayName = "Manager";
+        public const string ManagerDisplayName = "Ansvarig chef";
         public const string HR_Responsible = "HR Responsible";
-        public const string HR_ResponsibleDisplayName = "HR Responsible";
+        public const string HR_ResponsibleDisplayName = "HR ansvarig";
+        
         public const string Mentor = "Mentor";
         public const string MentorDisplayName = "Mentor";
+        public const string StartDate = "StartDate";
+        public const string StartDateDisplayName = "Startdatum";
+
         public const string IntroductionTemplate = "Template";
-        public const string IntroductionTemplateDisplayName = "Template";
+        public const string IntroductionTemplateDisplayName = "Introduktionsmall";
         //webPartView
-        public const string webPartTitle = "Anställda";
+        public const string webPartTitle = "Nya Medarbetare";
         public const string webPartView = "webPartView";
-        public const string ZoneId = "Left";
+
+        public const string webPartQuery =  "<Where>" +
+                                             "<Gt><FieldRef Name='StartDate'/><Value Type='DateTime'><Today OffsetDays='-30' /></Value></Gt>" +
+                                           "</Where>";
+            
+        public const string webPartViewFields = "LinkTitle,Position,Office,StartDate";
+
+        public const int webPartRowLimit = 10;
+
+        public const string ZoneId = "Right";
         public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/group.png";
 
         public static readonly SPContentTypeId EmployeeContentTypeId = new SPContentTypeId("0x0100A33D9AD9805788419BDAAC2CCB37508E");
@@ -263,29 +344,39 @@ namespace Atkins.Intranet.Utilities.HelperUtils
 
     public class IntroductionTasksFields
     {
-        public const string ListName = "Template Tasks";
+        public const string ListName = "Malluppgifter";
         public const string ListDescription = "Contains introduction tasks created for new employees.";
         public const string ListContentType = "Atkins Introduction Task";
         public const string AtkinsContentTypeGroup = "Atkins Content Types";
 
-        public const string TaskAssignee = "Assignee";
-        public const string TaskAssigneeDisplayName = "Assignee";
-        public const string DueDate = "DueDateIntroductionTask";
-        public const string DueDateDisplayName = "Due Date";
-        
-        //public const string DueDateInternalName = "Deadline";
+        public const string TitleDisplayName = "Aktivitet";
 
+        public const string TaskAssignee = "Assignee";
+        public const string TaskAssigneeDisplayName = "Tilldelad";
+        public const string DueDate = "DueDateIntroductionTask";
+        public const string DueDateDisplayName = "Förfallodag";
+        
         public const string Completed = "CompletedStatus";
-        public const string CompletedDisplayName = "Completed";
-        //public const string CompletedInternalName = "CompletedStatus";
+        public const string CompletedDisplayName = "Slutförd";
 
         public const string CompletionDate = "CompletionDate";
-        public const string CompletionDateDisplayName = "Completion Date";
+        public const string CompletionDateDisplayName = "Slutdatum";
         public const string Employee = "EmployeeName";
-        public const string EmployeeDisplayName = "Employee Name";
-        public const string webPartTitle = "Mina uppgifter";
+        public const string EmployeeDisplayName = "Medarbetarnamn";
+
+        public const string webPartTitle = "Att göra";
         public const string webPartView = "webPartView";
-        public const string webPartViewDisplayName = "webPartView";
+
+        public const string webPartQuery = "<Where>" +
+                                              "<And>" +
+                                                "<Eq><FieldRef Name='" + IntroductionTasksFields.TaskAssignee + "'/><Value Type='Integer'><UserID Type='Integer'/></Value></Eq>" +
+                                                "<Eq><FieldRef Name='" + IntroductionTasksFields.Completed + "'/><Value Type='Integer'>0</Value></Eq>" +
+                                              "</And>" +
+                                            "</Where>";
+        public const string webPartViewFields = "LinkTitle,Assignee,CompletionDate";
+
+        public const int webPartRowLimit = 5;
+
         public const string ZoneId = "Right";
         public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/task_my.png";
 
@@ -295,13 +386,13 @@ namespace Atkins.Intranet.Utilities.HelperUtils
 
     public class EmployeeDocuments
     {
-        public const string ListName = "Employee Documents";
+        public const string ListName = "Medarbetardokument";
         public const string ListDescription = "Contains introduction documents erlated to different employees.";
         public const string ListContentType = "Atkins Introduction Document";
         public const string AtkinsContentTypeGroup = "Atkins Content Types";
 
         public const string EmployeeName = "Employee";
-        public const string EmployeeNameDisplayName = "Employee";
+        public const string EmployeeNameDisplayName = "Medarbetare";
     }
     //PERSONAL
     public class TermStoreName
@@ -310,45 +401,60 @@ namespace Atkins.Intranet.Utilities.HelperUtils
     }
     public class EmployeeHandbook
     {
-        public const string ListName = "Employee Handbook";
+        public const string ListName = "Personalhandbok";
         public const string ListDescription = "Contains information for employees";
         public const string ListContentType = "Atkins Employee Handbook";
         public const string AtkinsContentTypeGroup = "Atkins Content Types";
 
         public const string Title = "Title";
-        public const string TitleDisplayName = "Title";
+        public const string TitleDisplayName = "Titel";
         public const string Description = "HandBook Description";
-        public const string DescriptionDisplayName = "HandBook Description";
+        public const string DescriptionDisplayName = "Beskrivning";
         public const string Category = "Employee Handbook Category";
-        public const string CategoryDisplayName = "Category";
-        public const string SubCategory = "Sub category";
-        public const string SubCategoryDisplayName = "Sub category";
+        public const string CategoryDisplayName = "Kategori";
+        
         public const string ValidFrom = "Valid from";
-        public const string ValidFromDisplayName = "Valid from";
+        public const string ValidFromDisplayName = "Giltig f.r.o.m";
         public const string ValidTo = "Valid to";
-        public const string ValidToDisplayName = "Valid to";
+        public const string ValidToDisplayName = "Giltig t.o.m";
 
         public const string TermGroup = "HR";
-        public const string TermSet = "EmployeeHandbook Categories";
+        public const string TermSet = "Employee handbook categories";
+
+
+        public const string webPartTitle = "Personalhandbok";
+        public const string webPartView = "webPartView";
+
+        public const string webPartQuery = "<Where>" +
+                                                "<Gt><FieldRef Name='Modified'/><Value Type='DateTime'><Today OffsetDays='-30' /></Value></Gt>" +
+                                            "</Where>"+
+                                            "<OrderBy><FieldRef Name='Modified' Ascending='TRUE'/></OrderBy>";
+        public const string webPartViewFields = "LinkTitle,EmployeeHandbookCategory";
+
+        public const int webPartRowLimit = 1000;
+
+        public const string ZoneId = "Left";
+        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/employeehandbook.png";
+
 
 
         public static readonly SPContentTypeId EmployeeHandBookContentTypeId = new SPContentTypeId("0x0100C4996397BE1448FB9360F07527C9F924");
     }
     public class EmployeeHandBookDocuments
     {
-        public const string ListName = "EmployeeHandBookDocuments";
+        public const string ListName = "Personalhandboksdokument";
         public const string ListDescription = "Contains documents related to different employee handbook items";
         public const string ListContentType = "Atkins Employee Handbook Document";
         public const string AtkinsContentTypeGroup = "Atkins Content Types";
 
         public const string EmployeeHandBook = "Employee HandBook";
-        public const string EmployeeHandBookDisplayName = "Employee HandBook";
+        public const string EmployeeHandBookDisplayName = "Personalhandbok";
     }
-  
-//---------------------------CONTROLLING DOCUMENTS--------------------------
+    //***************************************************************************QSE QSE QSE**************************************************************************************
+    //---------------------------CONTROLLING DOCUMENTS--------------------------
     public class ControllingDocuments
     {
-        public const string ListName = "Controlling Documents";
+        public const string ListName = "Kontrolldokument";
         public const string ListDescription = "Controlling Documents";
         public const string ListContentType = "Atkins QSE Controlling Document";
         public const string AtkinsContentTypeGroup = "Atkins Content Types";
@@ -359,14 +465,17 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string ISO14001DisplayName = "ISO14001";
         public const string ISO18001 = "ISO18001";
         public const string ISO18001DisplayName = "ISO18001";
+        public const string Chapter = "ControlDocChapter";
+        public const string ChapterDisplayname = "Kapitel";
+
         public const string WrittenBy = "Written By";
-        public const string WrittenByDisplayName = "Written By";
+        public const string WrittenByDisplayName = "Skrivet av";
         public const string Auditor = "Auditor";
-        public const string AuditorDisplayName = "Auditor";
+        public const string AuditorDisplayName = "Granskare";
         public const string Approver = "Approver";
-        public const string ApproverDisplayName = "Approver";
+        public const string ApproverDisplayName = "Godkännare";
         public const string ValidUntil = "Valid until";
-        public const string ValidUntilDisplayName = "Valid until";
+        public const string ValidUntilDisplayName = "Giltig t.o.m";
         public const string DocumentID = "DocumentID";
         public const string DocumentIDDisplayName = "DocumentID";
 
@@ -374,6 +483,7 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string TermSetISO9001 = "ISO9001";
         public const string TermSetISO14001 = "ISO14001";
         public const string TermSetISO18001 = "ISO18001";
+        public const string TermSetChapter = "Chapter";
         
         public static readonly SPContentTypeId controllingDocumentsContentTypeId = new SPContentTypeId("0x010100D38A7116AC8D488FB894DD2ED97EA4BB");
 
@@ -407,15 +517,15 @@ namespace Atkins.Intranet.Utilities.HelperUtils
 
     public class ResultingDocuments
     {
-        public const string ListName = "Resulting Documents";
+        public const string ListName = "Resultat Dokument";
         public const string ListDescription = "Resulting Documents";
         public const string ListContentType = "Atkins QSE Resulting Document";
         public const string AtkinsContentTypeGroup = "Atkins Content Types";
 
         public const string ResultingDocumentCategory = "Resulting Document Category";
-        public const string ResultingDocumentCategoryDisplayName = "Resulting Document Category";
+        public const string ResultingDocumentCategoryDisplayName = "Resultat dokument kategori";
         public const string ResultingDocumentYear = "Resulting Document Year";
-        public const string ResultingDocumentYearDisplayName = "Resulting Document Year";
+        public const string ResultingDocumentYearDisplayName = "Resultat dokument år";
         public const int ResultingDocumentYearStart = 2008;
         public const int ResultingDocumentYearStop = 2030;
 
@@ -433,15 +543,21 @@ namespace Atkins.Intranet.Utilities.HelperUtils
     //---------------------------PROCESS STEP LIST--------------------------
     public class ProcessStepList
     {
-        public const string ListName = "Process Steps";
+        public const string ListName = "Process steg";
         public const string ListDescription = "The Process Step List is a SharePoint list that is designed to replace the current static html-tables that informs the user about the steps in each of the different defined Atkins process";
         public const string ListContentType = "Atkins QSE Prosess Step";
         public const string AtkinsContentTypeGroup = "Atkins Content Types";
 
+        public const string TitleDisplayName = "Process steg";
+
         public const string Process = "Process";
         public const string ProcessDisplayName = "Process";
         public const string ProcessDescription = "Process Description";
-        public const string ProcessDescriptionDisplayName = "Process Description";
+        public const string ProcessDescriptionDisplayName = "Process Beskrivning";
+
+        public const string ProcessTemplates = "ProcessTemplates";
+        public const string ProcessTemplatesDisplayName = "Mallar";
+
 
         public const string TermGroup = "QSE";
         public const string TermSetProcess = "Process";
@@ -454,7 +570,7 @@ namespace Atkins.Intranet.Utilities.HelperUtils
     //---------------------------DEVIATION LIST--------------------------
     public class DeviationsList
     {
-        public const string ListName = "Deviations and Suggestions";
+        public const string ListName = "Avvikelser och förslag";
         public const string ListDescription = "Deviations and Suggestions";
         public const string ListContentTypeBase = "Atkins QSE Deviations Base";
         public const string ListContentTypeDeviations = "Atkins QSE Deviations";
@@ -463,25 +579,25 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string AtkinsContentTypeGroup = "Atkins Content Types";
 
         public const string Title = "Title";
-        public const string TitleDisplayName = "Title";
+        public const string TitleDisplayName = "Titel";
         public const string KeyDate = "Key Date";
-        public const string KeyDateDisplayName = "Key Date";
+        public const string KeyDateDisplayName = "Datum";
         public const string DeviationStatus = "Deviation Status";
-        public const string DeviationStatusDisplayName = "Deviation Status";
+        public const string DeviationStatusDisplayName = "Avvikelsestatus";
         public const string DeviationDescription = "Deviation Description";
-        public const string DeviationDescriptionDisplayName = "Deviation Description";
+        public const string DeviationDescriptionDisplayName = "Avvikelsebeskrivning";
         public const string Responsible = "Responsible";
-        public const string ResponsibleDisplayName = "Responsible";
+        public const string ResponsibleDisplayName = "Ansvarig";
         public const string DecisionDate = "Decision Date";
-        public const string DecisionDateDisplayName = "Decision Date";
+        public const string DecisionDateDisplayName = "Beslutsdatum";
         public const string DecisionComment = "Decision Comment";
-        public const string DecisionCommentDisplayName = "Decision Comment";
+        public const string DecisionCommentDisplayName = "Beslutskommentar";
         public const string ActionByDate = "Action By Date";
-        public const string ActionByDateDisplayName = "Action By Date";
+        public const string ActionByDateDisplayName = "Färdigställandedatum";
         public const string FollowUpDate = "Follow Up Date";
-        public const string FollowUpDateDisplayName = "Follow Up Date";
+        public const string FollowUpDateDisplayName = "Uppföljningsdatum";
         public const string FollowUpComment = "Follow Up Comment";
-        public const string FollowUpCommentDisplayName = "Follow Up Comment";
+        public const string FollowUpCommentDisplayName = "Uppföljningskommentar";
         
         public const string TermGroup = "QSE";
         public const string TermSetStatus = "Deviation Status";
@@ -505,13 +621,13 @@ namespace Atkins.Intranet.Utilities.HelperUtils
     //---------------------------TEMPLATE DOCUMENT LIBRARY LIST--------------------------
     public class TemplateDocuments
     {
-        public const string ListName = "Template Documents";
+        public const string ListName = "Malldokument";
         public const string ListDescription = "Template Documents";
         public const string ListContentType = "Atkins Template Documents";
         public const string AtkinsContentTypeGroup = "Atkins Content Types";
 
         public const string TemplateDocumentCategory = "Template Document Category";
-        public const string TemplateDocumentCategoryDisplayName = "Template Document Category";
+        public const string TemplateDocumentCategoryDisplayName = "Malldokument kategori";
 
         public const string TermGroup = "PORTAL";
         public const string TermSetTemplateDocumentCategory = "Template Document Category";
@@ -526,46 +642,6 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const SPRoleType role = SPRoleType.Contributor;
     }
 
-    public class BlogPosts
-    {
-        public const string webName = "Nyheter";
-        public const string webPartTitle = "Nyheter";
-        public const string webPartViewFields = "Title;Body;PublishedDate,DateTime;";
-        public const string webPartView = "webPartView";
-        public const string webpartItemStyle =  "CQWP_Blog";
-        public const string ListName = "Inlägg";
-        public const string xslPath = "/Sites/Intranet/Style Library/XSL Style Sheets/customItem.xsl";
-        public const string ZoneId = "Left";
-        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/news.png";
-        public const string blogpostCategories = "HR,QSE,Finans,Marknad,Kontor,IT,Teknik,Rekrytering";
-        public const string categoryFilterHR = "HR";
-        public const string categoryFilterQSE = "QSE";
-        public const string categoryFilterFinance = "Finans";
-
-        public const string categoryFilterMarketing = "Marknad";
-        public const string categoryFilterOffices = "Kontor";
-        public const string categoryFilterIT = "IT";
-
-        public const string categoryFilterTech = "Teknik";
-        public const string categoryFilterRecruit = "Rekrytering";
-        
-        
-    }
-    public class HideTitleBlog
-    {
-        public const string ZoneId = "Right";
-        public const string webPartTitle = "Hide Title";
-        public const string Content = "<style>.ms-webpartpagedescription {DISPLAY: none}</style>";
-    }
-
-    public class Announcements
-    {
-        public const string webPartTitle = "Meddelanden";
-        public const string webpartItemStyle = "Announcements";
-        public const string xslPath = "/Sites/Intranet/Style Library/XSL Style Sheets/customItem.xsl";
-        public const string ZoneId = "Left";
-        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/announcement.png";
-    }
     public class RelevantDocuments
     {
         public const string webPartTitle = "Relevanta dokument";
@@ -584,7 +660,7 @@ namespace Atkins.Intranet.Utilities.HelperUtils
     {
         public const string ListName = "$Resources:core,linksList;";
         public const string webPartTitle = "Länkar";
-        public const string ZoneId = "Left";
+        public const string ZoneId = "Right";
         public const string webPartView = "webPartView";
         public const string webPartViewFields = "URL";
         public const int rowlimit = 100;
@@ -593,11 +669,87 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const uint resourceLCID = 1053;
         public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/link.png";
     }
-    public class PageViewerHome
+
+
+    //***************************************************************************NYHETER BLOG**************************************************************************************
+
+    public class BlogPosts
     {
-        public const string webPartTitle = "Börskurs";
-        public const string contentLink = "http://ir2.flife.de/data/atkins/share-ticker.php";
-        public const string ZoneId = "Center";
-        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/announcement.png";
+        public const string webName = "Nyheter";
+        public const string webPartTitle = "Nyheter";
+        public const string webPartViewFields = "Title;Body;PublishedDate,DateTime;";
+        public const string webPartView = "webPartView";
+        public const string webpartItemStyle =  "CQWP_Blog";
+        public const int rowLimitStartPage = 10;
+        public const string ListName = "Inlägg";
+        public const string xslPath = "/Sites/Intranet/Style Library/XSL Style Sheets/customItem.xsl";
+        public const string ZoneId = "Left";
+        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/news.png";
+        public const string blogpostCategories = "HR,QSE,Finans,Marknad,Kontor,IT,Teknik,Rekrytering";
+        public const string categoryFilterHR = "HR";
+        public const string categoryFilterQSE = "QSE";
+        public const string categoryFilterFinance = "Finans";
+
+        public const string categoryFilterMarketing = "Marknad";
+        public const string categoryFilterOffices = "Kontor";
+        public const string categoryFilterIT = "IT";
+
+        public const string categoryFilterTech = "Teknik";
+        public const string categoryFilterRecruit = "Rekrytering";
+        
+        
     }
+   
+    public class HideTitleBlog
+    {
+        public const string ZoneId = "Right";
+        public const string webPartTitle = "Hide Title";
+        public const string Content = "<style>.ms-webpartpagedescription {DISPLAY: none}</style>";
+    }
+
+   
+    //******************************************************************FINANCE*******************************************************************************************
+
+    public class FinanceCalendar
+    {
+        public const string ListName = "Kalender";
+        
+        public const string webPartTitle = "Kalender";
+        public const string webPartView = "webPartView";
+        public const string webPartViewFields = "LinkTitle,EventDate,EndDate";
+        public const string webPartQuery = "<Where>" +
+                                              "<Geq><FieldRef Name='EndDate' /><Value Type='DateTime'><Today /></Value></Geq>" +
+                                           "</Where>" +
+                                           "<OrderBy><FieldRef Name='EventDate' Ascending='TRUE'/></OrderBy>";
+        public const int webPartRowLimit = 10;
+        public const string ZoneId = "Right";
+        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/calendar.png";
+    }
+    public class FinanceLinks
+    {
+        public const string webName = "Finance";
+        public const string ListName = "Länkar";
+        public const string ListDescription = "Länkar";
+
+        public const string TitleDisplayName = "Länk";
+
+        public const string activeField = "linkActive";
+        public const string activeFieldDisplayName = "Aktiv";
+
+        public const string areaField = "linkArea";
+        public const string areaFieldDisplayName = "Område";
+
+        public const string webPartTitle = "Nyttiga länkar";
+        public const string webPartView = "financeWebPartView";
+        public const string webPartQuery = "<Where>" +
+                                             "<Eq><FieldRef Name='linkArea'/><Value Type='Lookup'>Finans</Value></Eq>" +
+                                           "</Where>";
+
+
+        public const string webPartViewFields = "URL";
+        public const int webPartRowLimit = 10;
+        public const string ZoneId = "Right";
+        public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/link.png";
+    }
+
 }

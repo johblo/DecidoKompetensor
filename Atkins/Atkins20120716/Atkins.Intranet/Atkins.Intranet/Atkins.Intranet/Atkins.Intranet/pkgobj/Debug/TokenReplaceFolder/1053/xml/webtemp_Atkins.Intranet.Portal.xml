@@ -34,16 +34,25 @@
 			           BaseConfigurationID="0">
     </Configuration>
     <Configuration ID="3"
-                 Title="Atkins.Intranet.Finans"
+                 Title="Atkins.Intranet.Finance"
                  Hidden="FALSE" ImageUrl="/_layouts/images/Atkins.Intranet.Portal/AtkinsLogo.png"
-                 Description="Atkins.Intranet.Finans"
+                 Description="Atkins.Intranet.Finance"
                  DisplayCategory="Atkins"
                  SubWebOnly="True"
                  BaseTemplateName="CMSPUBLISHING"
 			           BaseTemplateID="39"
 			           BaseConfigurationID="0">
     </Configuration>
-   
+
+    <Configuration ID="4"
+                 Title="Atkins.Intranet.CommonSite"
+                 Hidden="FALSE" ImageUrl="/_layouts/images/Atkins.Intranet.Portal/AtkinsLogo.png"
+                 Description="Atkins.Intranet.CommonSite"
+                 DisplayCategory="Atkins"
+                 SubWebOnly="True"
+                 BaseTemplateName="CMSPUBLISHING"
+			           BaseTemplateID="39"
+			           BaseConfigurationID="0">
+    </Configuration>
   </Template>  
-  
 </Templates>

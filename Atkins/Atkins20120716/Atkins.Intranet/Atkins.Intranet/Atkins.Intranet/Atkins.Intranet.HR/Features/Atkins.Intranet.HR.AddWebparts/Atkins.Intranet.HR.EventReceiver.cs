@@ -34,16 +34,20 @@ namespace Atkins.Intranet.HR.Features.Atkins.Intranet.HR.AddWebparts
                 HttpContext.Current.Items["HttpHandlerSPWeb"] = web;
                 contextCreated = true;
             }
-            WebPartUtility.AddListViewWebPart(web,web, EmployeeContactFields.ListName,EmployeeContactFields.webPartTitle, EmployeeContactFields.webPartView, EmployeeContactFields.ZoneId, 2,EmployeeContactFields.webpartTitleImageUrl);
-            WebPartUtility.AddListViewWebPart(web, web, IntroductionTasksFields.ListName, IntroductionTasksFields.webPartTitle, IntroductionTasksFields.webPartView, IntroductionTasksFields.ZoneId, 1, IntroductionTasksFields.webpartTitleImageUrl);
-            
             
             //BLOG WEBPART FILTER HR CATEGORY
             using (SPWeb sourceWeb = web.Site.AllWebs[BlogPosts.webName])
             {
                 
-                WebPartUtility.AddBlogWebpart(web, sourceWeb, BlogPosts.ListName, BlogPosts.webPartTitle, BlogPosts.ZoneId, 3, BlogPosts.xslPath, BlogPosts.webpartItemStyle, BlogPosts.webPartViewFields, BlogPosts.webpartTitleImageUrl, BlogPosts.categoryFilterHR);
+                WebPartUtility.AddBlogWebpart(web, sourceWeb, BlogPosts.ListName, BlogPosts.webPartTitle, BlogPosts.ZoneId, 1, BlogPosts.xslPath, BlogPosts.webpartItemStyle, BlogPosts.webPartViewFields, BlogPosts.webpartTitleImageUrl, BlogPosts.categoryFilterHR);
+                WebPartUtility.AddBlogWebpart(web, sourceWeb, HRblogPosts.ListName, HRblogPosts.webPartTitle,HRblogPosts.ZoneId, 1, HRblogPosts.xslPath, HRblogPosts.webpartItemStyle, HRblogPosts.webPartViewFields, HRblogPosts.webpartTitleImageUrl, HRblogPosts.category);
             }
+
+            WebPartUtility.AddXSLTListViewWebPart(web, web, EmployeeHandbook.ListName, EmployeeHandbook.webPartTitle, EmployeeHandbook.webPartView, EmployeeHandbook.ZoneId, 2, EmployeeHandbook.webpartTitleImageUrl);
+
+            WebPartUtility.AddXSLTListViewWebPart(web, web, EmployeeContactFields.ListName, EmployeeContactFields.webPartTitle, EmployeeContactFields.webPartView, EmployeeContactFields.ZoneId, 2, EmployeeContactFields.webpartTitleImageUrl);
+            WebPartUtility.AddXSLTListViewWebPart(web, web, IntroductionTasksFields.ListName, IntroductionTasksFields.webPartTitle, IntroductionTasksFields.webPartView, IntroductionTasksFields.ZoneId, 3, IntroductionTasksFields.webpartTitleImageUrl);
+            
             if (contextCreated)
             {
                 HttpContext.Current = null;

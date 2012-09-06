@@ -66,7 +66,7 @@ namespace Atkins.Intranet.HR.Features.Lists
                 }
                 //Employee Handbook Documents 
                 SPList EmployeeHandBookDocumentsList = CustomListHelper.ReturnList(currentWeb, EmployeeHandBookDocuments.ListName);
-                if (employeeList == null)
+                if (EmployeeHandBookDocumentsList == null)
                 {
                     CreateEmployeeHandbookDocumentsContentTypeList(currentWeb);
                 }
@@ -205,6 +205,12 @@ namespace Atkins.Intranet.HR.Features.Lists
                     employeeHandbookList.ContentTypes[0].Delete();
                     employeeHandbookList.Update();
 
+
+                    SPField titleField = employeeHandbookList.Fields[SPBuiltInFieldId.Title];
+                    titleField.Title = EmployeeHandbook.TitleDisplayName;
+                    titleField.Update();
+
+
                     SPView defaultView = employeeHandbookList.DefaultView;
                     SPField description = CustomListHelper.ReturnListField(employeeHandbookList, EmployeeHandbook.Description);
                     if (description != null)
@@ -225,6 +231,13 @@ namespace Atkins.Intranet.HR.Features.Lists
 
                     defaultView.Update();
                     currentWeb.Update();
+
+                    //WebPartView
+                    if (!CustomListHelper.checkIfViewExist(employeeHandbookList, EmployeeHandbook.webPartView))
+                    {
+                        CustomListHelper.CreateView(employeeHandbookList, EmployeeHandbook.webPartView, CustomListHelper.returnStringArray(EmployeeHandbook.webPartViewFields), EmployeeHandbook.webPartQuery, EmployeeHandbook.webPartRowLimit);
+                    }
+
 
                     //ADD METADATA NAVIGATION TO LIST
                     MetadataNavigationSettings listNavSettings = MetadataNavigationSettings.GetMetadataNavigationSettings(employeeHandbookList);
@@ -294,6 +307,10 @@ namespace Atkins.Intranet.HR.Features.Lists
                     templateList.ContentTypes.Add(templateListContentType);
                     templateList.ContentTypes[0].Delete();
                     templateList.Update();
+
+                    SPField titleField = templateList.Fields[SPBuiltInFieldId.Title];
+                    titleField.Title = IntroductionTemplateFields.TitleDisplayName;
+                    titleField.Update();
 
                     SPView defaultView = templateList.DefaultView;
                     SPField templateSteps = CustomListHelper.ReturnListField(templateList, IntroductionTemplateFields.TemplateSteps);
@@ -372,6 +389,16 @@ namespace Atkins.Intranet.HR.Features.Lists
                     mentorField.Update();
                     SPFieldLink mentorLink = new SPFieldLink(mentorField);
 
+                    //StartDate Field
+                    
+                    fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, EmployeeContactFields.StartDate, SPFieldType.DateTime, false);
+                    SPFieldDateTime startDateField = (SPFieldDateTime)rootWeb.Fields.GetField(fieldInternalName);
+                    startDateField.Title = EmployeeContactFields.StartDateDisplayName;
+                    startDateField.Group = EmployeeContactFields.ListName;
+                    startDateField.DisplayFormat = SPDateTimeFieldFormatType.DateOnly;
+                    startDateField.Update();
+                    SPFieldLink startDateFieldLink = new SPFieldLink(startDateField);
+
 
                     employeeListContentType = new SPContentType(EmployeeContactFields.EmployeeContentTypeId,
                                                                 rootWeb.ContentTypes,
@@ -382,6 +409,7 @@ namespace Atkins.Intranet.HR.Features.Lists
                     employeeListContentType.FieldLinks.Add(mentorLink);
                     employeeListContentType.FieldLinks.Add(managerLink);
                     employeeListContentType.FieldLinks.Add(hrResponsibleLink);
+                    employeeListContentType.FieldLinks.Add(startDateFieldLink);
                     
                     employeeListContentType.Group = EmployeeContactFields.AtkinsContentTypeGroup;
                     employeeListContentType.DisplayFormUrl = currentWeb.ServerRelativeUrl + EmployeeContactFields.CustomDisplayFormUrl;
@@ -400,6 +428,10 @@ namespace Atkins.Intranet.HR.Features.Lists
                     employeeList.ContentTypes[0].Delete();
                     employeeList.Update();
 
+                    SPField titleField = employeeList.Fields[SPBuiltInFieldId.Title];
+                    titleField.Title = EmployeeContactFields.TitleDisplayName;
+                    titleField.Update();
+
                     currentWeb.Update();
                 }
 
@@ -411,6 +443,7 @@ namespace Atkins.Intranet.HR.Features.Lists
                     string internalName= employeeList.Fields.AddLookup(EmployeeContactFields.Office, officeList.ID, rootWeb.ID, true);
                     SPFieldLookup officeField = (SPFieldLookup)employeeList.Fields[internalName];
                     officeField.LookupField = officeList.Fields[SPBuiltInFieldId.Title].InternalName;
+                    officeField.Title = EmployeeContactFields.OfficeDisplayName;
                     officeField.Update();
                 }
 
@@ -421,7 +454,7 @@ namespace Atkins.Intranet.HR.Features.Lists
                     string fieldInternalName = employeeList.Fields.AddLookup(CustomListHelper.ReturnTrimmedString(EmployeeContactFields.IntroductionTemplate), templateList.ID, true);
                     SPFieldLookup templateField = (SPFieldLookup) employeeList.Fields[fieldInternalName];
                     templateField.LookupField = templateList.Fields[SPBuiltInFieldId.Title].InternalName;
-                    templateField.Title = EmployeeContactFields.IntroductionTemplate;
+                    templateField.Title = EmployeeContactFields.IntroductionTemplateDisplayName;
                     templateField.Update();
                 }
 
@@ -431,16 +464,16 @@ namespace Atkins.Intranet.HR.Features.Lists
                 defaultView.ViewFields.Add(CustomListHelper.ReturnTrimmedString(EmployeeContactFields.Manager));
                 defaultView.ViewFields.Add(CustomListHelper.ReturnTrimmedString(EmployeeContactFields.Mentor));
                 defaultView.ViewFields.Add(CustomListHelper.ReturnTrimmedString(EmployeeContactFields.HR_Responsible));
+                defaultView.ViewFields.Add(CustomListHelper.ReturnTrimmedString(EmployeeContactFields.StartDate));
                 defaultView.ViewFields.Add(CustomListHelper.ReturnTrimmedString(EmployeeContactFields.Office));
                 defaultView.ViewFields.Add(CustomListHelper.ReturnTrimmedString(EmployeeContactFields.IntroductionTemplate));
                 defaultView.Update();
 
                 //WebPartView
-                System.Collections.Specialized.StringCollection viewFields = new System.Collections.Specialized.StringCollection();
-                viewFields.Add("LinkTitle");
-                SPView webPartView = employeeList.Views.Add(EmployeeContactFields.webPartView, viewFields, "", 5, false, false);
-                webPartView.TabularView = false;
-                webPartView.Update();
+                if (!CustomListHelper.checkIfViewExist(templateList, EmployeeContactFields.webPartView))
+                {
+                    CustomListHelper.CreateView(employeeList, EmployeeContactFields.webPartView, CustomListHelper.returnStringArray(EmployeeContactFields.webPartViewFields), EmployeeContactFields.webPartQuery, EmployeeContactFields.webPartRowLimit);
+                }
             }
         }
 
@@ -518,6 +551,10 @@ namespace Atkins.Intranet.HR.Features.Lists
                     taskList.ContentTypes[0].Delete();
                     taskList.Update();
 
+                    SPField titleField = taskList.Fields[SPBuiltInFieldId.Title];
+                    titleField.Title = IntroductionTasksFields.TitleDisplayName;
+                    titleField.Update();
+
                     currentWeb.Update();
                 }
 
@@ -539,22 +576,14 @@ namespace Atkins.Intranet.HR.Features.Lists
                 defaultView.ViewFields.Add(CustomListHelper.ReturnTrimmedString(IntroductionTasksFields.CompletionDate));
                 defaultView.ViewFields.Add(CustomListHelper.ReturnTrimmedString(IntroductionTasksFields.Employee));
                 defaultView.ViewFields.Add(CustomListHelper.ReturnTrimmedString(IntroductionTasksFields.TaskAssignee));
-                defaultView.ViewFields.Add(IntroductionTasksFields.DueDate);
+                defaultView.ViewFields.Add(CustomListHelper.ReturnTrimmedString(IntroductionTasksFields.DueDate));
                 defaultView.Update();
 
-                //WebPartView show items assigned to [ME] and are not completed
-                System.Collections.Specialized.StringCollection viewFields = new System.Collections.Specialized.StringCollection();
-                viewFields.Add("LinkTitle");
-                string query = "<Where>"+
-                                    "<And>"+
-                                        "<Eq><FieldRef Name='"+IntroductionTasksFields.TaskAssignee+"'/><Value Type='Integer'><UserID Type='Integer'/></Value></Eq>"+
-                                        "<Eq><FieldRef Name='" + IntroductionTasksFields.Completed + "'/><Value Type='Integer'>0</Value></Eq>" +
-                                    "</And>" +
-                                "</Where>";
-                SPView webPartView = taskList.Views.Add(IntroductionTasksFields.webPartView, viewFields, query, 5, false, false);
-                webPartView.TabularView = false;
-                webPartView.Update();
-
+                //WebPartView
+                if (!CustomListHelper.checkIfViewExist(taskList, IntroductionTasksFields.webPartView))
+                {
+                    CustomListHelper.CreateView(taskList, IntroductionTasksFields.webPartView, CustomListHelper.returnStringArray(IntroductionTasksFields.webPartViewFields), IntroductionTasksFields.webPartQuery, IntroductionTasksFields.webPartRowLimit);
+                }
             }
 
         }

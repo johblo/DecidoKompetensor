@@ -87,7 +87,9 @@
     <Content Include="Images\Atkins.Intranet.Portal\icons\chart.png" />
     <Content Include="Images\Atkins.Intranet.Portal\icons\check.gif" />
     <Content Include="Images\Atkins.Intranet.Portal\icons\deviation.png" />
+    <Content Include="Images\Atkins.Intranet.Portal\icons\employeehandbook.png" />
     <Content Include="Images\Atkins.Intranet.Portal\icons\group.png" />
+    <Content Include="Images\Atkins.Intranet.Portal\icons\kpi.png" />
     <Content Include="Images\Atkins.Intranet.Portal\icons\link.png" />
     <Content Include="Images\Atkins.Intranet.Portal\icons\news.png" />
     <Content Include="Images\Atkins.Intranet.Portal\icons\plug_extension.png" />

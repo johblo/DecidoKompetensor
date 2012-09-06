@@ -40,11 +40,19 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Lists
                         CreateLinksList(currentWeb);
                     }
 
+                    #region commentCode
                     //PERSONAL LINKS LIST
-                    SPList personalLinksList = CustomListHelper.ReturnList(currentWeb, PersonalLinksStartSite.ListName);
-                    if (personalLinksList == null)
+                    //SPList personalLinksList = CustomListHelper.ReturnList(currentWeb, PersonalLinksStartSite.ListName);
+                    //if (personalLinksList == null)
+                    //{
+                        //CreatePersonalLinksList(currentWeb);
+                    //}
+                    #endregion
+
+                    SPList areaList = CustomListHelper.ReturnList(currentWeb, AreaList.ListName);
+                    if (areaList == null)
                     {
-                        CreatePersonalLinksList(currentWeb);
+                        CreateAreaList(currentWeb);
                     }
 
                     //CALENDAR LIST
@@ -60,45 +68,87 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Lists
                 throw exception;
             }
         }
+        private static void CreateAreaList(SPWeb currentWeb)
+        {
+            Guid listGuid = currentWeb.Lists.Add(CustomListHelper.ReturnTrimmedString(AreaList.ListName), AreaList.ListDescription, SPListTemplateType.GenericList);
+            SPList areaList = currentWeb.Lists[listGuid];
+            SPField titleField = areaList.Fields[SPBuiltInFieldId.Title];
+            titleField.Title = AreaList.TitleDisplayName;
+            titleField.Update();
+
+            currentWeb.Update();
+        }
+
         private static void CreateCalendarList(SPWeb currentWeb)
         {
             Guid listGuid = currentWeb.Lists.Add(CustomListHelper.ReturnTrimmedString(CalendarStartSite.ListName), CalendarStartSite.ListDescription, SPListTemplateType.Events);
-            SPList linksList = currentWeb.Lists[listGuid];
+            SPList calendarList = currentWeb.Lists[listGuid];
 
-            if (!CustomListHelper.checkIfViewExist(linksList, CalendarStartSite.webPartView))
+            if (!CustomListHelper.checkIfViewExist(calendarList, CalendarStartSite.webPartView))
             {
-                CustomListHelper.CreateView(linksList, CalendarStartSite.webPartView, CustomListHelper.returnStringArray(CalendarStartSite.webPartViewFields), "", 5);
+                CustomListHelper.CreateView(calendarList, CalendarStartSite.webPartView, CustomListHelper.returnStringArray(CalendarStartSite.webPartViewFields), CalendarStartSite.webPartQuery,CalendarStartSite.webPartRowLimit);
             }
         }
         private static void CreatePersonalLinksList(SPWeb currentWeb)
         {
 
             Guid listGuid = currentWeb.Lists.Add(CustomListHelper.ReturnTrimmedString(PersonalLinksStartSite.ListName), PersonalLinksStartSite.ListDescription, SPListTemplateType.Links);
-            SPList linksList = currentWeb.Lists[listGuid];
-            if (!CustomListHelper.checkIfViewExist(linksList, PersonalLinksStartSite.webPartView))
+            SPList personalLinksList = currentWeb.Lists[listGuid];
+            personalLinksList.Title = PersonalLinksStartSite.ListName;
+            personalLinksList.Update();
+            if (!CustomListHelper.checkIfViewExist(personalLinksList, PersonalLinksStartSite.webPartView))
             {
-                CustomListHelper.CreateView(linksList, PersonalLinksStartSite.webPartView, CustomListHelper.returnStringArray(PersonalLinksStartSite.webPartViewFields), PersonalLinksStartSite.webPartQuery, 5);
+                CustomListHelper.CreateView(personalLinksList, PersonalLinksStartSite.webPartView, CustomListHelper.returnStringArray(PersonalLinksStartSite.webPartViewFields), PersonalLinksStartSite.webPartQuery, 5);
             }
         }
 
         private static void CreateLinksList(SPWeb currentWeb)
         {
 
-            Guid listGuid = currentWeb.Lists.Add(CustomListHelper.ReturnTrimmedString(LinksStartSite.ListName), LinksStartSite.ListDescription, SPListTemplateType.Links);
-            SPList linksList = currentWeb.Lists[listGuid];
-            string fieldInternalName = CustomListHelper.CreateSiteColumn(currentWeb, LinksStartSite.activeField, SPFieldType.Boolean, false);
+            using (SPSite site = new SPSite(currentWeb.Site.ID))
+            {
+                SPWeb rootWeb = site.RootWeb;
+                Guid listGuid = currentWeb.Lists.Add(CustomListHelper.ReturnTrimmedString(LinksStartSite.ListName), LinksStartSite.ListDescription, SPListTemplateType.Links);
+                SPList linksList = currentWeb.Lists[listGuid];
+                linksList.Title = LinksStartSite.ListName;
+                string fieldInternalName = CustomListHelper.CreateSiteColumn(currentWeb, LinksStartSite.activeField, SPFieldType.Boolean, false);
 
-            SPFieldBoolean activeField = (SPFieldBoolean)currentWeb.Fields.GetField(fieldInternalName);
-            activeField.Group = LinksStartSite.ListName;
-            activeField.Title = LinksStartSite.activeFieldDisplayName;
-            activeField.Update();
-            linksList.Fields.Add(activeField);
-            linksList.Update();
+
+               
+                SPFieldBoolean activeField = (SPFieldBoolean)currentWeb.Fields.GetField(fieldInternalName);
+                activeField.Group = LinksStartSite.ListName;
+                activeField.Title = LinksStartSite.activeFieldDisplayName;
+                activeField.Update();
+                linksList.Fields.Add(activeField);
+
+                //ADD AREA FIELD LOOKUP
+                SPList areaList = CustomListHelper.ReturnList(rootWeb, AreaList.ListName);
+                if (areaList != null)
+                {
+                    string internalName = linksList.Fields.AddLookup(LinksStartSite.areaField, areaList.ID, rootWeb.ID,false);
+                    SPFieldLookup areaField = (SPFieldLookup)linksList.Fields[internalName];
+                    areaField.LookupField = areaList.Fields[SPBuiltInFieldId.Title].InternalName;
+                    areaField.Title = LinksStartSite.areaFieldDisplayName;
+                    areaField.AllowMultipleValues = true;
+                    areaField.Update();
+                }
+
+                SPField titleField = linksList.Fields[SPBuiltInFieldId.Title];
+                titleField.Title = LinksStartSite.TitleDisplayName;
+                titleField.Update();
+
+
+                linksList.Update();
+                SPView defaultView = linksList.DefaultView;
+                defaultView.ViewFields.Add(activeField);
+                defaultView.Update();
+
+                if (!CustomListHelper.checkIfViewExist(linksList, LinksStartSite.webPartView))
+                {
+                    CustomListHelper.CreateView(linksList, LinksStartSite.webPartView, CustomListHelper.returnStringArray(LinksStartSite.webPartViewFields), LinksStartSite.webPartQuery, 5);
+                }
+            }
         }
-
-
-
-
 
         private static void CreateTemplateDocumentLibraryContentTypeList(SPWeb currentWeb)
         {
@@ -167,7 +217,7 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Lists
                     defaultView.ViewFields.Delete(CustomListHelper.ReturnListField(templateDocumentsList, "Modified"));
                     defaultView.ViewFields.Delete(CustomListHelper.ReturnListField(templateDocumentsList, "Editor"));
                     defaultView.ViewFields.Add(CustomListHelper.ReturnListField(templateDocumentsList, TemplateDocuments.TemplateDocumentCategory));
-                    
+                    defaultView.ViewFields.Add("Modified");
 
                     defaultView.Update();
 
@@ -275,6 +325,11 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Lists
                 officeList.ContentTypes.Add(officeListContentType);
                 officeList.ContentTypes[0].Delete();
                 officeList.Update();
+
+                SPField titleField = officeList.Fields[SPBuiltInFieldId.Title];
+                titleField.Title = OfficeFields.TitleDisplayName;
+                titleField.Update();
+
 
                 SPView defaultView = officeList.DefaultView;
                 defaultView.ViewFields.Add(CustomListHelper.ReturnTrimmedString(OfficeFields.Address));

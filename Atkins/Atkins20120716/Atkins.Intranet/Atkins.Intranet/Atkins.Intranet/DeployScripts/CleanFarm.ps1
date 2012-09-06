@@ -52,5 +52,8 @@ iisreset
 RetractSolution("Atkins.Intranet.Finance.wsp")
 iisreset
 
+RetractSolution("Atkins.Intranet.CommonSite.wsp")
+iisreset
+
 
 
