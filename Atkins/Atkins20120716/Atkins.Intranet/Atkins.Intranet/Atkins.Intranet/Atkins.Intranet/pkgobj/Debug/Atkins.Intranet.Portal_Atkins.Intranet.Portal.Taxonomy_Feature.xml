@@ -1,0 +1,2 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Id="ddba34d7-dcc9-448f-9406-376769132550" ReceiverAssembly="Atkins.Intranet.Portal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=223aa5daed29128a" ReceiverClass="Atkins.Intranet.Features.Atkins.Intranet.Portal.Taxonomy.AtkinsIntranetPortalEventReceiver" Scope="Site" Title="Atkins.Intranet.Portal.Taxonomy"></Feature>

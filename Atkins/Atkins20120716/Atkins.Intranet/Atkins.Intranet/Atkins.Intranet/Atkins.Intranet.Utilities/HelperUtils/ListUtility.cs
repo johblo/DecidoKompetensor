@@ -37,7 +37,6 @@ namespace Atkins.Intranet.Utilities.HelperUtils
             if (!site.RootWeb.Fields.ContainsField(fieldInternalName))
             {
                 TaxonomyField field = site.RootWeb.Fields.CreateNewField("TaxonomyFieldType", fieldInternalName) as TaxonomyField;
-               
                 site.RootWeb.Fields.Add(field);
                 site.RootWeb.Update();
             }
@@ -202,7 +201,7 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string TitleDisplayName = "Länk";
 
         public const string activeField = "linkActive";
-        public const string activeFieldDisplayName = "Aktiv";
+        public const string activeFieldDisplayName = "Visa på startsidan";
 
         public const string areaField = "linkArea";
         public const string areaFieldDisplayName = "Område";
@@ -239,11 +238,18 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/link.png";
     }
 
+   
     public class Announcements
     {
+        public const string ListName = "$Resources:core,announceList;";
+        public const string webPartView = "webPartView";
+        public const string webPartQuery = "<Where>" +
+                                             "<Geq><FieldRef Name='Expires'/><Value Type='DateTime'><Today OffsetDays='0' /></Value></Geq>" +
+                                           "</Where>";
+
+        public const string webPartViewFields = "LinkTitle,Expires";
+        public const int webPartRowLimit = 1000;
         public const string webPartTitle = "Meddelanden";
-        public const string webpartItemStyle = "Announcements";
-        public const string xslPath = "/Sites/Intranet/Style Library/XSL Style Sheets/customItem.xsl";
         public const string ZoneId = "Left";
         public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/announcement.png";
     }
@@ -255,6 +261,30 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string ZoneId = "Center";
         public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/kpi.png";
     }
+
+    public class ManualsDocuments
+    {
+        public const string ListName = "Manualer";
+        public const string ListDescription = "Manual Documents";
+        public const string ListContentType = "Atkins Manuals Documents";
+        public const string AtkinsContentTypeGroup = "Atkins Content Types";
+
+        public const string TitleDisplayName = "Titel";
+        public const string ManualsDocumentCategory = "Manual Category";
+        public const string ManualsDocumentCategoryDisplayName = "Manualkategori";
+
+        public const string ManualsDocumentDescription = "ManualComments";
+        public const string ManualsDocumentDescriptionDisplayName = "Kommentarer";
+
+
+        public const string TermGroup = "Atkins Sweden";
+        public const string TermSetCategory = "Manual Category";
+        
+        public static readonly SPContentTypeId ContentTypeId = new SPContentTypeId("0x010100181BDCAB4A9542E9A4BE32D6BED2AC05");
+    }
+
+
+
     //***************************************************************************HR HR HR HR**************************************************************************************
     public class HRblogPosts
     {
@@ -398,6 +428,7 @@ namespace Atkins.Intranet.Utilities.HelperUtils
     public class TermStoreName
     {
         public const string TermStore = "Managed Metadata Service";
+        public const string TermGroup = "Atkins Sweden";
     }
     public class EmployeeHandbook
     {
@@ -418,7 +449,7 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string ValidTo = "Valid to";
         public const string ValidToDisplayName = "Giltig t.o.m";
 
-        public const string TermGroup = "HR";
+        public const string TermGroup = "Atkins Sweden";
         public const string TermSet = "Employee handbook categories";
 
 
@@ -479,7 +510,7 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string DocumentID = "DocumentID";
         public const string DocumentIDDisplayName = "DocumentID";
 
-        public const string TermGroup = "QSE";
+        public const string TermGroup = "Atkins Sweden";
         public const string TermSetISO9001 = "ISO9001";
         public const string TermSetISO14001 = "ISO14001";
         public const string TermSetISO18001 = "ISO18001";
@@ -529,7 +560,7 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const int ResultingDocumentYearStart = 2008;
         public const int ResultingDocumentYearStop = 2030;
 
-        public const string TermGroup = "QSE";
+        public const string TermGroup = "Atkins Sweden";
         public const string TermSetResultingDocumentCategory = "Resulting Document Category";
 
         public static readonly SPContentTypeId resultingDocumentsContentTypeId = new SPContentTypeId("0x0101003A2789604B6E4EAC9B33A49132E26BF1");
@@ -559,7 +590,7 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string ProcessTemplatesDisplayName = "Mallar";
 
 
-        public const string TermGroup = "QSE";
+        public const string TermGroup = "Atkins Sweden";
         public const string TermSetProcess = "Process";
 
         public const string webPartView = "webPartView";
@@ -586,7 +617,7 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string DeviationStatusDisplayName = "Avvikelsestatus";
         public const string DeviationDescription = "Deviation Description";
         public const string DeviationDescriptionDisplayName = "Avvikelsebeskrivning";
-        public const string Responsible = "Responsible";
+        public const string Responsible = "DeviationResponsible";
         public const string ResponsibleDisplayName = "Ansvarig";
         public const string DecisionDate = "Decision Date";
         public const string DecisionDateDisplayName = "Beslutsdatum";
@@ -598,8 +629,8 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string FollowUpDateDisplayName = "Uppföljningsdatum";
         public const string FollowUpComment = "Follow Up Comment";
         public const string FollowUpCommentDisplayName = "Uppföljningskommentar";
-        
-        public const string TermGroup = "QSE";
+
+        public const string TermGroup = "Atkins Sweden";
         public const string TermSetStatus = "Deviation Status";
         //WEBPART
         public const string webPartView = "webPartView";
@@ -618,6 +649,22 @@ namespace Atkins.Intranet.Utilities.HelperUtils
 
         public const string DeviationRoleDefinition = "Deviation Role Definition";
     }
+
+    public class DeviationsSettingsList
+    {
+        public const string ListName = "QSEansvarig";
+        public const string ListDescription = "This list contains the default user responsible for deviations";
+        public const string ListContentType = "Atkins QSE Deviation Settings";
+        public const string AtkinsContentTypeGroup = "Atkins Content Types";
+
+        public const string TitleDisplayName = "Inställning";
+        public const string Responsible = "DeviationSettingsResponsible";
+        public const string ResponsibleDisplayName = "Responsible";
+
+        public static readonly SPContentTypeId deviationSettingsContentTypeId = new SPContentTypeId("0x01007092430709A945E6BCD0C8E1B4D25C0D");
+    }
+
+
     //---------------------------TEMPLATE DOCUMENT LIBRARY LIST--------------------------
     public class TemplateDocuments
     {
@@ -629,7 +676,7 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string TemplateDocumentCategory = "Template Document Category";
         public const string TemplateDocumentCategoryDisplayName = "Malldokument kategori";
 
-        public const string TermGroup = "PORTAL";
+        public const string TermGroup = "Atkins Sweden";
         public const string TermSetTemplateDocumentCategory = "Template Document Category";
 
         public static readonly SPContentTypeId templateDocumentContentTypeId = new SPContentTypeId("0x010100450A55B589644618865764033A029768");
@@ -665,8 +712,7 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string webPartViewFields = "URL";
         public const int rowlimit = 100;
         public const string query = "";
-        public const string resourceFile = "core";
-        public const uint resourceLCID = 1053;
+        
         public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/link.png";
     }
 
@@ -681,7 +727,7 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         public const string webPartView = "webPartView";
         public const string webpartItemStyle =  "CQWP_Blog";
         public const int rowLimitStartPage = 10;
-        public const string ListName = "Inlägg";
+        public const string ListName = "$Resources:core,BlogPost;";
         public const string xslPath = "/Sites/Intranet/Style Library/XSL Style Sheets/customItem.xsl";
         public const string ZoneId = "Left";
         public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/news.png";
@@ -733,23 +779,21 @@ namespace Atkins.Intranet.Utilities.HelperUtils
 
         public const string TitleDisplayName = "Länk";
 
-        public const string activeField = "linkActive";
-        public const string activeFieldDisplayName = "Aktiv";
-
-        public const string areaField = "linkArea";
-        public const string areaFieldDisplayName = "Område";
-
         public const string webPartTitle = "Nyttiga länkar";
         public const string webPartView = "financeWebPartView";
         public const string webPartQuery = "<Where>" +
                                              "<Eq><FieldRef Name='linkArea'/><Value Type='Lookup'>Finans</Value></Eq>" +
                                            "</Where>";
 
-
         public const string webPartViewFields = "URL";
         public const int webPartRowLimit = 10;
         public const string ZoneId = "Right";
         public const string webpartTitleImageUrl = "/_layouts/images/Atkins.Intranet.Portal/icons/link.png";
     }
-
+    //******************************************************************COMMON COMMON COMMON***************************************************************************************
+    public class CommonSettings
+    {
+        public const string resourceFile = "core";
+        public const uint resourceLCID = 1053;
+    }
 }

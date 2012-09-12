@@ -36,14 +36,14 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.AddWebparts
                 contextCreated = true;
             }
             //QSE LINKS
-            WebPartUtility.AddXSLTListViewWebPart(web, web, SPUtility.GetLocalizedString(QSELinks.ListName, QSELinks.resourceFile, QSELinks.resourceLCID), QSELinks.webPartTitle, QSELinks.webPartView, QSELinks.ZoneId, 1, QSELinks.webpartTitleImageUrl);
+            WebPartUtility.AddXSLTListViewWebPart(web, web, SPUtility.GetLocalizedString(QSELinks.ListName, CommonSettings.resourceFile, CommonSettings.resourceLCID), QSELinks.webPartTitle, QSELinks.webPartView, QSELinks.ZoneId, 1, QSELinks.webpartTitleImageUrl);
             //DEVIATION
             WebPartUtility.AddXSLTListViewWebPart(web, web, DeviationsList.ListName, DeviationsList.webPartTitle, DeviationsList.webPartView, DeviationsList.ZoneId, 2, DeviationsList.webpartTitleImageUrl);
             
             //BLOG WEBPART FILTER QSE CATEGORY
             using (SPWeb sourceWeb = web.Site.AllWebs[BlogPosts.webName])
             {
-                WebPartUtility.AddBlogWebpart(web, sourceWeb, BlogPosts.ListName, BlogPosts.webPartTitle, BlogPosts.ZoneId, 1, BlogPosts.xslPath, BlogPosts.webpartItemStyle, BlogPosts.webPartViewFields, BlogPosts.webpartTitleImageUrl, BlogPosts.categoryFilterQSE);
+                WebPartUtility.AddBlogWebpart(web, sourceWeb, SPUtility.GetLocalizedString(BlogPosts.ListName, CommonSettings.resourceFile, CommonSettings.resourceLCID), BlogPosts.webPartTitle, BlogPosts.ZoneId, 1, BlogPosts.xslPath, BlogPosts.webpartItemStyle, BlogPosts.webPartViewFields, BlogPosts.webpartTitleImageUrl, BlogPosts.categoryFilterQSE);
             }
             //LAST ADDED DOCUMENTS
             WebPartUtility.AddLastCreatedDocuments(web, LastAddedModiefiedDocuments.webPartTitle, LastAddedModiefiedDocuments.ZoneId, 2, "", "", LastAddedModiefiedDocuments.webpartTitleImageUrl);

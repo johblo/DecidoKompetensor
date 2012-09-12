@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Title="Atkins.Intranet.Portal Page Layouts" Id="90fc8f29-9537-4dab-860d-363c8fdb4d27" Scope="Site">
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Id="90fc8f29-9537-4dab-860d-363c8fdb4d27" Scope="Site" Title="Atkins.Intranet.Portal Page Layouts">
   <ElementManifests>
     <ElementManifest Location="AtkinsStartPageLayout\Elements.xml" />
     <ElementFile Location="AtkinsStartPageLayout\AtkinsStartPageLayout.aspx" />

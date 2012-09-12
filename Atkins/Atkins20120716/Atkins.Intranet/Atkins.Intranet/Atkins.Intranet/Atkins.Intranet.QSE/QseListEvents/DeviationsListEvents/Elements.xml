@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Receivers ListUrl="Lists/Avvikelserochfrslag" >
+      <Receiver>
+        <Name>DeviationsListEventsItemAdding</Name>
+        <Type>ItemAdding</Type>
+        <Assembly>$SharePoint.Project.AssemblyFullName$</Assembly>
+        <Class>Atkins.Intranet.QSE.QseListEvents.DeviationsListEvents.DeviationsListEvents</Class>
+        <SequenceNumber>10000</SequenceNumber>
+      </Receiver>
+      <Receiver>
+        <Name>DeviationsListEventsItemUpdating</Name>
+        <Type>ItemUpdating</Type>
+        <Assembly>$SharePoint.Project.AssemblyFullName$</Assembly>
+        <Class>Atkins.Intranet.QSE.QseListEvents.DeviationsListEvents.DeviationsListEvents</Class>
+        <SequenceNumber>10000</SequenceNumber>
+      </Receiver>
+
+  <Receiver>
+<Name>DeviationsListEventsItemAdded</Name>
+<Type>ItemAdded</Type>
+<Assembly>$SharePoint.Project.AssemblyFullName$</Assembly>
+<Class>Atkins.Intranet.QSE.QseListEvents.DeviationsListEvents.DeviationsListEvents</Class>
+<SequenceNumber>1000</SequenceNumber>
+</Receiver>
+</Receivers>
+</Elements>

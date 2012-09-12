@@ -33,6 +33,11 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Lists
                     {
                         CreateTemplateDocumentLibraryContentTypeList(currentWeb);
                     }
+                    SPList areaList = CustomListHelper.ReturnList(currentWeb, AreaList.ListName);
+                    if (areaList == null)
+                    {
+                        CreateAreaList(currentWeb);
+                    }
                     //LINKS LIST
                     SPList linksList = CustomListHelper.ReturnList(currentWeb, LinksStartSite.ListName);
                     if (linksList == null)
@@ -49,11 +54,7 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Lists
                     //}
                     #endregion
 
-                    SPList areaList = CustomListHelper.ReturnList(currentWeb, AreaList.ListName);
-                    if (areaList == null)
-                    {
-                        CreateAreaList(currentWeb);
-                    }
+                    
 
                     //CALENDAR LIST
                     SPList calendarList = CustomListHelper.ReturnList(currentWeb, CalendarStartSite.ListName);
@@ -61,6 +62,13 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Lists
                     {
                         CreateCalendarList(currentWeb);
                     }
+                    //MANUALS DOCUMENTS
+                    SPList manualsDocumentsList = CustomListHelper.ReturnList(currentWeb, ManualsDocuments.ListName);
+                    if (manualsDocumentsList == null)
+                    {
+                        CreateManualsDocumentsList(currentWeb);
+                    }
+
                 }
             }
             catch (SPException exception)
@@ -68,6 +76,88 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Lists
                 throw exception;
             }
         }
+        private static void CreateManualsDocumentsList(SPWeb currentWeb)
+        {
+
+            Guid listGuid = currentWeb.Lists.Add(CustomListHelper.ReturnTrimmedString(ManualsDocuments.ListName), ManualsDocuments.ListDescription, SPListTemplateType.DocumentLibrary);
+            SPList manualsDocumentsList = currentWeb.Lists[listGuid];
+            SPField titleField = manualsDocumentsList.Fields[SPBuiltInFieldId.Title];
+            titleField.Title = ManualsDocuments.TitleDisplayName;
+            titleField.Update();
+
+            using (SPSite site = new SPSite(currentWeb.Site.ID))
+            {
+                SPWeb rootWeb = site.RootWeb;
+                SPContentType manualsDocumentsContentType = null;
+                if (CustomListHelper.SiteContainsContentType(rootWeb, ManualsDocuments.ContentTypeId))
+                {
+                    manualsDocumentsContentType = rootWeb.ContentTypes[ManualsDocuments.ContentTypeId];
+                }
+                else
+                {
+                    string fieldInternalName = CustomListHelper.CreateTaxonomySiteColumn(site, ManualsDocuments.ManualsDocumentCategory);
+                    TaxonomyField manualsDocumentsCategoryField = rootWeb.Fields[fieldInternalName] as TaxonomyField;
+                    manualsDocumentsCategoryField.AllowMultipleValues = true;
+                    manualsDocumentsCategoryField.CreateValuesInEditForm = false;
+                    manualsDocumentsCategoryField.Open = true;
+                    manualsDocumentsCategoryField.Group = ManualsDocuments.ListName;
+                    manualsDocumentsCategoryField.Title = ManualsDocuments.ManualsDocumentCategoryDisplayName;
+                    TaxonomyUtility.ConnectTaxonomyField(site, manualsDocumentsCategoryField.Id, TermStoreName.TermGroup, ManualsDocuments.TermSetCategory);
+                    SPFieldLink manualsDocumentsCategoryFieldLink = new SPFieldLink(manualsDocumentsCategoryField);
+
+
+                    fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, ManualsDocuments.ManualsDocumentDescription, SPFieldType.Note, false);
+                    SPFieldMultiLineText descriptionField = (SPFieldMultiLineText)rootWeb.Fields.GetField(fieldInternalName);
+                    descriptionField.NumberOfLines = 15;
+                    descriptionField.RichText = true;
+                    descriptionField.RichTextMode = SPRichTextMode.FullHtml;
+                    descriptionField.Title = ManualsDocuments.ManualsDocumentDescriptionDisplayName;
+                    descriptionField.Group = ManualsDocuments.ListName;
+                    descriptionField.Update();
+                    SPFieldLink descriptionFieldLink = new SPFieldLink(descriptionField);
+
+
+                    manualsDocumentsContentType = new SPContentType(ManualsDocuments.ContentTypeId,
+                                                                  rootWeb.ContentTypes,
+                                                                  ManualsDocuments.ListContentType);
+                    manualsDocumentsContentType.FieldLinks.Add(manualsDocumentsCategoryFieldLink);
+                    manualsDocumentsContentType.FieldLinks.Add(descriptionFieldLink);
+                    manualsDocumentsContentType.Group = ManualsDocuments.AtkinsContentTypeGroup;
+                    rootWeb.ContentTypes.Add(manualsDocumentsContentType);
+                    rootWeb.Update();
+                }
+                if (manualsDocumentsContentType != null &&
+                !CustomListHelper.ListContainsContentType(manualsDocumentsList, ManualsDocuments.ContentTypeId))
+                {
+                    manualsDocumentsList.ContentTypesEnabled = true;
+                    manualsDocumentsList.ContentTypes.Add(manualsDocumentsContentType);
+                    manualsDocumentsList.ContentTypes[0].Delete();
+                    manualsDocumentsList.Update();
+
+                    SPView defaultView = manualsDocumentsList.DefaultView;
+                    defaultView.ViewFields.Delete(CustomListHelper.ReturnListField(manualsDocumentsList, "Editor"));
+                    defaultView.ViewFields.Add(CustomListHelper.ReturnListField(manualsDocumentsList, ManualsDocuments.ManualsDocumentCategory));
+                    
+
+                    SPField docId = CustomListHelper.ReturnListField(manualsDocumentsList, "_dlc_DocIdUrl");
+                    if (docId != null)
+                        defaultView.ViewFields.Add(docId);
+
+                    defaultView.Update();
+
+                    currentWeb.Update();
+                    //ADD METADATA NAVIGATION TO LIST
+                    MetadataNavigationSettings listNavSettings = MetadataNavigationSettings.GetMetadataNavigationSettings(manualsDocumentsList);
+                    MetadataNavigationHierarchy navigationManualDocumentCategory = new MetadataNavigationHierarchy(CustomListHelper.ReturnListField(manualsDocumentsList, ManualsDocuments.ManualsDocumentCategory));
+                    listNavSettings.AddConfiguredHierarchy(navigationManualDocumentCategory);
+                    MetadataNavigationSettings.SetMetadataNavigationSettings(manualsDocumentsList, listNavSettings, true);
+                }
+            }
+
+            currentWeb.Update();
+        }
+
+
         private static void CreateAreaList(SPWeb currentWeb)
         {
             Guid listGuid = currentWeb.Lists.Add(CustomListHelper.ReturnTrimmedString(AreaList.ListName), AreaList.ListDescription, SPListTemplateType.GenericList);
@@ -122,9 +212,11 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Lists
                 linksList.Fields.Add(activeField);
 
                 //ADD AREA FIELD LOOKUP
-                SPList areaList = CustomListHelper.ReturnList(rootWeb, AreaList.ListName);
+
+                SPList areaList = rootWeb.Lists.TryGetList(AreaList.ListName);
                 if (areaList != null)
                 {
+                    
                     string internalName = linksList.Fields.AddLookup(LinksStartSite.areaField, areaList.ID, rootWeb.ID,false);
                     SPFieldLookup areaField = (SPFieldLookup)linksList.Fields[internalName];
                     areaField.LookupField = areaList.Fields[SPBuiltInFieldId.Title].InternalName;
@@ -132,10 +224,6 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Lists
                     areaField.AllowMultipleValues = true;
                     areaField.Update();
                 }
-
-                SPField titleField = linksList.Fields[SPBuiltInFieldId.Title];
-                titleField.Title = LinksStartSite.TitleDisplayName;
-                titleField.Update();
 
 
                 linksList.Update();
@@ -173,27 +261,17 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Lists
                 }
                 else
                 {
-                    //RESULTING DOCUMENT CATEGORY   -   CREATE QSE TERMSET and Group
-                    TaxonomyUtility.CreateTermSet(currentWeb, TemplateDocuments.TermGroup, TemplateDocuments.TermSetTemplateDocumentCategory);
+                    //TEMPLATE DOCUMENT CATEGORY   -   CREATE QSE TERMSET and Group
+                    
                     string fieldInternalName = CustomListHelper.CreateTaxonomySiteColumn(site, TemplateDocuments.TemplateDocumentCategory);
                     TaxonomyField templateDocumentCategoryField = rootWeb.Fields[fieldInternalName] as TaxonomyField;
-                    TaxonomySession session = new TaxonomySession(site);
-                    var termStore = session.TermStores[TermStoreName.TermStore];
-                    var group = from g in termStore.Groups where g.Name == TemplateDocuments.TermGroup select g;
-                    var termSet = group.FirstOrDefault().TermSets[TemplateDocuments.TermSetTemplateDocumentCategory];
-                    templateDocumentCategoryField.SspId = termSet.TermStore.Id;
-                    templateDocumentCategoryField.TermSetId = termSet.Id;
-                    templateDocumentCategoryField.TargetTemplate = string.Empty;
                     templateDocumentCategoryField.AllowMultipleValues = false;
                     templateDocumentCategoryField.CreateValuesInEditForm = false;
                     templateDocumentCategoryField.Open = true;
-                    templateDocumentCategoryField.AnchorId = Guid.Empty;
                     templateDocumentCategoryField.Group = TemplateDocuments.ListName;
                     templateDocumentCategoryField.Title = TemplateDocuments.TemplateDocumentCategoryDisplayName;
-                    templateDocumentCategoryField.Update();
+                    TaxonomyUtility.ConnectTaxonomyField(site, templateDocumentCategoryField.Id, TermStoreName.TermGroup, TemplateDocuments.TermSetTemplateDocumentCategory);
                     SPFieldLink templateDocumentCategoryFieldLink = new SPFieldLink(templateDocumentCategoryField);
-
-
 
                     templateDocumentsContentType = new SPContentType(TemplateDocuments.templateDocumentContentTypeId,
                                                                    rootWeb.ContentTypes,
@@ -215,9 +293,15 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Lists
 
                     SPView defaultView = templateDocumentsList.DefaultView;
                     defaultView.ViewFields.Delete(CustomListHelper.ReturnListField(templateDocumentsList, "Modified"));
+                    
                     defaultView.ViewFields.Delete(CustomListHelper.ReturnListField(templateDocumentsList, "Editor"));
                     defaultView.ViewFields.Add(CustomListHelper.ReturnListField(templateDocumentsList, TemplateDocuments.TemplateDocumentCategory));
                     defaultView.ViewFields.Add("Modified");
+
+                    SPField docId = CustomListHelper.ReturnListField(templateDocumentsList, "_dlc_DocIdUrl");
+                    if (docId != null)
+                        defaultView.ViewFields.Add(docId);
+
 
                     defaultView.Update();
 

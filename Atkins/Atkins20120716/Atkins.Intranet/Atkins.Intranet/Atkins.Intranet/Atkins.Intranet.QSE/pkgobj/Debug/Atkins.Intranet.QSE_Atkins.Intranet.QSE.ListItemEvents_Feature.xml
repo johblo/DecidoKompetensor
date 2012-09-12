@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Id="799a630b-ca35-4251-87cf-07eaaf59a5e0" Scope="Web" Title="Atkins.Intranet.QSE.ListItemEvents">
+  <ElementManifests>
+    <ElementManifest Location="DeviationsListEvents\Elements.xml" />
+  </ElementManifests>
+</Feature>

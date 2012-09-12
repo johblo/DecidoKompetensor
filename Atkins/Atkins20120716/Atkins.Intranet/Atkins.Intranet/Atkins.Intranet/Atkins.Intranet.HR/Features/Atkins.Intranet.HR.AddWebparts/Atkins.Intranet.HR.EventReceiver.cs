@@ -6,6 +6,7 @@ using Microsoft.SharePoint.Security;
 using Atkins.Intranet.Utilities.HelperUtils;
 using System.Web;
 using System.IO;
+using Microsoft.SharePoint.Utilities;
 
 namespace Atkins.Intranet.HR.Features.Atkins.Intranet.HR.AddWebparts
 {
@@ -38,8 +39,8 @@ namespace Atkins.Intranet.HR.Features.Atkins.Intranet.HR.AddWebparts
             //BLOG WEBPART FILTER HR CATEGORY
             using (SPWeb sourceWeb = web.Site.AllWebs[BlogPosts.webName])
             {
-                
-                WebPartUtility.AddBlogWebpart(web, sourceWeb, BlogPosts.ListName, BlogPosts.webPartTitle, BlogPosts.ZoneId, 1, BlogPosts.xslPath, BlogPosts.webpartItemStyle, BlogPosts.webPartViewFields, BlogPosts.webpartTitleImageUrl, BlogPosts.categoryFilterHR);
+
+                WebPartUtility.AddBlogWebpart(web, sourceWeb, SPUtility.GetLocalizedString(BlogPosts.ListName, CommonSettings.resourceFile, CommonSettings.resourceLCID), BlogPosts.webPartTitle, BlogPosts.ZoneId, 1, BlogPosts.xslPath, BlogPosts.webpartItemStyle, BlogPosts.webPartViewFields, BlogPosts.webpartTitleImageUrl, BlogPosts.categoryFilterHR);
                 WebPartUtility.AddBlogWebpart(web, sourceWeb, HRblogPosts.ListName, HRblogPosts.webPartTitle,HRblogPosts.ZoneId, 1, HRblogPosts.xslPath, HRblogPosts.webpartItemStyle, HRblogPosts.webPartViewFields, HRblogPosts.webpartTitleImageUrl, HRblogPosts.category);
             }
 

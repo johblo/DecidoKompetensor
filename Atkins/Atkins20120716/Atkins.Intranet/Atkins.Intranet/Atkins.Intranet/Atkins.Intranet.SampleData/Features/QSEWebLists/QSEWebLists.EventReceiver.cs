@@ -60,7 +60,7 @@ namespace Atkins.Intranet.SampleData.Features.QSEWebLists
                 KeyDate = x.Element(CustomListHelper.ReturnTrimmedString(DeviationsList.KeyDate)).Value,
                 DeviationStatus = x.Element(CustomListHelper.ReturnTrimmedString(DeviationsList.DeviationStatus)).Value,
                 DeviationDescription = x.Element(CustomListHelper.ReturnTrimmedString(DeviationsList.DeviationDescription)).Value,
-                Responsible = x.Element(CustomListHelper.ReturnTrimmedString(DeviationsList.Responsible)).Value,
+                DeviationResponsible = x.Element(CustomListHelper.ReturnTrimmedString(DeviationsList.Responsible)).Value,
                 DecisionDate = x.Element(CustomListHelper.ReturnTrimmedString(DeviationsList.DecisionDate)).Value,
                 DecisionComment = x.Element(CustomListHelper.ReturnTrimmedString(DeviationsList.DecisionComment)).Value,
                 ActionByDate = x.Element(CustomListHelper.ReturnTrimmedString(DeviationsList.ActionByDate)).Value,
@@ -80,7 +80,7 @@ namespace Atkins.Intranet.SampleData.Features.QSEWebLists
                 newItem[SPBuiltInFieldId.Title] = DeviationData.Title;
                 newItem[CustomListHelper.ReturnListField(DeviationList, DeviationsList.KeyDate).Id] = DeviationData.KeyDate;
                 newItem[CustomListHelper.ReturnListField(DeviationList, DeviationsList.DeviationDescription).Id] = DeviationData.DeviationDescription;
-                newItem[CustomListHelper.ReturnListField(DeviationList, DeviationsList.Responsible).Id] = DeviationData.Responsible;
+                newItem[CustomListHelper.ReturnListField(DeviationList, DeviationsList.Responsible).Id] = DeviationData.DeviationResponsible;
                 newItem[CustomListHelper.ReturnListField(DeviationList, DeviationsList.DecisionDate).Id] = DeviationData.DecisionDate;
                 newItem[CustomListHelper.ReturnListField(DeviationList, DeviationsList.DecisionComment).Id] = DeviationData.DecisionComment;
                 newItem[CustomListHelper.ReturnListField(DeviationList, DeviationsList.ActionByDate).Id] = DeviationData.ActionByDate;
@@ -95,7 +95,8 @@ namespace Atkins.Intranet.SampleData.Features.QSEWebLists
 
     class DeviationData
     {
-        public string Title, KeyDate, DeviationStatus, DeviationDescription, Responsible, DecisionDate, DecisionComment, ActionByDate, FollowUpDate, FollowUpComment;
+
+        public string Title, KeyDate, DeviationStatus, DeviationDescription, DeviationResponsible, DecisionDate, DecisionComment, ActionByDate, FollowUpDate, FollowUpComment;
     }
 
 }

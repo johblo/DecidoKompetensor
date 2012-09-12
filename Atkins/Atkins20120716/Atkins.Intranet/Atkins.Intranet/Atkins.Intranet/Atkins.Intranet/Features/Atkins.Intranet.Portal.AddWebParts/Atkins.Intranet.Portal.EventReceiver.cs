@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Security;
+using Microsoft.SharePoint.Utilities;
 using Atkins.Intranet.Utilities.HelperUtils;
 using System.Web;
 using System.IO;
@@ -38,12 +39,22 @@ namespace Atkins.Intranet.Features.Atkins.Intranet.Portal.AddWebParts
             //ADD BLOG WP TO START
             using (SPWeb sourceWeb = web.Site.AllWebs[BlogPosts.webName])
             {
-                WebPartUtility.AddCQWP(web, sourceWeb, BlogPosts.ListName, BlogPosts.webPartTitle,BlogPosts.rowLimitStartPage, BlogPosts.ZoneId, 1, BlogPosts.xslPath, BlogPosts.webpartItemStyle, BlogPosts.webPartViewFields,BlogPosts.webpartTitleImageUrl);
+                WebPartUtility.AddCQWP(web, sourceWeb, SPUtility.GetLocalizedString(BlogPosts.ListName, CommonSettings.resourceFile, CommonSettings.resourceLCID), BlogPosts.webPartTitle, BlogPosts.rowLimitStartPage, BlogPosts.ZoneId, 1, BlogPosts.xslPath, BlogPosts.webpartItemStyle, BlogPosts.webPartViewFields, BlogPosts.webpartTitleImageUrl);
             }
-            //ADD ANNOUNCEMENT
-            WebPartUtility.AddAnnouncementCQWP(web,  Announcements.webPartTitle, Announcements.ZoneId, 1, Announcements.xslPath, Announcements.webpartItemStyle,"",Announcements.webpartTitleImageUrl);
+            //ADD ANNOUNCEMENT Webpart
 
-
+            SPList announcementsList = web.Lists.TryGetList(SPUtility.GetLocalizedString(Announcements.ListName, CommonSettings.resourceFile, CommonSettings.resourceLCID));
+            if (announcementsList != null)
+            {
+                if (!CustomListHelper.checkIfViewExist(announcementsList, Announcements.webPartView))
+                {
+                    CustomListHelper.CreateView(announcementsList, Announcements.webPartView, CustomListHelper.returnStringArray(Announcements.webPartViewFields), Announcements.webPartQuery, Announcements.webPartRowLimit);
+                }
+                WebPartUtility.AddXSLTListViewWebPart(web, web, SPUtility.GetLocalizedString(Announcements.ListName, CommonSettings.resourceFile, CommonSettings.resourceLCID), Announcements.webPartTitle, Announcements.webPartView, Announcements.ZoneId, 1, Announcements.webpartTitleImageUrl);
+            }
+            
+            
+            
             //ADD Calendar Webpart
             WebPartUtility.AddXSLTListViewWebPart(web, web, CalendarStartSite.ListName, CalendarStartSite.webPartTitle, CalendarStartSite.webPartView, CalendarStartSite.ZoneId, 1, CalendarStartSite.webpartTitleImageUrl);
 

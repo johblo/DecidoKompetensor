@@ -75,9 +75,15 @@
     <Compile Include="Features\Atkins.Intranet.Portal.Settings\Atkins.Intranet.Portal.EventReceiver.cs">
       <DependentUpon>Atkins.Intranet.Portal.Settings.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Atkins.Intranet.Portal.Taxonomy\Atkins.Intranet.Portal.EventReceiver.cs">
+      <DependentUpon>Atkins.Intranet.Portal.Taxonomy.feature</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Features\Atkins.Intranet.Portal.Taxonomy\Atkins.Intranet.Portal.Taxonomy.Template.xml">
+      <DependentUpon>Atkins.Intranet.Portal.Taxonomy.feature</DependentUpon>
+    </Content>
     <Content Include="Images\Atkins.Intranet.Portal\AtkinsMan.png" />
     <Content Include="Images\Atkins.Intranet.Portal\Footer-left.jpg" />
     <Content Include="Images\Atkins.Intranet.Portal\Footer-middle.jpg" />
@@ -100,6 +106,9 @@
     <Content Include="Layouts\Atkins.Intranet.Portal\CSS\AtkinsSubSitePageLayout.css" />
     <Content Include="Layouts\Atkins.Intranet.Portal\CSS\AtkinsWebParts.css" />
     <Content Include="MasterPages\AtkinsSubSiteMasterPage\Elements.xml" />
+    <None Include="Features\Atkins.Intranet.Portal.Taxonomy\Atkins.Intranet.Portal.Taxonomy.feature">
+      <FeatureId>{46d402fb-647f-4994-ae7a-72a876d5a901}</FeatureId>
+    </None>
     <None Include="MasterPages\AtkinsSubSiteMasterPage\AtkinsSubSiteMasterPage.master" />
     <Content Include="PageLayouts\AtkinsSubStartPageLayout\Elements.xml" />
     <Content Include="PageLayouts\AtkinsSubStartPageLayout\AtkinsSubStartPageLayout.aspx" />

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Title="Atkins.Intranet.Utilities.jQuery" Description="Adds Jquery to current site" Id="783ce8a6-bf49-44de-b4ee-52812db59e2c" Scope="Web">
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Description="Adds Jquery to current site" Id="783ce8a6-bf49-44de-b4ee-52812db59e2c" Scope="Web" Title="Atkins.Intranet.Utilities.jQuery">
   <ElementManifests>
     <ElementManifest Location="jQueryElement\Elements.xml" />
   </ElementManifests>

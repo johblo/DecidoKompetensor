@@ -6,6 +6,7 @@ using Microsoft.SharePoint.Security;
 using Atkins.Intranet.Utilities.HelperUtils;
 using System.Web;
 using System.IO;
+using Microsoft.SharePoint.Utilities;
 
 
 namespace Atkins.Intranet.Finance.Features.Atkins.Intranet.Finance.AddWebparts
@@ -38,12 +39,13 @@ namespace Atkins.Intranet.Finance.Features.Atkins.Intranet.Finance.AddWebparts
             //BLOG WEBPART FILTER Finance CATEGORY
             using (SPWeb sourceWeb = web.Site.AllWebs[BlogPosts.webName])
             {
-                WebPartUtility.AddBlogWebpart(web, sourceWeb, BlogPosts.ListName, BlogPosts.webPartTitle, BlogPosts.ZoneId, 3, BlogPosts.xslPath, BlogPosts.webpartItemStyle, BlogPosts.webPartViewFields, BlogPosts.webpartTitleImageUrl, BlogPosts.categoryFilterFinance);
+                WebPartUtility.AddBlogWebpart(web, sourceWeb, SPUtility.GetLocalizedString(BlogPosts.ListName, CommonSettings.resourceFile, CommonSettings.resourceLCID), BlogPosts.webPartTitle, BlogPosts.ZoneId, 3, BlogPosts.xslPath, BlogPosts.webpartItemStyle, BlogPosts.webPartViewFields, BlogPosts.webpartTitleImageUrl, BlogPosts.categoryFilterFinance);
             }
 
 
             using (SPWeb sourceWeb = web.Site.RootWeb)
             {
+                sourceWeb.AllowUnsafeUpdates = true;
                 SPList linkList = sourceWeb.Lists.TryGetList(FinanceLinks.ListName);
                 if (linkList != null)
                 {
@@ -53,6 +55,7 @@ namespace Atkins.Intranet.Finance.Features.Atkins.Intranet.Finance.AddWebparts
                     }
                     WebPartUtility.AddXSLTListViewWebPart(web, sourceWeb, FinanceLinks.ListName, FinanceLinks.webPartTitle, FinanceLinks.webPartView, FinanceLinks.ZoneId, 1, FinanceLinks.webpartTitleImageUrl);
                 }
+                sourceWeb.AllowUnsafeUpdates = false;
             }
 
             //ADD Calendar view and Webpart

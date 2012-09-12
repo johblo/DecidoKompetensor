@@ -48,14 +48,21 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                 {
                     CreateProcessStepContentTypeList(currentWeb);
                 }
+                //DeviationSettingsList
+                SPList deviationSettingsList = CustomListHelper.ReturnList(currentWeb, DeviationsSettingsList.ListName);
+                if (deviationSettingsList == null)
+                {
+                    CreateDeviationsSettingsContentTypeList(currentWeb);
+                }
                 //Deviations Step
                 SPList deviationList = CustomListHelper.ReturnList(currentWeb, DeviationsList.ListName);
                 if (deviationList == null)
                 {
                     CreateDeviationsContentTypeList(currentWeb);
                 }
+                
                 //Create view in LinkList
-                string listName = SPUtility.GetLocalizedString(QSELinks.ListName, QSELinks.resourceFile, QSELinks.resourceLCID);
+                string listName = SPUtility.GetLocalizedString(QSELinks.ListName, CommonSettings.resourceFile, CommonSettings.resourceLCID);
                 SPList linkList = CustomListHelper.ReturnList(currentWeb, listName);
                 if (!CustomListHelper.checkIfViewExist(linkList, QSELinks.webPartView))
                 {
@@ -69,6 +76,76 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
             }
            
         }
+
+        private static void CreateDeviationsSettingsContentTypeList(SPWeb currentWeb)
+        {
+            
+            Guid listGuid = currentWeb.Lists.Add(CustomListHelper.ReturnTrimmedString(DeviationsSettingsList.ListName), DeviationsSettingsList.ListDescription, SPListTemplateType.GenericList);
+            SPList deviationSettingsList = currentWeb.Lists[listGuid];
+            deviationSettingsList.Title = DeviationsSettingsList.ListName;
+            deviationSettingsList.NavigateForFormsPages = true;
+            deviationSettingsList.BreakRoleInheritance(false);
+            deviationSettingsList.Update();
+            SecurityUtility.CreateListGroup(currentWeb, deviationSettingsList, QSEAdministratorsGroup.Name, QSEAdministratorsGroup.Description, QSEAdministratorsGroup.role);
+            SecurityUtility.AddExistingGroup(currentWeb, deviationSettingsList, currentWeb.AssociatedOwnerGroup, SPRoleType.Administrator);
+            using (SPSite site = new SPSite(currentWeb.Site.ID))
+            {
+                SPWeb rootWeb = site.RootWeb;
+
+                SPContentType deviationSettingsContentType = null;
+
+                if (CustomListHelper.SiteContainsContentType(rootWeb, DeviationsSettingsList.deviationSettingsContentTypeId))
+                {
+                    deviationSettingsContentType = rootWeb.ContentTypes[DeviationsSettingsList.deviationSettingsContentTypeId];
+                }
+                else
+                {
+                    //RESPONSIBLE
+                    string fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, DeviationsSettingsList.Responsible, SPFieldType.User, true);
+                    SPFieldUser responsibleField = (SPFieldUser)rootWeb.Fields.GetField(fieldInternalName);
+                    responsibleField.Title = DeviationsSettingsList.ResponsibleDisplayName;
+                    responsibleField.AllowMultipleValues = false;
+                    responsibleField.Group = DeviationsSettingsList.ListName;
+                    responsibleField.Update();
+                    SPFieldLink responsibleFieldLink = new SPFieldLink(responsibleField);
+
+                    //----CONTENT TYPE------
+                    deviationSettingsContentType = new SPContentType(DeviationsSettingsList.deviationSettingsContentTypeId,
+                                                                    rootWeb.ContentTypes,
+                                                                    DeviationsSettingsList.ListContentType);
+
+                    deviationSettingsContentType.FieldLinks.Add(responsibleFieldLink);
+
+
+                    deviationSettingsContentType.Group = DeviationsSettingsList.AtkinsContentTypeGroup;
+                    rootWeb.ContentTypes.Add(deviationSettingsContentType);
+                    rootWeb.Update();
+                }
+                if (deviationSettingsContentType != null &&
+                !CustomListHelper.ListContainsContentType(deviationSettingsList,
+                                                            DeviationsSettingsList.deviationSettingsContentTypeId))
+                {
+                    deviationSettingsList.ContentTypesEnabled = true;
+                    //deviationList.ContentTypes.Add(deviationBaseContentType);
+                    deviationSettingsList.ContentTypes.Add(deviationSettingsContentType);
+                    deviationSettingsList.ContentTypes[0].Delete();
+
+                    SPField titleField = deviationSettingsList.Fields[SPBuiltInFieldId.Title];
+                    titleField.Title = DeviationsSettingsList.TitleDisplayName;
+                    titleField.Update();
+
+                    deviationSettingsList.Update();
+
+                    SPView defaultView = deviationSettingsList.DefaultView;
+                    defaultView.ViewFields.Add(CustomListHelper.ReturnTrimmedString(DeviationsSettingsList.Responsible));
+                    defaultView.Update();
+                }
+            }
+        }
+
+
+
+
         private static void CreateDeviationsContentTypeList(SPWeb currentWeb)
         {
 
@@ -133,23 +210,15 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     SPFieldLink descriptionFieldLink = new SPFieldLink(descriptionField);
 
                     //STATUS
-                    TaxonomyUtility.CreateTermSet(currentWeb, DeviationsList.TermGroup, DeviationsList.TermSetStatus);
                     fieldInternalName = CustomListHelper.CreateTaxonomySiteColumn(site, DeviationsList.DeviationStatus);
                     TaxonomyField statusField = rootWeb.Fields[fieldInternalName] as TaxonomyField;
-                    TaxonomySession session = new TaxonomySession(site);
-                    var termStore = session.TermStores[TermStoreName.TermStore];
-                    var group = from g in termStore.Groups where g.Name == DeviationsList.TermGroup select g;
-                    var termSet = group.FirstOrDefault().TermSets[DeviationsList.TermSetStatus];
-                    statusField.SspId = termSet.TermStore.Id;
-                    statusField.TermSetId = termSet.Id;
-                    statusField.TargetTemplate = string.Empty;
-                    statusField.AllowMultipleValues = false;
-                    statusField.CreateValuesInEditForm = false;
-                    statusField.Open = true;
-                    statusField.AnchorId = Guid.Empty;
                     statusField.Group = DeviationsList.ListName;
                     statusField.Title = DeviationsList.DeviationStatusDisplayName;
-                    statusField.Update();
+                    statusField.ShowInNewForm = false;
+                    statusField.Open = true;
+                    statusField.AllowMultipleValues = false;
+                    statusField.CreateValuesInEditForm = false;
+                    TaxonomyUtility.ConnectTaxonomyField(site, statusField.Id, TermStoreName.TermGroup, DeviationsList.TermSetStatus);
                     SPFieldLink statusFieldLink = new SPFieldLink(statusField);
 
                     //RESPONSIBLE
@@ -158,6 +227,7 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     responsibleField.Title = DeviationsList.ResponsibleDisplayName;
                     responsibleField.AllowMultipleValues = false;
                     responsibleField.Group = DeviationsList.ListName;
+                    responsibleField.ShowInNewForm = false;
                     responsibleField.Update();
                     SPFieldLink responsibleFieldLink = new SPFieldLink(responsibleField);
 
@@ -167,6 +237,7 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     decisionDateField.Title = DeviationsList.DecisionDateDisplayName;
                     decisionDateField.Group = DeviationsList.ListName;
                     decisionDateField.DisplayFormat = SPDateTimeFieldFormatType.DateOnly;
+                    decisionDateField.ShowInNewForm = false;
                     decisionDateField.Update();
                     SPFieldLink decisionDateFieldLink = new SPFieldLink(decisionDateField);
 
@@ -179,6 +250,7 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     decisionCommentField.NumberOfLines = 15;
                     decisionCommentField.RichText = true;
                     decisionCommentField.RichTextMode = SPRichTextMode.FullHtml;
+                    decisionCommentField.ShowInNewForm = false;
                     decisionCommentField.Update();
                     SPFieldLink decisionCommentFieldLink = new SPFieldLink(decisionCommentField);
 
@@ -188,6 +260,7 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     actionDateField.Title = DeviationsList.ActionByDateDisplayName;
                     actionDateField.Group = DeviationsList.ListName;
                     actionDateField.DisplayFormat = SPDateTimeFieldFormatType.DateOnly;
+                    actionDateField.ShowInNewForm = false;
                     actionDateField.Update();
                     SPFieldLink actionDateFieldLink = new SPFieldLink(actionDateField);
 
@@ -197,6 +270,7 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     followUpDateField.Title = DeviationsList.FollowUpDateDisplayName;
                     followUpDateField.Group = DeviationsList.ListName;
                     followUpDateField.DisplayFormat = SPDateTimeFieldFormatType.DateOnly;
+                    followUpDateField.ShowInNewForm = false;
                     followUpDateField.Update();
                     SPFieldLink followupDateFieldLink = new SPFieldLink(followUpDateField);
 
@@ -208,6 +282,7 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     followUpCommentField.NumberOfLines = 15;
                     followUpCommentField.RichText = true;
                     followUpCommentField.RichTextMode = SPRichTextMode.FullHtml;
+                    followUpCommentField.ShowInNewForm = false;
                     followUpCommentField.Update();
                     SPFieldLink followUpCommentFieldLink = new SPFieldLink(followUpCommentField);
 
@@ -340,24 +415,16 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                 }
                 else
                 {
-                    //RESULTING DOCUMENT CATEGORY   -   CREATE QSE TERMSET and Group
-                    TaxonomyUtility.CreateTermSet(currentWeb, ProcessStepList.TermGroup, ProcessStepList.TermSetProcess);
+                    //PROCESS CATEGORY 
+                    
                     string fieldInternalName = CustomListHelper.CreateTaxonomySiteColumn(site, ProcessStepList.Process);
                     TaxonomyField processStepField = rootWeb.Fields[fieldInternalName] as TaxonomyField;
-                    TaxonomySession session = new TaxonomySession(site);
-                    var termStore = session.TermStores[TermStoreName.TermStore];
-                    var group = from g in termStore.Groups where g.Name == ProcessStepList.TermGroup select g;
-                    var termSet = group.FirstOrDefault().TermSets[ProcessStepList.TermSetProcess];
-                    processStepField.SspId = termSet.TermStore.Id;
-                    processStepField.TermSetId = termSet.Id;
-                    processStepField.TargetTemplate = string.Empty;
                     processStepField.AllowMultipleValues = false;
                     processStepField.CreateValuesInEditForm = false;
                     processStepField.Open = true;
-                    processStepField.AnchorId = Guid.Empty;
                     processStepField.Group = ProcessStepList.ListName;
                     processStepField.Title = ProcessStepList.ProcessDisplayName;
-                    processStepField.Update();
+                    TaxonomyUtility.ConnectTaxonomyField(site, processStepField.Id, TermStoreName.TermGroup, ProcessStepList.TermSetProcess);
                     SPFieldLink processStepFieldLink = new SPFieldLink(processStepField);
 
                     //Process Description Field
@@ -370,8 +437,6 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     descriptionField.Group = ProcessStepList.ListName;
                     descriptionField.Update();
                     SPFieldLink descriptionFieldLink = new SPFieldLink(descriptionField);
-
-
 
                     //Templates Field
                     fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, ProcessStepList.ProcessTemplates, SPFieldType.Note, false);
@@ -411,6 +476,12 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                     defaultView.ViewFields.Add(CustomListHelper.ReturnListField(processStepList, ProcessStepList.Process));
                     defaultView.ViewFields.Add(CustomListHelper.ReturnListField(processStepList, ProcessStepList.ProcessDescription));
                     defaultView.ViewFields.Add(CustomListHelper.ReturnListField(processStepList, ProcessStepList.ProcessTemplates));
+
+                    defaultView.Query = "<OrderBy>" +
+                                            "<FieldRef Name ='" + CustomListHelper.ReturnTrimmedString(ProcessStepList.Process) + "' Ascending='TRUE' />" +
+                                            "<FieldRef Name='Title' Ascending='TRUE' />" +
+                                        "</OrderBy>";
+
                     defaultView.Update();
 
                     SPField titleField = processStepList.Fields[SPBuiltInFieldId.Title];
@@ -461,24 +532,15 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                 }
                 else
                 {
-                    //RESULTING DOCUMENT CATEGORY   -   CREATE QSE TERMSET and Group
-                    TaxonomyUtility.CreateTermSet(currentWeb, ResultingDocuments.TermGroup, ResultingDocuments.TermSetResultingDocumentCategory);
+                    //RESULTING DOCUMENT CATEGORY 
                     string fieldInternalName = CustomListHelper.CreateTaxonomySiteColumn(site, ResultingDocuments.ResultingDocumentCategory);
                     TaxonomyField resultingDocumentCategoryField = rootWeb.Fields[fieldInternalName] as TaxonomyField;
-                    TaxonomySession session = new TaxonomySession(site);
-                    var termStore = session.TermStores[TermStoreName.TermStore];
-                    var group = from g in termStore.Groups where g.Name == ResultingDocuments.TermGroup select g;
-                    var termSet = group.FirstOrDefault().TermSets[ResultingDocuments.TermSetResultingDocumentCategory];
-                    resultingDocumentCategoryField.SspId = termSet.TermStore.Id;
-                    resultingDocumentCategoryField.TermSetId = termSet.Id;
-                    resultingDocumentCategoryField.TargetTemplate = string.Empty;
                     resultingDocumentCategoryField.AllowMultipleValues = false;
                     resultingDocumentCategoryField.CreateValuesInEditForm = false;
                     resultingDocumentCategoryField.Open = true;
-                    resultingDocumentCategoryField.AnchorId = Guid.Empty;
                     resultingDocumentCategoryField.Group = ResultingDocuments.ListName;
                     resultingDocumentCategoryField.Title = ResultingDocuments.ResultingDocumentCategoryDisplayName;
-                    resultingDocumentCategoryField.Update();
+                    TaxonomyUtility.ConnectTaxonomyField(site, resultingDocumentCategoryField.Id, TermStoreName.TermGroup, ResultingDocuments.TermSetResultingDocumentCategory);
                     SPFieldLink resultingDocumentCategoryFieldLink = new SPFieldLink(resultingDocumentCategoryField);
 
                     //RESULTING DOCUMENT YEAR
@@ -574,80 +636,55 @@ namespace Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists
                 }
                 else
                 {
-                    //ISO9001   -   CREATE QSE TERMSET and Group
-                    TaxonomyUtility.CreateTermSet(currentWeb, ControllingDocuments.TermGroup, ControllingDocuments.TermSetISO9001);
+                    //ISO9001 
                     string fieldInternalName = CustomListHelper.CreateTaxonomySiteColumn(site, ControllingDocuments.ISO9001);
                     TaxonomyField iso9001Field = rootWeb.Fields[fieldInternalName] as TaxonomyField;
-                    TaxonomySession session = new TaxonomySession(site);
-                    var termStore = session.TermStores[TermStoreName.TermStore];
-                    var group = from g in termStore.Groups where g.Name == ControllingDocuments.TermGroup select g;
-                    var termSet = group.FirstOrDefault().TermSets[ControllingDocuments.TermSetISO9001];
-                    iso9001Field.SspId = termSet.TermStore.Id;
-                    iso9001Field.TermSetId = termSet.Id;
-                    iso9001Field.TargetTemplate = string.Empty;
                     iso9001Field.AllowMultipleValues = false;
                     iso9001Field.CreateValuesInEditForm = false;
                     iso9001Field.Open = true;
-                    iso9001Field.AnchorId = Guid.Empty;
                     iso9001Field.Group = ControllingDocuments.ListName;
                     iso9001Field.Title = ControllingDocuments.ISO9001DisplayName;
-                    iso9001Field.Update();
+                    TaxonomyUtility.ConnectTaxonomyField(site, iso9001Field.Id, TermStoreName.TermGroup, ControllingDocuments.TermSetISO9001);
                     SPFieldLink iso9001FieldLink = new SPFieldLink(iso9001Field);
 
-                    //ISO14001   -   CREATE QSE TERM GROUP AND TERMSET 
-                    TaxonomyUtility.CreateTermSet(currentWeb, ControllingDocuments.TermGroup, ControllingDocuments.TermSetISO14001);
+                    //ISO14001
+                    
                     fieldInternalName = CustomListHelper.CreateTaxonomySiteColumn(site, ControllingDocuments.ISO14001);
                     TaxonomyField iso14001Field = rootWeb.Fields[fieldInternalName] as TaxonomyField;
-                    group = from g in termStore.Groups where g.Name == ControllingDocuments.TermGroup select g;
-                    termSet = group.FirstOrDefault().TermSets[ControllingDocuments.TermSetISO14001];
-                    iso14001Field.SspId = termSet.TermStore.Id;
-                    iso14001Field.TermSetId = termSet.Id;
-                    iso14001Field.TargetTemplate = string.Empty;
                     iso14001Field.AllowMultipleValues = false;
                     iso14001Field.CreateValuesInEditForm = false;
                     iso14001Field.Open = true;
                     iso14001Field.AnchorId = Guid.Empty;
                     iso14001Field.Group = ControllingDocuments.ListName;
                     iso14001Field.Title = ControllingDocuments.ISO14001DisplayName;
-                    iso14001Field.Update();
+                    TaxonomyUtility.ConnectTaxonomyField(site, iso14001Field.Id, TermStoreName.TermGroup, ControllingDocuments.TermSetISO14001);
                     SPFieldLink iso14001FieldLink = new SPFieldLink(iso14001Field);
 
                     //ISO18001   -   CREATE QSE TERM GROUP AND TERMSET 
-                    TaxonomyUtility.CreateTermSet(currentWeb, ControllingDocuments.TermGroup, ControllingDocuments.TermSetISO18001);
+                    
                     fieldInternalName = CustomListHelper.CreateTaxonomySiteColumn(site, ControllingDocuments.ISO18001);
                     TaxonomyField iso18001Field = rootWeb.Fields[fieldInternalName] as TaxonomyField;
-                    group = from g in termStore.Groups where g.Name == ControllingDocuments.TermGroup select g;
-                    termSet = group.FirstOrDefault().TermSets[ControllingDocuments.TermSetISO18001];
-                    iso18001Field.SspId = termSet.TermStore.Id;
-                    iso18001Field.TermSetId = termSet.Id;
-                    iso18001Field.TargetTemplate = string.Empty;
                     iso18001Field.AllowMultipleValues = false;
                     iso18001Field.CreateValuesInEditForm = false;
                     iso18001Field.Open = true;
                     iso18001Field.AnchorId = Guid.Empty;
                     iso18001Field.Group = ControllingDocuments.ListName;
                     iso18001Field.Title = ControllingDocuments.ISO18001DisplayName;
-                    iso18001Field.Update();
+                    TaxonomyUtility.ConnectTaxonomyField(site, iso18001Field.Id, TermStoreName.TermGroup, ControllingDocuments.TermSetISO18001);
                     SPFieldLink iso18001FieldLink = new SPFieldLink(iso18001Field);
 
                     //CHAPTER   -   CREATE QSE TERM GROUP AND TERMSET 
-                    TaxonomyUtility.CreateTermSet(currentWeb, ControllingDocuments.TermGroup, ControllingDocuments.TermSetChapter);
+                    
                     fieldInternalName = CustomListHelper.CreateTaxonomySiteColumn(site, ControllingDocuments.Chapter);
                     TaxonomyField chapterField = rootWeb.Fields[fieldInternalName] as TaxonomyField;
-                    group = from g in termStore.Groups where g.Name == ControllingDocuments.TermGroup select g;
-                    termSet = group.FirstOrDefault().TermSets[ControllingDocuments.TermSetChapter];
-                    chapterField.SspId = termSet.TermStore.Id;
-                    chapterField.TermSetId = termSet.Id;
-                    chapterField.TargetTemplate = string.Empty;
                     chapterField.AllowMultipleValues = false;
                     chapterField.CreateValuesInEditForm = false;
                     chapterField.Open = true;
                     chapterField.AnchorId = Guid.Empty;
                     chapterField.Group = ControllingDocuments.ListName;
                     chapterField.Title = ControllingDocuments.ChapterDisplayname;
-                    chapterField.Update();
+                    TaxonomyUtility.ConnectTaxonomyField(site, chapterField.Id, TermStoreName.TermGroup, ControllingDocuments.TermSetChapter);
                     SPFieldLink chapterFieldLink = new SPFieldLink(chapterField);
-
 
                     //Written By Field
                     fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, ControllingDocuments.WrittenBy, SPFieldType.User,false);

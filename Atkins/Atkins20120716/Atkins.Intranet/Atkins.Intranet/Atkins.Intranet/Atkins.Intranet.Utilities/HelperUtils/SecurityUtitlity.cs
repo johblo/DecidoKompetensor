@@ -37,7 +37,6 @@ namespace Atkins.Intranet.Utilities.HelperUtils
         
         public static SPRoleDefinition CreateDeviationCustomRoleDefinition(SPWeb web,string Name)
         {
-            
             bool exist = false;
             foreach (SPRoleDefinition role in web.Site.RootWeb.RoleDefinitions)
             {
@@ -54,9 +53,8 @@ namespace Atkins.Intranet.Utilities.HelperUtils
                 SPBasePermissions.Open |
                 SPBasePermissions.AddListItems |
                 SPBasePermissions.ViewListItems |
-                SPBasePermissions.ViewFormPages | 
-                SPBasePermissions.ViewPages |
-                SPBasePermissions.EditListItems;
+                SPBasePermissions.ViewFormPages |
+                SPBasePermissions.ViewPages;
                 roleDef.Name = Name;
                 web.Site.RootWeb.AllowUnsafeUpdates = true;
                 web.Site.RootWeb.RoleDefinitions.Add(roleDef);

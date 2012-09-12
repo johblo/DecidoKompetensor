@@ -2,9 +2,19 @@
 $culture = new-object "System.Globalization.CultureInfo" $lcid
 [System.Threading.Thread]::CurrentThread.CurrentUICulture = $culture
 
+$w = get-spwebapplication http://ws2008r2efen64:6000
+$w.HttpThrottleSettings
+$w.Update()
+ 
+
 $intranetUrl = "http://ws2008r2efen64:6000/sites/intranet"
 $intranetTitle = "Start"
 $administratorAccount = "TRETTON37\administrator"
+
+
+
+
+
 
 $rootTemplate = Get-SPWebTemplate "Atkins.Intranet.Portal#0"
 iisreset
@@ -14,11 +24,13 @@ $homeSiteCollection = New-SPSite -Url $intranetUrl -OwnerAlias $administratorAcc
 Write-Host "Site "$intranetTitle" successfully created!"
 Write-Host "************************************************************"
 
+Write-Host "Creating TermSets "
+Write-Host "***********************Create TermSets*********"
+Enable-SPFeature -Identity "ddba34d7-dcc9-448f-9406-376769132550" -URL $intranetUrl
+
 Write-Host "Activating Rootweb features:"
 Write-Host "***********************Create Rootweb lists*********"
 Enable-SPFeature -Identity "df6a80ee-8cbe-4253-9cca-8f173a97b8dd" -URL $intranetUrl
-
-
 
 Write-Host "Activating Rootweb features:"
 Write-Host "***********************Permission level and Document ID Feature*********"
@@ -88,8 +100,13 @@ Write-Host "Activating QSE features:"
 Write-Host "***********************Create lists*********"
 Enable-SPFeature -Identity "5fda185d-59ca-4101-955b-c9f28dd3acd7" -URL $qseUrl
 
+Write-Host "***********************Deviation Eventreceiver*********"
+Enable-SPFeature -Identity "799a630b-ca35-4251-87cf-07eaaf59a5e0" -URL $qseUrl
+
 Write-Host "***********************QSE Sample Data*********"
 Enable-SPFeature -Identity "da11ccec-692a-4402-a86e-6e4a53f56742" -URL $qseUrl
+
+
 
 
 Write-Host "QSE Features Activation Done!"
@@ -158,7 +175,7 @@ $technologyTitle = "Teknikområden"
 $technologyTemplate= Get-SPWebTemplate "Atkins.Intranet.Portal#4"
 iisreset
 
-Write-Host "Creating Sub-Site: "$itTitle
+Write-Host "Creating Sub-Site: "$technologyTitle
 $technologySubSite = New-SPWeb –url $technologyUrl -name $technologyTitle -template $technologyTemplate -Language 1053
 Write-Host "Sub-site "$technologyTitle" successfully created!"
 Write-Host "************************************************************"

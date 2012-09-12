@@ -44,5 +44,6 @@
     <FeatureManifest Location="Atkins.Intranet.Portal_Atkins.Intranet.Lists\Feature.xml" />
     <FeatureManifest Location="Atkins.Intranet.Portal_Atkins.Intranet.Portal.AddWebParts\Feature.xml" />
     <FeatureManifest Location="Atkins.Intranet.Portal_Atkins.Intranet.Portal.Settings\Feature.xml" />
+    <FeatureManifest Location="Atkins.Intranet.Portal_Atkins.Intranet.Portal.Taxonomy\Feature.xml" />
   </FeatureManifests>
 </Solution>

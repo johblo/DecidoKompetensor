@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Hidden="TRUE" Title="Atkins.Intranet.HR Print Item" Description="Feature that activates a print button in the ribbon for custom list items in display mode" Id="e1aea629-4aa3-479d-b9fe-f3454f5227e6" Scope="Web">
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Hidden="TRUE" Description="Feature that activates a print button in the ribbon for custom list items in display mode" Id="e1aea629-4aa3-479d-b9fe-f3454f5227e6" Scope="Web" Title="Atkins.Intranet.HR Print Item">
   <ElementManifests>
     <ElementManifest Location="PrintAction\Elements.xml" />
   </ElementManifests>

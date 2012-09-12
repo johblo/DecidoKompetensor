@@ -100,10 +100,6 @@
 
     <Configuration ID="1" Name="Atkins.Intranet.HR" MasterUrl="~SiteCollection/_catalogs/masterpage/AtkinsSubSiteMasterPage.master" CustomMasterUrl="~SiteCollection/_catalogs/masterpage/AtkinsSystemMasterPage.master" >
       <Lists>
-        <List FeatureId="00BFEA71-D1CE-42de-9C63-A44004CE0104"
-          Type="104" Title="$Resources:core,announceList;"
-          Url="$Resources:core,lists_Folder;/$Resources:core,announce_Folder;">
-        </List>
         <List FeatureId="00BFEA71-2062-426C-90BF-714C59600103"
           Type="103" Title="$Resources:core,linksList;"
           Url="$Resources:core,lists_Folder;/$Resources:core,links_Folder;" />
@@ -257,13 +253,6 @@
 
     <Configuration ID="3" Name="Atkins.Intranet.Finance" MasterUrl="~SiteCollection/_catalogs/masterpage/AtkinsSubSiteMasterPage.master" CustomMasterUrl="~SiteCollection/_catalogs/masterpage/AtkinsSystemMasterPage.master" >
       <Lists>
-        <List FeatureId="00BFEA71-D1CE-42de-9C63-A44004CE0104"
-          Type="104" Title="$Resources:core,announceList;"
-          Url="$Resources:core,lists_Folder;/$Resources:core,announce_Folder;">
-        </List>
-        <List FeatureId="00BFEA71-2062-426C-90BF-714C59600103"
-          Type="103" Title="$Resources:core,linksList;"
-          Url="$Resources:core,lists_Folder;/$Resources:core,links_Folder;" />
         <List FeatureId="00BFEA71-EC85-4903-972D-EBE475780106"
           Type="106" Title="$Resources:core,calendarList;"
           Url="$Resources:core,lists_Folder;/$Resources:core,calendar_Folder;"
@@ -327,10 +316,6 @@
 
     <Configuration ID="4" Name="Atkins.Intranet.Common" MasterUrl="~SiteCollection/_catalogs/masterpage/AtkinsSubSiteMasterPage.master" CustomMasterUrl="~SiteCollection/_catalogs/masterpage/AtkinsSystemMasterPage.master" >
       <Lists>
-        <List FeatureId="00BFEA71-D1CE-42de-9C63-A44004CE0104"
-          Type="104" Title="$Resources:core,announceList;"
-          Url="$Resources:core,lists_Folder;/$Resources:core,announce_Folder;">
-        </List>
         <List FeatureId="00BFEA71-2062-426C-90BF-714C59600103"
           Type="103" Title="$Resources:core,linksList;"
           Url="$Resources:core,lists_Folder;/$Resources:core,links_Folder;" />

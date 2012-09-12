@@ -59,7 +59,7 @@
     <xsl:variable name="bodyContent">
       <xsl:call-template name="removeMarkup">
         <!--<xsl:with-param name="string" select="$bodyContent" />-->
-        <xsl:with-param name="string" select="substring(@Body,1,300)" />
+        <xsl:with-param name="string" select="substring(@Body,1,290)" />
       </xsl:call-template>
     </xsl:variable>
     <div id="linkitem" class="announcementItem">
@@ -75,14 +75,16 @@
         <a href="{$SafeLinkUrl}" target="{$LinkTarget}" title="{@LinkToolTip}">
           <span class="ms-announcementtitle">
             <xsl:value-of select="$DisplayTitle"/>
-          </span> (skriven <xsl:value-of select="@Created" /> av <xsl:value-of select="@Author" />)
+          </span>
+          <br/>
+          skriven av <xsl:value-of select="@Author" />
         </a>
         <div class="description">
           <!--<xsl:value-of select="substring($bodyContent,1,1000)" disable-output-escaping="yes" />-->
-          <xsl:value-of select="$bodyContent" disable-output-escaping="yes" />
-          ...(<a href="{$SafeLinkUrl}" mce_href="{$SafeLinkUrl}" target="{$LinkTarget}" title="{@LinkToolTip}">läs mer</a>)
+          <xsl:value-of select="$bodyContent" disable-output-escaping="yes" /> ...
           <br />
-          <xsl:value-of select="@PublishedDate" />
+          <br />
+          Publiceringsdatum <xsl:value-of select="substring(@PublishedDate, 1,10)" />
         </div>
       </div>
     </div>

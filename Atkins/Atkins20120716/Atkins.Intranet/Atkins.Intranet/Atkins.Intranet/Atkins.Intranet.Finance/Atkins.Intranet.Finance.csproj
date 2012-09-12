@@ -72,6 +72,7 @@
   <ItemGroup>
     <Content Include="Features\Atkins.Intranet.Finance.AddWebparts\Atkins.Intranet.Finance.AddWebparts.Template.xml">
       <DependentUpon>Atkins.Intranet.Finance.AddWebparts.feature</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>

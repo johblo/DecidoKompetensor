@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Title="Atkins.Intranet.QSE Lists" Id="5fda185d-59ca-4101-955b-c9f28dd3acd7" ReceiverAssembly="Atkins.Intranet.QSE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=44c1abf65c93664b" ReceiverClass="Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists.AtkinsIntranetQSEEventReceiver" Scope="Web"></Feature>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Id="5fda185d-59ca-4101-955b-c9f28dd3acd7" ReceiverAssembly="Atkins.Intranet.QSE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=44c1abf65c93664b" ReceiverClass="Atkins.Intranet.QSE.Features.Atkins.Intranet.QSE.Lists.AtkinsIntranetQSEEventReceiver" Scope="Web" Title="Atkins.Intranet.QSE Lists"></Feature>

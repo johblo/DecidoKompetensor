@@ -6,6 +6,7 @@ using Microsoft.SharePoint.Security;
 using Atkins.Intranet.Utilities.HelperUtils;
 using System.Web;
 using System.IO;
+using Microsoft.SharePoint.Utilities;
 
 
 namespace Atkins.Intranet.CommonSite.Features.Atkins.Intranet.CommonSite.AddWebParts
@@ -38,7 +39,7 @@ namespace Atkins.Intranet.CommonSite.Features.Atkins.Intranet.CommonSite.AddWebP
             //BLOG WEBPART // MANUAL FILTERING
             using (SPWeb sourceWeb = web.Site.AllWebs[BlogPosts.webName])
             {
-                WebPartUtility.AddCQWP(web, sourceWeb, BlogPosts.ListName, BlogPosts.webPartTitle,BlogPosts.rowLimitStartPage, BlogPosts.ZoneId, 1, BlogPosts.xslPath, BlogPosts.webpartItemStyle, BlogPosts.webPartViewFields, BlogPosts.webpartTitleImageUrl);
+                WebPartUtility.AddCQWP(web, sourceWeb, SPUtility.GetLocalizedString(BlogPosts.ListName, CommonSettings.resourceFile, CommonSettings.resourceLCID), BlogPosts.webPartTitle, BlogPosts.rowLimitStartPage, BlogPosts.ZoneId, 1, BlogPosts.xslPath, BlogPosts.webpartItemStyle, BlogPosts.webPartViewFields, BlogPosts.webpartTitleImageUrl);
                 
             }
             if (contextCreated)

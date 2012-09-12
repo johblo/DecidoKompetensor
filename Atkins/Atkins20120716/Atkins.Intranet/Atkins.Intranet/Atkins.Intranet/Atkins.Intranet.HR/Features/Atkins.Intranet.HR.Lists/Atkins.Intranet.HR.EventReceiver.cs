@@ -133,7 +133,7 @@ namespace Atkins.Intranet.HR.Features.Lists
                 else
                 {
                     //Description Field
-                    string fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, EmployeeHandbook.Description, SPFieldType.Note, true);
+                    string fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, EmployeeHandbook.Description, SPFieldType.Note, false);
                     SPFieldMultiLineText descriptionField = (SPFieldMultiLineText)rootWeb.Fields.GetField(fieldInternalName);
                     descriptionField.Title = EmployeeHandbook.DescriptionDisplayName;
                     descriptionField.Group = EmployeeHandbook.ListName;
@@ -143,26 +143,17 @@ namespace Atkins.Intranet.HR.Features.Lists
                     descriptionField.Update();
                     SPFieldLink descriptionLink = new SPFieldLink(descriptionField);
 
-                    //Creates the TermSet and or group
-                    TaxonomyUtility.CreateTermSet(currentWeb,EmployeeHandbook.TermGroup,EmployeeHandbook.TermSet);
+                    
+                    
                     //Category TaxonomyField
-
                     fieldInternalName = CustomListHelper.CreateTaxonomySiteColumn(site, EmployeeHandbook.Category);
                     TaxonomyField categoryField = rootWeb.Fields[fieldInternalName] as TaxonomyField;
-                    TaxonomySession session = new TaxonomySession(site);
-                    var termStore = session.TermStores[TermStoreName.TermStore];
-                    var group = from g in termStore.Groups where g.Name == EmployeeHandbook.TermGroup select g;
-                    var termSet = group.FirstOrDefault().TermSets[EmployeeHandbook.TermSet];
-                    categoryField.SspId = termSet.TermStore.Id;
-                    categoryField.TermSetId = termSet.Id;
-                    categoryField.TargetTemplate = string.Empty;
                     categoryField.AllowMultipleValues = false;
                     categoryField.CreateValuesInEditForm = false;
                     categoryField.Open = true;
-                    categoryField.AnchorId = Guid.Empty;
                     categoryField.Group = EmployeeHandbook.ListName;
                     categoryField.Title = EmployeeHandbook.CategoryDisplayName;
-                    categoryField.Update();
+                    TaxonomyUtility.ConnectTaxonomyField(site, categoryField.Id, TermStoreName.TermGroup, EmployeeHandbook.TermSet);
                     SPFieldLink categoryFieldLink = new SPFieldLink(categoryField);
                     
                     //Valid from Field
@@ -175,7 +166,7 @@ namespace Atkins.Intranet.HR.Features.Lists
                     SPFieldLink validFromFieldLink = new SPFieldLink(validFromField);
 
                     //Valid to Field
-                    fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, EmployeeHandbook.ValidTo, SPFieldType.DateTime, true);
+                    fieldInternalName = CustomListHelper.CreateSiteColumn(rootWeb, EmployeeHandbook.ValidTo, SPFieldType.DateTime, false);
                     SPFieldDateTime validToField = (SPFieldDateTime)rootWeb.Fields.GetField(fieldInternalName);
                     validToField.Title = EmployeeHandbook.ValidToDisplayName;
                     validToField.Group = EmployeeHandbook.ListName;

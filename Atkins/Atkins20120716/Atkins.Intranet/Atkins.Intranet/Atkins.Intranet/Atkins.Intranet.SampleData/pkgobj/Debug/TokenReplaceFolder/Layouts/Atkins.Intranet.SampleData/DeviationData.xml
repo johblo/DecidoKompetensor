@@ -5,7 +5,7 @@
     <KeyDate>2011-05-09</KeyDate>
     <DeviationStatus>aa</DeviationStatus>
     <DeviationDescription>Bron i lagret rasade</DeviationDescription>
-    <Responsible>1;#administrator</Responsible>
+    <DeviationResponsible>1;#administrator</DeviationResponsible>
     <DecisionDate>2011-06-11</DecisionDate>
     <DecisionComment>Bygg en ny starkare bro</DecisionComment>
     <ActionByDate>2011-07-09</ActionByDate>
