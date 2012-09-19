@@ -23,26 +23,66 @@
 <asp:Content ContentPlaceholderID="PlaceHolderMain" runat="server"> 
        <table cellpadding="0" cellspacing="0"><tr>
        <td class="zonegap"></td>                                       
-       <td class="zoneColumn">
+       <td class="zoneColumnLeft">
         <div class="layout-left-zone">
             <WebPartPages:WebPartZone runat="server" Title="loc:Left" ID="Left" FrameType="TitleBarOnly" class="layout-right-zone">
             <ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
         </div>
         </td>
         <td class="zonegap"></td>
-        <td class="zoneColumn">
+        <td class="zoneColumnCenter">
         <div class="layout-center-zone">
             <WebPartPages:WebPartZone runat="server" Title="loc:Center" ID="Center" FrameType="TitleBarOnly" class="layout-center-zone"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
         </div>
         </td>
         <td class="zonegap"></td>
-        <td class="zoneColumn">
+        <td class="zoneColumnRight">
         <div class="layout-right-zone">
             <WebPartPages:WebPartZone runat="server" Title="loc:Right" ID="Right" FrameType="TitleBarOnly" class="layout-right-zone"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
         </div>
         </td>
         <td class="zonegap"></td>
        </tr>
+
+
+       <tr>
+        <td class="zonegap"></td> 
+        <td class="zoneColumnOverall" colspan="5">
+            <div class="layout-overall-zone">
+                <WebPartPages:WebPartZone runat="server" Title="loc:Center" ID="MiddleZone1" FrameType="TitleBarOnly" class="layout-overall-zone">
+                <ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+            </div>
+        </td>
+        <td class="zonegap"></td> 
+       </tr>
+       </table> 
+
+
+       <table width="100%" cellpadding="0" cellspacing="0"><tr>
+       <td class="zonegap"></td>                                       
+       <td class="zoneColumn">
+        <div class="layout-left-zone">
+            <WebPartPages:WebPartZone runat="server" Title="loc:Left" ID="LeftBottom" FrameType="TitleBarOnly" class="layout-right-zone">
+            <ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+        </div>
+        </td>
+        <td class="zonegap"></td>
+        <td class="zoneColumn">
+        <div class="layout-center-zone">
+            <WebPartPages:WebPartZone runat="server" Title="loc:Center" ID="CenterBottom" FrameType="TitleBarOnly" class="layout-center-zone"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+        </div>
+        </td>
+        <td class="zonegap"></td>
+        <td class="zoneColumn">
+        <div class="layout-right-zone">
+            <WebPartPages:WebPartZone runat="server" Title="loc:Right" ID="RightBottom" FrameType="TitleBarOnly" class="layout-right-zone"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+        </div>
+        </td>
+        <td class="zonegap"></td>
+       </tr>
+       
+
+
        </table> 
     
 </asp:Content>

@@ -71,14 +71,7 @@
     font-weight:bold !important;
 }
 
-.s4-tn {
-    background-color: #00688B !important; /*#6495ED */
-    color: white !important;
-    font-weight: bold !important;
-    padding-left: 30px !important;
-    padding-right: 30px !important;
-    /*width: 100% !important;*/
-}
+
 
 .s4-socialdata-notif {
      display: none !important;
@@ -92,19 +85,14 @@
     color: white !important;
 }
 
-.static .selected {
-    
-    color: #00688B !important;
-}
+
 
 #s4-leftpanel {
     width: 0px !important;
     display: none !important;
 }
 
-#s4-topheader2 {
-    /*width: 100% !important;*/
-}
+
 
 .ms-cui-topBar2
 {

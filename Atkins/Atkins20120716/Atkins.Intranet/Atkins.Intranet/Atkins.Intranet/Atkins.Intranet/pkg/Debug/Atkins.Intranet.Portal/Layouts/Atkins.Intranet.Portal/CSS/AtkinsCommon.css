@@ -1,4 +1,12 @@
-﻿/*Footer */
+﻿#body
+{
+    font-family:Arial !important;
+}
+#body a
+{
+    color:Black !important;
+}
+/*Footer */
 .footer
 {
     text-align: center; 
@@ -18,3 +26,79 @@
     font-size: 10px;
     background-color:#304860;
 }
+
+.s4-tn {
+    background-color: #304961 !important; /*#6495ED */
+    color: white !important;
+    font-weight: bold !important;
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+    font-size:12px;
+    height:24px;
+    /*width: 100% !important;*/
+}
+
+.static .selected {
+    
+    color: #304961 !important;
+}
+
+.ms-WPHeader td h3, .ms-WPHeader td h3 a, .ms-WPTitle
+{
+    color:White !important;
+    height:18px !important;
+    font-size:10px !important;
+    font-weight:bold !important;
+}
+
+.ms-WPHeader td
+{
+    border-bottom:0px !important;
+}
+
+.ms-WPHeader {
+    background: url(/_layouts/images/Atkins.Intranet.Portal/sub_menu_bar_gradient.gif) #6B91B3 repeat-x left top  !important;
+    border-top: 0px !important;
+    border-bottom:0px !important;
+    height:18px;
+}
+.ms-WPHeaderTdMenu
+{
+    border-top: 0px !important;
+    
+}
+
+.ms-vb a:link,.ms-vb a:visited, .ms-vb2 A:link, .ms-vb2 A:visited
+{
+   color:Black !important;
+}
+
+
+
+#s4-topheader2 {
+    /*width: 100% !important;*/
+    border-bottom:0px !important;
+}
+
+#s4-leftpanel-content 
+{
+    background-color: #E7E7E7 !important;
+}
+
+.s4-tn .menu-item {    
+    color: white !important;
+}
+
+.s4-tn .static .selected {
+    
+    color: #304961 !important;
+}
+
+
+
+#s4-leftpanel > .menu-item, .s4-ql UL.root > LI > .menu-item, .s4-ql UL.root UL > LI > A
+{
+    color: Black !important;
+    font-size:10px !important;
+}
+

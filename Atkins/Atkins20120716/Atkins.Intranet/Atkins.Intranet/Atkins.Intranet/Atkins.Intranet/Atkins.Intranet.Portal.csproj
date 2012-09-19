@@ -101,6 +101,7 @@
     <Content Include="Images\Atkins.Intranet.Portal\icons\plug_extension.png" />
     <Content Include="Images\Atkins.Intranet.Portal\icons\task_my.png" />
     <Content Include="Images\Atkins.Intranet.Portal\icons\warning.png" />
+    <Content Include="Images\Atkins.Intranet.Portal\sub_menu_bar_gradient.gif" />
     <Content Include="Layouts\Atkins.Intranet.Portal\CSS\AtkinsCommon.css" />
     <Content Include="Layouts\Atkins.Intranet.Portal\CSS\AtkinsSubSiteMasterPage.css" />
     <Content Include="Layouts\Atkins.Intranet.Portal\CSS\AtkinsSubSitePageLayout.css" />
