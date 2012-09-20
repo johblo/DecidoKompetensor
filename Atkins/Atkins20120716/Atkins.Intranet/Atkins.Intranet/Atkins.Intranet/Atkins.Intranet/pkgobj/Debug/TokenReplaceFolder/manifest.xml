@@ -30,6 +30,7 @@
     <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\plug_extension.png" />
     <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\task_my.png" />
     <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\warning.png" />
+    <TemplateFile Location="Images\Atkins.Intranet.Portal\sub_menu_bar_gradient.gif" />
     <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\docs.png" />
     <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\employee.png" />
     <TemplateFile Location="Images\Atkins.Intranet.Portal\icons\task.png" />

@@ -87,13 +87,10 @@ padding-left: 0px !important;
 padding-right: 0px !important;
 }
 
-.s4-ca
-{
-    
-}
+
 
 #s4-leftpanel .menu-item {
-     color: #00558D !important;
+     color: Black !important;
      
 }
 
@@ -103,3 +100,14 @@ padding-right: 0px !important;
     padding-right: 100px !important;
 }
 
+.s4-ca
+{
+    margin-left:192px;
+    
+}
+
+#s4-leftpanel 
+{
+    width:192px !important;
+    float:left;
+}

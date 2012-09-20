@@ -21,9 +21,9 @@
 
 
 <asp:Content ContentPlaceholderID="PlaceHolderMain" runat="server"> 
-       <table cellpadding="0" cellspacing="0"><tr>
+       <table width="100%" cellpadding="0" cellspacing="0"><tr>
        <td class="zonegap"></td>                                       
-       <td class="zoneColumn">
+       <td class="zoneColumnLeft">
         <div class="layout-left-zone">
             <WebPartPages:WebPartZone runat="server" Title="loc:Left" ID="Left" FrameType="TitleBarOnly" class="layout-right-zone">
             <ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
@@ -31,7 +31,7 @@
         </td>
         
         <td class="zonegap"></td>
-        <td class="zoneColumn">
+        <td class="zoneColumnRight">
         <div class="layout-right-zone">
             <WebPartPages:WebPartZone runat="server" Title="loc:Right" ID="Right" FrameType="TitleBarOnly" class="layout-right-zone"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
         </div>

@@ -7,7 +7,7 @@
     // on load
     fixFooterPosition();
     showFooter();
-
+    /*
     $("#s4-leftpanel-content ul.root>li.static>a").css("margin-left", "9px");
     $("#s4-leftpanel-content ul.root>li.static").css("background", "url('/_layouts/images/Menu-right.gif') no-repeat 5px 7px");
     $("#s4-leftpanel-content ul.root>li.static>ul.static>li.selected").parent().parent().css("background", "url('/_layouts/images/Menu1.gif') no-repeat 5px 7px");
@@ -31,7 +31,7 @@ function () { },
 function () { }
 );
     $("#s4-leftpanel-content ul.root>li.static>ul.static>li.selected").parent().show();
-
+    */
 }); 
 
 

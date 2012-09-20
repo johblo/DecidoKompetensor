@@ -300,15 +300,7 @@
 						<table class="s4-titletable" cellspacing="0">
 							<tbody>
 								<tr>
-									<td class="s4-titlelogo">
-										<SharePoint:SPLinkButton runat="server" NavigateUrl="~site/" id="onetidProjectPropertyTitleGraphic">
-											<SharePoint:SiteLogoImage name="onetidHeadbnnr0" id="onetidHeadbnnr2" LogoImageUrl="~site/_layouts/Images/Atkins.Intranet.Portal/AtkinsLogo.png" runat="server"/>
-										</SharePoint:SPLinkButton>
-									</td>
-                                    <td class="titleImage">
-                                        <asp:Image runat="server" ImageUrl="~site/_layouts/Images/Atkins.Intranet.Portal/AtkinsMan.png" />
-									</td>
-									<td class="s4-titletext">
+                                    <td class="s4-titletext">
 										<h1 name="onetidProjectPropertyTitle">
 											<asp:ContentPlaceHolder id="PlaceHolderSiteName" runat="server">
 												<SharePoint:SPLinkButton runat="server" NavigateUrl="~site/" id="onetidProjectPropertyTitle"><SharePoint:ProjectProperty Property="Title" runat="server" /></SharePoint:SPLinkButton>
@@ -325,6 +317,15 @@
 									</td>
 									<td class="s4-socialdata-notif">
 										<SharePoint:DelegateControl ControlId="GlobalSiteLink3" Scope="Farm" runat="server"/>
+									</td>
+									
+                                    <td class="titleImage">
+                                        <asp:Image runat="server" ImageUrl="~site/_layouts/Images/Atkins.Intranet.Portal/AtkinsMan.png" />
+									</td>
+									<td class="s4-titlelogo">
+										<SharePoint:SPLinkButton runat="server" NavigateUrl="~site/" id="onetidProjectPropertyTitleGraphic">
+											<SharePoint:SiteLogoImage name="onetidHeadbnnr0" id="onetidHeadbnnr2" LogoImageUrl="~site/_layouts/Images/Atkins.Intranet.Portal/AtkinsLogo.png" runat="server"/>
+										</SharePoint:SPLinkButton>
 									</td>
 								</tr>
 							</tbody>

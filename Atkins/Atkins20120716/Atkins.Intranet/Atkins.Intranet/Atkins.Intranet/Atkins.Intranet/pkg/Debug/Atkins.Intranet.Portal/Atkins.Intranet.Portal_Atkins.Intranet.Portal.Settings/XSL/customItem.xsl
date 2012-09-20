@@ -76,15 +76,10 @@
           <span class="ms-announcementtitle">
             <xsl:value-of select="$DisplayTitle"/>
           </span>
-          <br/>
-          skriven av <xsl:value-of select="@Author" />
         </a>
         <div class="description">
           <!--<xsl:value-of select="substring($bodyContent,1,1000)" disable-output-escaping="yes" />-->
           <xsl:value-of select="$bodyContent" disable-output-escaping="yes" /> ...
-          <br />
-          <br />
-          Publiceringsdatum <xsl:value-of select="substring(@PublishedDate, 1,10)" />
         </div>
       </div>
     </div>

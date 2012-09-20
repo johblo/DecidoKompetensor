@@ -80,7 +80,7 @@
           <Properties xmlns="http://schemas.microsoft.com/sharepoint/">
             <Property Key="InheritGlobalNavigation" Value="true" />
             <Property Key="ShowSiblings" Value="true" />
-            <Property Key="IncludeSubSites" Value="true" />
+            <Property Key="IncludeSubSites" Value="false" />
             <Property Key="IncludePages" Value="false" />
           </Properties>
         </Feature>
@@ -151,7 +151,7 @@
           <Properties xmlns="http://schemas.microsoft.com/sharepoint/">
             <Property Key="InheritGlobalNavigation" Value="true" />
             <Property Key="ShowSiblings" Value="false" />
-            <Property Key="IncludeSubSites" Value="true" />
+            <Property Key="IncludeSubSites" Value="false" />
             <Property Key="IncludePages" Value="false" />
             <Property Key="InheritCurrentNavigation" Value="false"/>
             <Property Key="IncludeInCurrentNavigation" Value="false"/>
@@ -230,7 +230,7 @@
           <Properties xmlns="http://schemas.microsoft.com/sharepoint/">
             <Property Key="InheritGlobalNavigation" Value="true" />
             <Property Key="ShowSiblings" Value="false" />
-            <Property Key="IncludeSubSites" Value="true" />
+            <Property Key="IncludeSubSites" Value="false" />
             <Property Key="IncludePages" Value="false" />
             <Property Key="InheritCurrentNavigation" Value="false"/>
             <Property Key="IncludeInCurrentNavigation" Value="false"/>
@@ -296,7 +296,7 @@
           <Properties xmlns="http://schemas.microsoft.com/sharepoint/">
             <Property Key="InheritGlobalNavigation" Value="true" />
             <Property Key="ShowSiblings" Value="false" />
-            <Property Key="IncludeSubSites" Value="true" />
+            <Property Key="IncludeSubSites" Value="false" />
             <Property Key="IncludePages" Value="false" />
             <Property Key="InheritCurrentNavigation" Value="false"/>
             <Property Key="IncludeInCurrentNavigation" Value="false"/>
@@ -360,8 +360,8 @@
           <Properties xmlns="http://schemas.microsoft.com/sharepoint/">
             <Property Key="InheritGlobalNavigation" Value="true" />
             <Property Key="ShowSiblings" Value="false" />
-            <Property Key="IncludeSubSites" Value="true" />
             <Property Key="IncludePages" Value="false" />
+            <Property Key="IncludeSubSites" Value="false" />
             <Property Key="InheritCurrentNavigation" Value="false"/>
             <Property Key="IncludeInCurrentNavigation" Value="false"/>
           </Properties>
