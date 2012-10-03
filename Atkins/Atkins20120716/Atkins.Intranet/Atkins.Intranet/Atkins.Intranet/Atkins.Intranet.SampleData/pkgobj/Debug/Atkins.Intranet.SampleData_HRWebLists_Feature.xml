@@ -1,2 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Hidden="false" Id="ba6fd70d-555e-448f-9271-c87f3d354c66" ReceiverAssembly="Atkins.Intranet.SampleData, Version=1.0.0.0, Culture=neutral, PublicKeyToken=266b4302532a3153" ReceiverClass="Atkins.Intranet.SampleData.Features.HRWebLists.HRWebListsEventReceiver" Scope="Web" Title="Atkins.Intranet.SampleData HR Lists"></Feature>

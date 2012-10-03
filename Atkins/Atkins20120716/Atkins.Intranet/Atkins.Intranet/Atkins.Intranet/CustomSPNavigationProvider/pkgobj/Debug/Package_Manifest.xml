@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Solution xmlns="http://schemas.microsoft.com/sharepoint/" SolutionId="3f0b4d7a-18ac-45e5-8977-d62834b14f38" SharePointProductVersion="14.0">
-  <Assemblies>
-    <Assembly Location="CustomSPNavigationProvider.dll" DeploymentTarget="GlobalAssemblyCache" />
-  </Assemblies>
-</Solution>

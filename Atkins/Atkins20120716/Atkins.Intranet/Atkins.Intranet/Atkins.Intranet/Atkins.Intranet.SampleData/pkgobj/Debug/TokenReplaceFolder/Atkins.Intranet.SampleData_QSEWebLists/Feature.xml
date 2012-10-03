@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Id="da11ccec-692a-4402-a86e-6e4a53f56742" ReceiverAssembly="Atkins.Intranet.SampleData, Version=1.0.0.0, Culture=neutral, PublicKeyToken=266b4302532a3153" ReceiverClass="Atkins.Intranet.SampleData.Features.QSEWebLists.QSEWebListsEventReceiver" Scope="Web" Title="Atkins.Intranet.SampleData QSE Lists"></Feature>

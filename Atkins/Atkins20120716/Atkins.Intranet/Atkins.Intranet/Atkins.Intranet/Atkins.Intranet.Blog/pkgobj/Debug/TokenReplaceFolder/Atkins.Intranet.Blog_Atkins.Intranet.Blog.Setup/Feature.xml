@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Description="Feature to configure the blog site" Id="4612ce28-dddf-4127-bb32-40d6e34de1c7" ReceiverAssembly="Atkins.Intranet.Blog, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c37db852da4e4d43" ReceiverClass="Atkins.Intranet.Blog.Features.Atkins.Intranet.Blog.Setup.AtkinsIntranetBlogEventReceiver" Scope="Web" Title="Atkins.Intranet.Blog.Setup"></Feature>

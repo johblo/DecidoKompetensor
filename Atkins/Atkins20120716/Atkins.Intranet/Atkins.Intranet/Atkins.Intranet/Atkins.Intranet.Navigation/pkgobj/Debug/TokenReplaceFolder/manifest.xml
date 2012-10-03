@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Solution xmlns="http://schemas.microsoft.com/sharepoint/" SolutionId="0f49e405-afb6-4a2a-ae54-30db1af062d1" SharePointProductVersion="14.0">
-  <Assemblies>
-    <Assembly Location="Atkins.Intranet.Navigation.dll" DeploymentTarget="GlobalAssemblyCache" />
-  </Assemblies>
-</Solution>

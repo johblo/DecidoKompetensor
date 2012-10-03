@@ -1,6 +1,0 @@
-<Modules>
-  <Module PersistentId="5E0D8D65-3429-4BE2-B098-5F45DECC1218" ModuleId="Atkins.Intranet.Portal" />
-  <Module PersistentId="A1D3ECBC-CBDF-409D-B00C-C25D0F69105A" ModuleId="Atkins.Intranet.Utilities" />
-  <Module PersistentId="0300BA5A-58E3-4AFC-B83F-1A0CB3FBC7C6" ModuleId="Atkins.Intranet.HR" />
-  <Module PersistentId="50640BA0-DC7A-4F20-AF39-4B108175D8DB" ModuleId="Atkins.Intranet.SampleData" />
-</Modules>

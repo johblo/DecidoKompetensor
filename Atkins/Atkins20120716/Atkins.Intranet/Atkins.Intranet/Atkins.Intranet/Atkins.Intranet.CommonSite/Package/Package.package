@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="0f0c5260-608a-4718-80eb-a422b8df3a84" solutionId="0f0c5260-608a-4718-80eb-a422b8df3a84" resetWebServer="false" name="Atkins.Intranet.CommonSite" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
-  <features>
-    <featureReference itemId="44f58c5b-559e-4d61-a086-45feb2d1a2b3" />
-  </features>
-</package>

@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<ProjectItem Type="CKS.Dev.SharePoint.MasterPage" DefaultFile="Elements.xml" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site, WebApplication, Farm, Package" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
-  <Files>
-    <ProjectItemFile Source="Elements.xml" Target="AtkinsPortalMasterPage\" Type="ElementManifest" />
-    <ProjectItemFile Source="AtkinsPortalMasterPage.master" Target="AtkinsPortalMasterPage\" Type="ElementFile" />
-  </Files>
-</ProjectItem>

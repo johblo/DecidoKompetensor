@@ -1,2 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Title="Atkins.Intranet.CommonSite.AddWebParts" Id="a35dd431-e2e2-45b1-aa33-9cdbf4eec4fa" ReceiverAssembly="Atkins.Intranet.Marketing, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5868ee2fe5ef2483" ReceiverClass="Atkins.Intranet.Marketing.Features.Atkins.Intranet.CommonSite.AddWebPart.AtkinsIntranetCommonSiteEventReceiver" Scope="Web"></Feature>

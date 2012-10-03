@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
-  <Control Id="AdditionalPageHead"
-          Sequence="90"
-          ControlSrc="~/_CONTROLTEMPLATES/jQuery/jQuery.ascx" />
-</Elements>

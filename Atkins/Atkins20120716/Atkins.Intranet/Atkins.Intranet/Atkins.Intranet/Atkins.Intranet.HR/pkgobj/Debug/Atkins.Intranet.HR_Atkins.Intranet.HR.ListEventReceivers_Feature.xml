@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Hidden="true" Id="08636772-0489-40fe-82bf-651ef3ec281e" Scope="Web" Title="Atkins.Intranet.HR List Event Receivers">
-  <ElementManifests>
-    <ElementManifest Location="ContactTaskEventReceiver\Elements.xml" />
-  </ElementManifests>
-</Feature>
